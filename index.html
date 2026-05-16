@@ -53,20 +53,17 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--white);color:var(--black);overflow-x:hidden;}
 
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:999;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:1rem 3rem;background:var(--white);
-  border-bottom:3px solid var(--yellow);
-}
-.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;}
-.nav-logo em{font-style:italic;font-weight:400;}
-.nav-links{display:flex;gap:2.5rem;align-items:center;}
-.nav-links a{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:600;}
-.nav-links a:hover{text-decoration:underline;}
-.nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--sans);}
-
+<!-- NAV -->
+<nav aria-label="Navegación principal">
+  <div class="nav-logo"><em>#W4</em>AIS — IA Safety</div>
+  <div class="nav-links">
+    <a href="#evento">Primer evento</a>
+    <a href="#quienes">Quiénes somos</a>
+    <a href="manifiesto.html">Manifiesto</a>
+    <a href="#cta" class="nav-cta">Únete</a>
+  </div>
+</nav>
+  
 /* HERO */
 #hero{padding-top:64px;background:var(--white);text-align:center;}
 .hero-cols{display:flex;width:60%;margin:3rem auto 0;height:320px;gap:3px;}
