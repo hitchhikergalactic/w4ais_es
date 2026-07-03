@@ -3,14 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>W4AIS – Women For AI Safety | Desde España para el mundo</title>
+<title>W4AIS – Women For AI Safety </title>
 <meta name="description" content="W4AIS (Women For AI Safety) es una comunidad abierta para que más voces participen en la construcción de una IA segura. Charlas, eventos y recursos desde España para el mundo.">
+<link rel="canonical" href="https://women4aisafety.com/">
+<link rel="alternate" hreflang="es" href="https://women4aisafety.com/">
+<link rel="alternate" hreflang="en" href="https://women4aisafety.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://women4aisafety.com/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://women4aisafety.com/">
 <meta property="og:title" content="W4AIS – Women For AI Safety">
-<meta property="og:description" content="La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS existe para que más voces sean parte de esa conversación. Desde España para el mundo.">
+<meta property="og:description" content="La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS nace para que más voces estén en esa conversación. Desde España para el mundo.">
 <meta property="og:image" content="https://i.imgur.com/5WnsIKC.gif">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="W4AIS – Women For AI Safety">
@@ -18,7 +22,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="W4AIS – Women For AI Safety">
-<meta name="twitter:description" content="La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS existe para que más voces sean parte de esa conversación. Desde España para el mundo.">
+<meta name="twitter:description" content="La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS nace para que más voces estén en esa conversación. Desde España para el mundo.">
 <meta name="twitter:image" content="https://i.imgur.com/5WnsIKC.gif">
 
 <!-- JSON-LD -->
@@ -65,7 +69,11 @@ nav{
 .nav-links a{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:600;}
 .nav-links a:hover{text-decoration:underline;}
 .nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--sans);}
-.nav-cta:hover{background:#e0b300;}
+.lang-switch{display:flex;align-items:center;gap:0.3rem;font-family:var(--sans);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;}
+.lang-switch a{text-decoration:none;padding:0.2rem 0.4rem;color:var(--black);}
+.lang-switch a.active{background:var(--black);color:var(--white);}
+.lang-switch a:not(.active):hover{text-decoration:underline;}
+.lang-switch span{color:var(--grey);}
 
 /* HERO */
 #hero{padding-top:64px;background:var(--white);text-align:center;}
@@ -97,7 +105,7 @@ nav{
 .evento-right p{font-size:0.85rem;line-height:1.9;color:#333;margin-bottom:1rem;}
 .evento-right .apoyo{font-size:0.75rem;color:var(--grey);margin-top:0.5rem;}
 .evento-right .apoyo a{color:var(--black);font-weight:700;}
-.btn-evento{display:inline-block;margin-top:1.5rem;background:var(--black);color:var(--white);padding:0.9rem 2rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-decoration:none;cursor:pointer;border:none;}
+.btn-evento{display:inline-block;margin-top:1.5rem;background:var(--black);color:var(--white);padding:0.9rem 2rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:background 0.2s;width:fit-content;}
 .btn-evento:hover{background:#333;}
 
 /* QUIÉNES SOMOS */
@@ -129,7 +137,7 @@ nav{
 #cta .cta-sub{font-size:0.82rem;color:#333;margin-bottom:2.5rem;}
 .form-wrap{max-width:440px;margin:0 auto;text-align:left;}
 .form-wrap label{display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;margin-top:1rem;font-weight:700;}
-.form-wrap input,.form-wrap select{width:100%;padding:0.7rem 0.8rem;border:2px solid var(--black);font-family:var(--sans);font-size:0.85rem;background:var(--white);border-radius:0;}
+.form-wrap input,.form-wrap select{width:100%;padding:0.7rem 0.8rem;border:2px solid var(--black);font-family:var(--sans);font-size:0.85rem;background:var(--white);border-radius:0;-webkit-appearance:none;}
 .check-label{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.78rem;margin-top:1.2rem;cursor:pointer;color:#333;}
 .check-label input{margin-top:3px;flex-shrink:0;}
 .btn-cta{display:block;width:100%;margin-top:1.5rem;background:var(--black);color:var(--white);border:none;padding:1rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;}
@@ -163,13 +171,16 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
 <body>
 
 <!-- NAV -->
-<nav aria-label="Main navigation">
-  <div class="nav-logo"><em>#W4</em>AIS — AI Safety</div>
+<nav aria-label="Navegación principal">
+  <div class="nav-logo"><em>#W4</em>AIS — IA Safety</div>
   <div class="nav-links">
     <a href="#evento">Primer evento</a>
     <a href="#quienes">Quiénes somos</a>
     <a href="manifiesto.html">Manifiesto</a>
     <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Únete</button>
+    <div class="lang-switch" aria-label="Selector de idioma">
+      <a href="/" class="active">ES</a><span>/</span><a href="/en/">EN</a>
+    </div>
   </div>
 </nav>
 
@@ -188,10 +199,10 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
   </div>
   <div class="hero-body-wrap">
     <h2 class="section-sub" style="margin-bottom:0.6rem;">Qué es W4AIS</h2>
-    <p class="hero-body">La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS existe para que más voces sean parte de esa conversación.</p>
+    <p class="hero-body">La IA que se construye hoy decidirá cómo vivimos mañana. W4AIS nace para que más voces estén en esa conversación.</p>
     <div class="hero-sign">Osmani</div>
     <div class="hero-name"></div>
-    <div class="hero-role">Dirección, #WomenForAISafety</div>
+    <div class="hero-role">Líder #WomenForAISafety</div>
   </div>
 </section>
 
@@ -199,8 +210,8 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
 <section id="stat">
   <div class="stat-number">12%</div>
   <div class="stat-text">
-    <h2 class="stat-main">de las personas que construyen IA<br>representan la mayoría del mundo.</h2>
-    <div class="stat-sub">Los sistemas que no nos incluyen no nos protegen. Esto no es un tema de diversidad corporativa. Es un tema de seguridad.</div>
+    <h2 class="stat-main">de quienes construyen la IA<br>representan a la mayoría del mundo.</h2>
+    <div class="stat-sub">Los sistemas que no nos incluyen no nos protegen. No es un problema de diversidad corporativa. Es un problema de seguridad.</div>
   </div>
 </section>
 
@@ -208,14 +219,14 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
 <section id="evento">
   <div class="evento-left">
     <div class="label">Primer evento W4AIS</div>
-    <h2><em>Todo comienza</em><br>aquí.</h2>
-    <div class="fecha">Próximamente — Celonis Madrid</div>
+    <h2><em>Todo empieza</em><br>aquí.</h2>
+    <div class="fecha"> Coming Soon — Celonis Madrid</div>
   </div>
   <div class="evento-right">
-    <p>Charlas, conversaciones y snacks para quien crea que la IA debe construirse con más voces en la mesa.</p>
+    <p>Charlas, conversaciones y snacks para quienes creen que la IA debe construirse con más voces dentro.</p>
     <p>Todas las personas son bienvenidas.</p>
     <div class="apoyo">Con el apoyo de <a href="https://bluedot.org" target="_blank">Blue Dot Impact</a>.</div>
-    <a class="btn-evento" href="#cta">Reserva tu lugar</a>
+    <a class="btn-evento" href="#cta">Reserva tu plaza</a>
   </div>
 </section>
 
@@ -223,7 +234,7 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
 <section id="quienes">
   <h2 class="section-title"><em>quiénes</em> SOMOS</h2>
   <div class="section-sub">Women For AI Safety</div>
-  <div class="section-desc">Diferentes backgrounds. Un mismo objetivo: una IA que funcione para todo el mundo.</div>
+  <div class="section-desc">Distintas trayectorias. Un mismo objetivo: una IA que funcione para el mundo entero.</div>
   <div class="profiles-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:3rem 2rem;max-width:700px;margin:0 auto;text-align:center;">
     <div class="profile">
       <div class="profile-img" style="width:180px;height:180px;border-radius:50%;background:#d0cdc6;margin:0 auto 1rem;overflow:hidden;">
@@ -231,15 +242,15 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
       </div>
       <h3>Osmani Redondo</h3>
       <div class="role-main">Directora de IAS</div>
-      <blockquote>"La seguridad de la IA necesita perspectivas diversas. Si los sistemas de IA van a funcionar para la sociedad en su conjunto, las personas que los hacen seguros también deben representarla".</blockquote>
+      <blockquote>"La IA Safety necesita perspectivas diversas. Si los sistemas de IA van a funcionar para el conjunto de la sociedad, quienes los hacen seguros también deben representarla."</blockquote>
     </div>
     <div class="profile">
       <div class="profile-img" style="width:180px;height:180px;border-radius:50%;background:#d0cdc6;margin:0 auto 1rem;overflow:hidden;">
         <img src="https://i.imgur.com/zq6NSzV.png" alt="Brenda Rivera, Diseño & Tech en W4AIS" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <h3>Brenda Rivera</h3>
-      <div class="role-main">Diseño & Tech → AI Safety</div>
-      <blockquote>"Comunicación científica y cultura digital"</blockquote>
+      <div class="role-main">Diseño & Tech → IA Safety</div>
+      <blockquote>"Divulgación científica y cultura digital"</blockquote>
     </div>
   </div>
 </section>
@@ -247,58 +258,57 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
 <!-- MANIFIESTO -->
 <section id="manifiesto">
   <div class="manif-text">
-    <h2><em>Manifiesto</em><br>W4AIS</h2>
-    <p>La IA que se construye hoy tomará decisiones sobre la vida de las personas durante décadas. W4AIS existe porque las personas que diseñan estos sistemas aún no representan el mundo al que afectarán.</p>
-    <p><strong>Somos el espacio donde el conocimiento técnico y la experiencia vivida se sientan en la misma mesa.</strong></p>
-    <p>Aquí, el conocimiento se comparte, no se acumula. Cada background añade valor, porque cada perspectiva hace que los sistemas sean más seguros.</p>
-    <p class="tagline">Desde España. Para el mundo.</p>
+    <h2><em>Manifiesto</em> W4AIS</h2>
+    <p>La IA que se construye hoy tomará decisiones sobre la vida de las personas durante décadas. W4AIS existe porque quienes diseñan esos sistemas todavía no representan al mundo que van a afectar. No es un problema de cuotas. Es un problema de calidad, de seguridad, de futuro compartido.
+Somos el espacio donde el conocimiento técnico y las experiencias vividas se sientan en la misma mesa. Aquí el conocimiento se comparte, no se guarda. Cada trayectoria suma porque cada perspectiva mejora los sistemas.
+Desde España. Para el mundo.</div>
   </div>
   <div class="manif-photo">
-    <img src="https://i.imgur.com/5WnsIKC.gif" alt="Imagen representativa del manifiesto de W4AIS" style="width:100%;height:100%;object-fit:cover;">
+    <img src="https://i.imgur.com/5WnsIKC.gif" alt="Imagen representativa del manifiesto W4AIS" style="width:100%;height:100%;object-fit:cover;">
   </div>
 </section>
 
-<!-- CTA -->
+  <!-- CTA -->
 <section id="cta">
   <h2><em>¿Quieres una IA</em><br>realmente segura?</h2>
   <p class="cta-sub">Empieza aquí. Únete a #W4AIS</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfArnCnoTWP7FMcmWxWdlCH-rigp772LoZV8onQhdvSfgFGXA/viewform" target="_blank" class="btn-cta">Quiero ser parte</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfArnCnoTWP7FMcmWxWdlCH-rigp772LoZV8onQhdvSfgFGXA/viewform" target="_blank" class="btn-cta" style="display:inline-block;text-decoration:none;margin-top:1rem;width:auto;padding:1rem 2.5rem;">Quiero ser parte</a>
 </section>
-
+  
 <!-- VOLUNTARIADO -->
 <section id="voluntariado" style="background:var(--off);text-align:center;padding:6rem 2rem;">
-  <h2 style="font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);margin-bottom:0.5rem;"><em style="font-style:italic;font-weight:400;">¿Quieres</em><br>voluntariarte?</h2>
+  <h2 style="font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);margin-bottom:0.5rem;"><em style="font-style:italic;font-weight:400;">¿Te gustaría hacer</em><br>voluntariado?</h2>
   <p style="font-size:0.82rem;color:#333;margin-bottom:2.5rem;">Ayúdanos a construir W4AIS desde dentro</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPZvKb0hRc_KYzfnQNwarNVS9erzejsFYLuahEaf_UJskr0g/viewform?usp=dialog" target="_blank" style="display:inline-block;background:var(--black);color:var(--white);padding:0.9rem 2rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Quiero ser voluntaria</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPZvKb0hRc_KYzfnQNwarNVS9erzejsFYLuahEaf_UJskr0g/viewform?usp=dialog" target="_blank" style="display:inline-block;background:var(--black);color:var(--white);padding:1rem 2.5rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Apúntate ahora</a>
 </section>
-
+  
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
-    <h3><em>W4AIS</em><br>AI Safety</h3>
-    <p>Desde España, para el mundo</p>
+    <h3><em>W4AIS</em><br>IA Safety</h3>
+    <p>Desde España para el mundo</p>
     <div class="footer-icons">
       <a href="https://www.instagram.com/womenaisafety/" target="_blank" title="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a href="https://www.linkedin.com/company/women4aisafety/" target="_blank" title="LinkedIn">
+      <a href="https://www.linkedin.com/company/women4aisafety/about/" target="_blank" title="LinkedIn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
       </a>
       <a href="mailto:w4ais@women4aisafety.com" title="Email">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
     <div style="margin-top:1.5rem;">
-      <a href="https://osmaniredondo.substack.com/" target="_blank" style="font-size:0.72rem;color:#aaa;text-decoration:underline;">Te recomendamos este blog →</a>
+      <a href="https://osmaniredondo.substack.com/" target="_blank" style="font-size:0.72rem;color:#aaa;text-decoration:underline;">Recomendamos este blog →</a>
     </div>
   </div>
   <div class="footer-nav">
-    <h4>Community</h4>
+    <h4>Comunidad</h4>
     <a href="#quienes">Quiénes somos</a>
     <a href="manifiesto.html">Manifiesto</a>
   </div>
   <div class="footer-nav">
-    <h4>Project</h4>
+    <h4>Proyecto</h4>
     <a href="#evento">Primer evento</a>
     <a href="#cta">Únete</a>
     <a href="https://osmaniredondo.substack.com/" target="_blank">Blog</a>
