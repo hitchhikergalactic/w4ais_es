@@ -6,6 +6,9 @@
 <title>W4AIS – Women For AI Safety | Desde España para el mundo</title>
 <meta name="description" content="W4AIS (Women For AI Safety) es una comunidad abierta para que más voces participen en la construcción de una IA segura. Charlas, eventos y recursos desde España para el mundo.">
 <link rel="canonical" href="https://women4aisafety.com/">
+<link rel="alternate" hreflang="es" href="https://women4aisafety.com/">
+<link rel="alternate" hreflang="en" href="https://women4aisafety.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://women4aisafety.com/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -66,6 +69,11 @@ nav{
 .nav-links a{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:600;}
 .nav-links a:hover{text-decoration:underline;}
 .nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--sans);}
+.lang-switch{display:flex;align-items:center;gap:0.3rem;font-family:var(--sans);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;}
+.lang-switch a{text-decoration:none;padding:0.2rem 0.4rem;color:var(--black);}
+.lang-switch a.active{background:var(--black);color:var(--white);}
+.lang-switch a:not(.active):hover{text-decoration:underline;}
+.lang-switch span{color:var(--grey);}
 
 /* HERO */
 #hero{padding-top:64px;background:var(--white);text-align:center;}
@@ -170,6 +178,9 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
     <a href="#quienes">Quiénes somos</a>
     <a href="manifiesto.html">Manifiesto</a>
     <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Únete</button>
+    <div class="lang-switch" aria-label="Selector de idioma">
+      <a href="/" class="active">ES</a><span>/</span><a href="/en/">EN</a>
+    </div>
   </div>
 </nav>
 
