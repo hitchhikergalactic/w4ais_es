@@ -6,6 +6,9 @@
 <title>Manifiesto W4AIS – Women For AI Safety</title>
 <meta name="description" content="El manifiesto de W4AIS: por qué la seguridad de la IA necesita más voces. Solo el 12% de quienes construyen IA representan a la mayoría del mundo. Hay que cambiarlo.">
 <link rel="canonical" href="https://women4aisafety.com/manifiesto">
+<link rel="alternate" hreflang="es" href="https://women4aisafety.com/manifiesto">
+<link rel="alternate" hreflang="en" href="https://women4aisafety.com/en/manifiesto">
+<link rel="alternate" hreflang="x-default" href="https://women4aisafety.com/manifiesto">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
@@ -61,6 +64,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;justify-content
 .nav-links a{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:600;}
 .nav-links a:hover{text-decoration:underline;}
 .nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--sans);}
+.lang-switch{display:flex;align-items:center;gap:0.3rem;font-family:var(--sans);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;}
+.lang-switch a{text-decoration:none;padding:0.2rem 0.4rem;color:var(--black);}
+.lang-switch a.active{background:var(--black);color:var(--white);}
+.lang-switch a:not(.active):hover{text-decoration:underline;}
+.lang-switch span{color:var(--grey);}
 
 /* HERO — idéntico a index.html */
 #hero{padding-top:64px;background:var(--white);text-align:center;}
@@ -128,6 +136,9 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
     <a href="index.html#quienes">Quiénes somos</a>
     <a href="manifiesto.html">Manifiesto</a>
     <button class="nav-cta" onclick="window.location='index.html#cta'">Únete</button>
+    <div class="lang-switch" aria-label="Selector de idioma">
+      <a href="/manifiesto" class="active">ES</a><span>/</span><a href="/en/manifiesto">EN</a>
+    </div>
   </div>
 </nav>
 
@@ -183,7 +194,7 @@ footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;g
   <div class="cierre-sub">Únete a #W4AIS</div>
   <div class="btns">
     <button class="btn-secondary" onclick="compartir()">Comparte el manifiesto</button>
-  </div>>
+  </div>
   <div class="share-label">Comparte en</div>
   <div class="share-btns">
     <a class="share-btn" href="https://twitter.com/intent/tweet?text=El%20manifiesto%20de%20%23W4AIS%20%E2%80%94%20IA%20Safety%20para%20todas%20las%20personas.%20women4aisafety.com/manifiesto" target="_blank">𝕏 Twitter</a>
