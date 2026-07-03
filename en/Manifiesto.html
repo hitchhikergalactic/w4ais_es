@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W4AIS Manifesto – Women For AI Safety</title>
+<meta name="description" content="The W4AIS manifesto: why AI safety needs more voices. Only 12% of the people building AI represent the majority of the world. That has to change.">
+<link rel="canonical" href="https://women4aisafety.com/en/manifiesto">
+<link rel="alternate" hreflang="es" href="https://women4aisafety.com/manifiesto">
+<link rel="alternate" hreflang="en" href="https://women4aisafety.com/en/manifiesto">
+<link rel="alternate" hreflang="x-default" href="https://women4aisafety.com/manifiesto">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://women4aisafety.com/en/manifiesto">
+<meta property="og:title" content="W4AIS Manifesto: AI Safety for Everyone">
+<meta property="og:description" content="The AI systems being built today will decide how people are hired, diagnosed and governed. We need more voices in the room.">
+<meta property="og:image" content="https://i.imgur.com/5WnsIKC.gif">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="W4AIS – Women For AI Safety">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="W4AIS Manifesto: AI Safety for Everyone">
+<meta name="twitter:description" content="The AI systems being built today will decide how people are hired, diagnosed and governed. We need more voices in the room.">
+<meta name="twitter:image" content="https://i.imgur.com/5WnsIKC.gif">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "W4AIS Manifesto – Women For AI Safety",
+  "url": "https://women4aisafety.com/en/manifiesto",
+  "description": "Why AI safety needs more perspectives. The founding manifesto of the W4AIS community.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "W4AIS – Women For AI Safety",
+    "url": "https://women4aisafety.com"
+  }
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --yellow:#F5C800;
+  --white:#FAFAF7;
+  --off:#F0EFE9;
+  --black:#1A1A1A;
+  --grey:#6B6B6B;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Montserrat',Arial,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--black);overflow-x:hidden;}
+
+/* NAV — identical to index.html */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:var(--white);border-bottom:3px solid var(--yellow);}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;}
+.nav-logo em{font-style:italic;font-weight:400;}
+.nav-links{display:flex;gap:2.5rem;align-items:center;}
+.nav-links a{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:600;}
+.nav-links a:hover{text-decoration:underline;}
+.nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--sans);}
+.lang-switch{display:flex;align-items:center;gap:0.3rem;font-family:var(--sans);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;}
+.lang-switch a{text-decoration:none;padding:0.2rem 0.4rem;color:var(--black);}
+.lang-switch a.active{background:var(--black);color:var(--white);}
+.lang-switch a:not(.active):hover{text-decoration:underline;}
+.lang-switch span{color:var(--grey);}
+
+/* HERO — identical to index.html */
+#hero{padding-top:64px;background:var(--white);text-align:center;}
+.hero-cols{display:flex;width:60%;margin:3rem auto 0;height:320px;gap:3px;}
+.hero-col{flex:1;filter:grayscale(100%);}
+.hero-logo-wrap{padding:2rem 1rem 0;}
+.hero-logo{font-family:var(--serif);font-size:clamp(5rem,16vw,13rem);font-weight:900;line-height:0.9;letter-spacing:-0.02em;}
+.hero-logo em{font-style:italic;font-weight:400;}
+.hero-body-wrap{max-width:580px;margin:2rem auto 0;padding:0 2rem 4rem;}
+.hero-sub{font-size:0.88rem;line-height:1.9;color:#333;}
+
+/* MANIFESTO CONTENT */
+#manifiesto{max-width:720px;margin:0 auto;padding:6rem 2rem;}
+.bloque{margin-bottom:2.5rem;}
+.bloque p{font-size:0.92rem;line-height:1.95;color:#333;margin-bottom:1rem;}
+.bloque p strong{font-weight:700;color:var(--black);}
+.bloque h2{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;margin-bottom:1rem;line-height:1.2;}
+.bloque h2 em{font-style:italic;font-weight:400;}
+.stat-block{background:var(--off);border-left:4px solid var(--yellow);padding:1.2rem 1.5rem;margin:1.5rem 0;font-size:0.88rem;line-height:1.9;color:#333;}
+.stat-block strong{font-weight:700;color:var(--black);}
+.defendemos-item{border-top:1px solid #ddd;padding:1.1rem 0;font-size:0.9rem;line-height:1.8;color:#333;}
+.defendemos-item:last-child{border-bottom:1px solid #ddd;}
+
+/* CLOSING */
+#cierre{background:var(--yellow);text-align:center;padding:6rem 2rem;}
+.cierre-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:0.5rem;}
+.cierre-sub{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#333;margin-bottom:3rem;}
+.btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;}
+.btn-primary{background:var(--black);color:var(--white);padding:1rem 2.5rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;}
+.btn-primary:hover{background:#333;}
+.btn-secondary{background:transparent;color:var(--black);padding:1rem 2.5rem;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border:2px solid var(--black);cursor:pointer;}
+.btn-secondary:hover{background:var(--black);color:var(--white);}
+.share-label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#555;margin-bottom:1rem;}
+.share-btns{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;}
+.share-btn{padding:0.6rem 1.2rem;font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--black);color:var(--black);}
+.share-btn:hover{background:var(--black);color:var(--white);}
+
+/* FOOTER — identical to index.html */
+footer{background:var(--black);color:var(--white);padding:4rem 6%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;align-items:start;}
+.footer-brand h3{font-family:var(--serif);font-size:1.8rem;margin-bottom:0.5rem;}
+.footer-brand h3 em{font-style:italic;font-weight:400;}
+.footer-brand p{font-size:0.75rem;color:#aaa;margin-bottom:1rem;}
+.footer-icons{display:flex;gap:1rem;}
+.footer-icons a{color:var(--white);font-size:0.75rem;text-decoration:none;}
+.footer-nav h4{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;color:#aaa;}
+.footer-nav a{display:block;font-size:0.75rem;text-decoration:underline;color:var(--white);margin-bottom:0.4rem;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero-cols{width:90%;}
+  #manifiesto{padding:4rem 1.5rem;}
+  .btns{flex-direction:column;align-items:center;}
+  footer{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <div class="nav-logo"><em>#W4</em>AIS — AI Safety</div>
+  <div class="nav-links">
+    <a href="index.html#evento">First Event</a>
+    <a href="index.html#quienes">Who We Are</a>
+    <a href="manifiesto.html">Manifesto</a>
+    <button class="nav-cta" onclick="window.location='index.html#cta'">Join Us</button>
+    <div class="lang-switch" aria-label="Language selector">
+      <a href="/manifiesto">ES</a><span>/</span><a href="/en/manifiesto" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-logo-wrap">
+    <h1 class="hero-logo"><em>#W4</em>AIS</h1>
+  </div>
+  <div class="hero-body-wrap"></div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifiesto">
+
+  <div class="bloque">
+    <p style="background:var(--yellow);padding:1.2rem 1.5rem;font-weight:700;color:var(--black);">We are living through the most important moment in the history of technology. And we are not exaggerating.</p>
+    <p>The artificial intelligence systems being built right now will decide how people are hired, how they are diagnosed, how they are monitored and how they are governed. And they will keep doing so for decades.</p>
+    <p><strong>The problem is that they are being built with very few voices in the room.</strong></p>
+    <div class="stat-block">
+      Only <strong>22%</strong> of global AI talent is female. Fewer than <strong>15%</strong> hold executive positions. In AI research specifically, we make up just <strong>12%</strong>. In Spain, we are <strong>19.5%</strong> of tech specialists.
+    </div>
+    <p>This is not a corporate diversity problem. <strong>It is a technical quality problem.</strong></p>
+    <p>Car safety systems were designed for men, and women are <strong>47% more</strong> likely to suffer serious injury in a crash. If this happens with cars, what can we expect from AI systems that learn about us, evaluate us and listen to us?</p>
+    <p>Facial recognition systems developed by teams that lack diversity perform worse at identifying women's faces, particularly those from ethnic minorities. This is not malice. It is absence. <strong>And absence has real consequences.</strong></p>
+  </div>
+
+  <div class="bloque">
+    <h2><em>Why</em> W4AIS exists</h2>
+    <p>Because we are the ones who most often bear the consequences of badly designed systems. Because we are underrepresented in exactly the spaces where decisions get made. And because when someone who has lived a problem firsthand joins the room, the solutions improve.</p>
+    <p>It was born because there was a gap nobody was filling. <strong>But the door is open.</strong></p>
+    <p>AI safety is not a women's issue. It is an issue for everyone who will live in a world with powerful AI, which is to say, it concerns everyone.</p>
+    <p>We need people who research, who legislate, who communicate, who design policy, who ask the uncomfortable questions. People who come from different places, who have lived different things, who see what others do not see.</p>
+    <p><strong>If you share the mission, you are welcome here.</strong> The name tells you where we come from. The community tells you where we are going.</p>
+  </div>
+
+  <div class="bloque">
+    <h2><em>What we</em> stand for</h2>
+    <div class="defendemos-item">AI safety is not a technical problem that a handful of clever people at a handful of large companies can solve on their own.</div>
+    <div class="defendemos-item">"Moving fast" does not excuse failing to think about who gets left out.</div>
+    <div class="defendemos-item">Building the future with the perspectives of the people who will live in it the most.</div>
+  </div>
+
+  <div class="bloque">
+    <h2><em>What we</em> are building</h2>
+    <p>A community where curiosity counts for more than your CV. Where you can arrive not knowing what alignment means and leave wanting to build a career around it. Where the people who have been doing this for years share what they know with those who have just arrived.</p>
+  </div>
+
+</section>
+
+<!-- CLOSING -->
+<section id="cierre">
+  <div class="cierre-tagline">From Spain. For the world.</div>
+  <div class="cierre-sub">Join #W4AIS</div>
+  <div class="btns">
+    <button class="btn-secondary" onclick="compartir()">Share the manifesto</button>
+  </div>
+  <div class="share-label">Share on</div>
+  <div class="share-btns">
+    <a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20W4AIS%20manifesto%3A%20AI%20safety%20for%20everyone.%20women4aisafety.com/en/manifiesto" target="_blank">𝕏 Twitter</a>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://women4aisafety.com/en/manifiesto" target="_blank">LinkedIn</a>
+    <a class="share-btn" href="https://api.whatsapp.com/send?text=The%20W4AIS%20manifesto%3A%20AI%20safety%20for%20everyone.%20https://women4aisafety.com/en/manifiesto" target="_blank">WhatsApp</a>
+    <a class="share-btn" href="https://t.me/share/url?url=https://women4aisafety.com/en/manifiesto&text=The%20W4AIS%20manifesto%3A%20AI%20safety%20for%20everyone." target="_blank">Telegram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <h3><em>W4AIS</em><br>AI Safety</h3>
+    <p>From Spain, for the world</p>
+    <div class="footer-icons">
+      <a href="https://www.instagram.com/womenaisafety/" target="_blank" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/women4aisafety/about/" target="_blank" title="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="mailto:w4ais@women4aisafety.com" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <a href="https://osmaniredondo.substack.com/" target="_blank" style="font-size:0.72rem;color:#aaa;text-decoration:underline;">We recommend this blog →</a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <h4>Community</h4>
+    <a href="index.html#quienes">Who We Are</a>
+    <a href="manifiesto.html">Manifesto</a>
+  </div>
+  <div class="footer-nav">
+    <h4>Project</h4>
+    <a href="index.html#evento">First Event</a>
+    <a href="index.html#cta">Join Us</a>
+    <a href="https://osmaniredondo.substack.com/" target="_blank">Blog</a>
+  </div>
+</footer>
+
+<script>
+function compartir(){
+  if(navigator.share){
+    navigator.share({title:'W4AIS Manifesto',text:'AI safety for everyone.',url:'https://women4aisafety.com/en/manifiesto'});
+  }
+}
+</script>
+</body>
+</html>
