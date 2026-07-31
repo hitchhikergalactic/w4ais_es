@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://women4aisafety.com/sitemap.xml
