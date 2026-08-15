@@ -23,6 +23,42 @@ Esto evita contenido duplicado en el índice de Google: Search Console consolida
 
 Por el mismo motivo, ninguna página dark lleva metadatos SEO propios (`meta description`, `og:*`, `twitter:*`, JSON-LD). No es contenido indexable independiente — es solo el toggle 🌙 de la página clara, así que hereda semánticamente los metadatos de esta última.
 
+## Logo del nav y del footer
+
+En toda página, tanto el logo del `<nav>` como el del `<footer>` deben ir envueltos en `<a href="index.html">`. No debe quedar ningún `<img>` de logo suelto sin enlazar a inicio.
+
+```html
+<a href="index.html" style="display:flex;margin-right:auto"><img src="logo_color_cropped.png" alt="W4AIS" style="height:64px;width:auto"></a>
+```
+
+Antes de cualquier commit que añada o modifique una página de sesión, ejecuta `scripts/check-logo-links.sh` desde la raíz del repo. Falla con mensaje claro (archivo y línea) si algún logo no enlaza a `index.html`:
+
+```
+./scripts/check-logo-links.sh
+```
+
+## Páginas de sesión (`session-*.html`)
+
+Toda página de sesión nueva se crea **copiando `session-template.html`** y rellenando sus marcadores de posición. Nunca copiando otra página de sesión ya existente (como `session-johanna-angulo.html`) ni escribiéndola desde cero — así se evita arrastrar contenido de la ponente anterior por error y se garantiza que el nav, el footer y el enlace del logo ya vienen corregidos.
+
+Marcadores de `session-template.html`:
+
+| Marcador | Qué va ahí |
+|---|---|
+| `[TITULO_SESION]` | Título de la charla (title, h1, og:title...) |
+| `[SLUG_SESION]` | Slug del nombre de archivo, ej. `jane-doe` → `session-jane-doe.html` |
+| `[CATEGORIA_SESION]` | Etiqueta de categoría (Technical research, Governance & policy, Career...) |
+| `[DESCRIPCION_SESION]` | Subtítulo / resumen de una frase de la charla |
+| `[NOMBRE_PONENTE]` | Nombre de la ponente |
+| `[BIO_PONENTE]` | Biografía |
+| `[FOTO_PONENTE]` | Nombre de archivo de la foto local (ver convención de imágenes más abajo) |
+| `[LINK_REDES_PONENTE]` | URL de LinkedIn (u otra red) de la ponente |
+| `[EMBED_YOUTUBE]` | URL de embed de YouTube (`https://www.youtube.com/embed/ID`); si aún no hay grabación, borra el bloque del iframe entero (está marcado con un comentario) |
+| `[EMBED_SLIDES]` | URL de las slides; si no hay, borra el bloque del enlace entero (está marcado con un comentario) |
+| `[FECHA_SESION]` | Fecha de la sesión, o "Date TBA" |
+
+Después de rellenar los marcadores y guardar como `session-[slug].html`, ejecuta `scripts/check-logo-links.sh` antes de commitear.
+
 ## Dominio canónico
 
 Todas las URLs absolutas del sitio (canonical tags, `sitemap.xml`, la línea `Sitemap:` de `robots.txt`, JSON-LD) usan el dominio con `www`: `https://www.women4aisafety.com/`. No mezclar con la variante sin `www`.
