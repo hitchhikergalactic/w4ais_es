@@ -20,21 +20,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:oklch(0.98 0.005 80);color:oklch(0.22 0.01 260)}
-    a{color:#5a7ef8}
-    a:hover{color:#3f56a1}
+    a{color:#3f56a1}
+    a:hover{color:#2c3d78}
     ::selection{background:rgba(90,126,248,0.25)}
+    .nav-toggle{position:absolute;opacity:0;pointer-events:none}
+    .nav-burger{display:none}
+    @media (max-width: 700px) {
+      nav img{height:48px}
+      .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer}
+      .nav-burger span{display:block;width:22px;height:2.5px;background:currentColor;border-radius:2px}
+      .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;position:absolute;top:100%;left:0;background:oklch(0.98 0.005 80);padding:12px 24px 20px;border-top:1px solid oklch(0.88 0.005 80);box-shadow:0 16px 32px -16px rgba(30,20,10,0.18);z-index:30}
+      .nav-toggle:checked ~ .nav-links{display:flex}
+      .nav-links a{width:100%;padding:14px 4px}
+      .sessions-grid{grid-template-columns:1fr !important}
+    }
   </style>
 </head>
 <body>
 
-<nav style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:20px 24px">
+<nav style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:20px 24px;position:relative">
   <a href="index.html" style="display:flex;margin-right:auto"><img src="logo_color_cropped.png" alt="W4AIS" style="height:64px;width:auto"></a>
-  <a href="index.html#why" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Why it matters</a>
-  <a href="index.html#what" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">What we do</a>
-  <a href="seminar.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Seminars</a>
-  <a href="about.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">About us</a>
-  <a href="seminar-dark.html" aria-label="Dark mode" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit;display:flex" title="Dark mode">🌙</a>
-  <a href="index.html#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#5a7ef8;padding:10px 20px;border-radius:999px">Join us</a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></label>
+  <div class="nav-links" style="display:flex;align-items:center;gap:16px">
+    <a href="index.html#why" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Why it matters</a>
+    <a href="index.html#what" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">What we do</a>
+    <a href="seminar.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Seminars</a>
+    <a href="about.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">About us</a>
+    <a href="seminar-dark.html" aria-label="Dark mode" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit;display:flex" title="Dark mode">🌙</a>
+    <a href="index.html#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 20px;border-radius:999px">Join us</a>
+  </div>
 </nav>
 
 <header id="seminar" style="position:relative;overflow:hidden;background:radial-gradient(circle at 15% 85%, #f2a259 0%, transparent 45%), radial-gradient(circle at 85% 15%, #ae9ad5 0%, transparent 50%), linear-gradient(135deg, #d6897f 0%, #d6b39f 35%, #b380b8 100%)">
@@ -60,28 +75,28 @@
 
 <section style="max-width:1180px;margin:0 auto;padding:64px 24px 80px">
   <h2 style="font-size:30px;font-weight:800;letter-spacing:-0.01em;margin-bottom:32px">Sessions &amp; speakers</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+  <div class="sessions-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
     <a href="session-johanna-angulo.html" style="text-decoration:none;color:inherit;border:1px solid oklch(0.88 0.005 80);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
       <span style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#3f56a1;background:#f2f5fe;padding:5px 12px;border-radius:999px;width:fit-content">Technical research</span>
       <h3 style="font-size:19px;font-weight:700;margin:4px 0 0">The model passed, but should we believe it?</h3>
       <p style="font-size:14px;font-weight:600;color:oklch(0.35 0.01 260);margin:0">Johanna Angulo</p>
-      <p style="font-size:14px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Contamination, memorisation, and trustworthy safety evals.</p>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Contamination, memorisation, and trustworthy safety evals.</p>
       <span style="font-size:13px;font-weight:700;color:oklch(0.5 0.01 260);margin-top:8px">Wednesday, July 29th</span>
     </a>
     <a href="session-vivi-svendsen.html" style="text-decoration:none;color:inherit;border:1px solid oklch(0.88 0.005 80);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
       <span style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#8a5a3f;background:#fbeee2;padding:5px 12px;border-radius:999px;width:fit-content">Governance &amp; policy</span>
       <h3 style="font-size:19px;font-weight:700;margin:4px 0 0">Communicating AI to Policymakers and Non-Technical Decision-Makers</h3>
       <p style="font-size:14px;font-weight:600;color:oklch(0.35 0.01 260);margin:0">Vivi Svendsen</p>
-      <p style="font-size:14px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Why AI legislation needs to be legible to the people it's meant to protect.</p>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Why AI legislation needs to be legible to the people it's meant to protect.</p>
       <span style="font-size:13px;font-weight:700;color:oklch(0.5 0.01 260);margin-top:8px">Wednesday, 12 August</span>
     </a>
     <a href="https://luma.com/Women4AISafety" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;border:1px solid oklch(0.88 0.005 80);border-radius:20px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px">
-      <span style="font-weight:700;font-size:15px;color:#fff;background:#5a7ef8;padding:12px 24px;border-radius:999px">Subscribe to calendar</span>
+      <span style="font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:12px 24px;border-radius:999px">Subscribe to calendar</span>
     </a>
   </div>
   <div style="background:#fbeee2;border-radius:20px;padding:28px;margin-top:28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
-    <p style="font-size:15px;line-height:1.6;color:#8a5a3f;margin:0">Sessions and speakers are announced here as they're confirmed.</p>
-    <a href="https://luma.com/Women4AISafety" target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#5a7ef8;padding:12px 24px;border-radius:999px">Register to be notified</a>
+    <p style="font-size:16px;line-height:1.6;color:#8a5a3f;margin:0">Sessions and speakers are announced here as they're confirmed.</p>
+    <a href="https://luma.com/Women4AISafety" target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:12px 24px;border-radius:999px">Register to be notified</a>
   </div>
 </section>
 

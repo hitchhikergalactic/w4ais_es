@@ -21,21 +21,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:oklch(0.98 0.005 80);color:oklch(0.22 0.01 260)}
-    a{color:#5a7ef8}
-    a:hover{color:#3f56a1}
+    a{color:#3f56a1}
+    a:hover{color:#2c3d78}
     ::selection{background:rgba(90,126,248,0.25)}
+    .nav-toggle{position:absolute;opacity:0;pointer-events:none}
+    .nav-burger{display:none}
+    @media (max-width: 700px) {
+      nav img{height:48px}
+      .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer}
+      .nav-burger span{display:block;width:22px;height:2.5px;background:currentColor;border-radius:2px}
+      .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;position:absolute;top:100%;left:0;background:oklch(0.98 0.005 80);padding:12px 24px 20px;border-top:1px solid oklch(0.88 0.005 80);box-shadow:0 16px 32px -16px rgba(30,20,10,0.18);z-index:30}
+      .nav-toggle:checked ~ .nav-links{display:flex}
+      .nav-links a{width:100%;padding:14px 4px}
+      .core-beliefs-grid{grid-template-columns:1fr !important}
+    }
   </style>
 
 </head>
 <body>
 
 
-<nav style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:20px 24px">
-  <a href="index.html" style="display:flex"><img src="logo_color_cropped.png" alt="W4AIS – Women For AI Safety logo" style="height:64px;width:auto"></a>
-  <span style="margin-right:auto"></span>
-  <a href="#who" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Who we are</a>
-  <a href="seminar.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Seminar</a>
-  <a href="index.html#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#5a7ef8;padding:10px 20px;border-radius:999px">Join us</a>
+<nav style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:20px 24px;position:relative">
+  <a href="index.html" style="display:flex;margin-right:auto"><img src="logo_color_cropped.png" alt="W4AIS – Women For AI Safety logo" style="height:64px;width:auto"></a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></label>
+  <div class="nav-links" style="display:flex;align-items:center;gap:16px">
+    <a href="#who" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Who we are</a>
+    <a href="seminar.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Seminar</a>
+    <a href="index.html#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 20px;border-radius:999px">Join us</a>
+  </div>
 </nav>
 
 <div style="max-width:1180px;margin:0 auto;padding:8px 24px 0;font-size:13px;color:oklch(0.5 0.01 260)">
@@ -56,18 +70,18 @@
 
 <section style="max-width:1180px;margin:0 auto;padding:0 24px 80px">
   <h2 style="font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:32px">Core beliefs</h2>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+  <div class="core-beliefs-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
     <div>
-      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#5a7ef8">A diversity problem is a safety problem</h3>
-      <p style="font-size:15px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">A system built by a narrow group, for a narrow group, can change what it protects. Who builds AI shapes what it safeguards.</p>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">A diversity problem is a safety problem</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">A system built by a narrow group, for a narrow group, can change what it protects. Who builds AI shapes what it safeguards.</p>
     </div>
     <div>
-      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#5a7ef8">Today's progress isn't guaranteed tomorrow</h3>
-      <p style="font-size:15px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">The benefits we have now can be undone. Staying included in the process is how we keep them.</p>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">Today's progress isn't guaranteed tomorrow</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">The benefits we have now can be undone. Staying included in the process is how we keep them.</p>
     </div>
     <div>
-      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#5a7ef8">The field is still being shaped</h3>
-      <p style="font-size:15px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Now is the moment to get in and move up — not after the field has already set its course.</p>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">The field is still being shaped</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Now is the moment to get in and move up — not after the field has already set its course.</p>
     </div>
   </div>
 </section>
@@ -79,8 +93,8 @@
     <div>
       <img src="osmani-redondo.jpg" alt="Osmani Redondo" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:16px">
       <h3 style="font-size:16px;font-weight:800;margin:0 0 2px">Osmani Redondo</h3>
-      <div style="font-size:13px;color:#5a7ef8;font-weight:700;margin-bottom:10px">Director of IAS</div>
-      <p style="font-size:14px;font-style:italic;color:oklch(0.4 0.01 260);line-height:1.6;margin:0">"AI safety needs diverse perspectives. If AI systems are going to work for society as a whole, the people making them safe need to represent it too."</p>
+      <div style="font-size:13px;color:#3f56a1;font-weight:700;margin-bottom:10px">Director of IAS</div>
+      <p style="font-size:16px;font-style:italic;color:oklch(0.4 0.01 260);line-height:1.6;margin:0">"AI safety needs diverse perspectives. If AI systems are going to work for society as a whole, the people making them safe need to represent it too."</p>
     </div>
   </div>
 </section>
