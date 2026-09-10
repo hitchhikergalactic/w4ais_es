@@ -26,6 +26,7 @@
     ::selection{background:rgba(90,126,248,0.25)}
     .nav-toggle{position:absolute;opacity:0;pointer-events:none}
     .nav-burger{display:none}
+    .nav-links{display:flex}
     @media (max-width: 700px) {
       nav img{height:48px}
       .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer}
@@ -45,7 +46,7 @@
   <a href="index.html" style="display:flex;margin-right:auto"><img src="logo_color_cropped.png" alt="W4AIS – Women For AI Safety logo" style="height:64px;width:auto"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></label>
-  <div class="nav-links" style="display:flex;align-items:center;gap:16px">
+  <div class="nav-links" style="align-items:center;gap:16px">
     <a href="#who" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Who we are</a>
     <a href="seminar.html" style="text-decoration:none;font-weight:600;font-size:15px;color:inherit">Seminar</a>
     <a href="index.html#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 20px;border-radius:999px">Join us</a>
