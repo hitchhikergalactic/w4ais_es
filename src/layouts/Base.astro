@@ -42,9 +42,9 @@ const styles = `
       nav img{height:48px}
       .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer}
       .nav-burger span{display:block;width:22px;height:2.5px;background:currentColor;border-radius:2px}
-      .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;position:absolute;top:100%;left:0;${menuPanel};z-index:30}
+      .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;box-sizing:border-box;position:absolute;top:100%;left:0;${menuPanel};z-index:30}
       .nav-toggle:checked ~ .nav-links{display:flex}
-      .nav-links a{width:100%;padding:14px 4px}
+      .nav-links a{width:100%;box-sizing:border-box;padding:14px 4px}
       ${mobileCss}
     }
   `;
