@@ -1,0 +1,40 @@
+---
+import { categories } from '../data/categories';
+import { sessionHref, type Session } from '../data/sessions';
+import { LUMA_URL, type Theme } from '../data/site';
+
+// Bloque «More sessions» al pie de cada página de sesión, con la tarjeta «Coming soon» al final.
+interface Props {
+  sessions: Session[];
+  theme?: Theme;
+}
+
+const { sessions, theme = 'light' } = Astro.props;
+const dark = theme === 'dark';
+const cardStyle = `text-decoration:none;color:inherit;border:1px solid ${dark ? '#3a3532' : 'oklch(0.88 0.005 80)'};border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px`;
+const h3Style = `font-size:16px;font-weight:700;margin:2px 0 0${dark ? ';color:#efe9e2' : ''}`;
+const metaStyle = `font-size:13px;color:${dark ? '#948c7d' : 'oklch(0.5 0.01 260)'};margin:0`;
+const tagStyle = (color: string, background: string) =>
+  `font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${color};background:${background};padding:5px 12px;border-radius:999px;width:fit-content`;
+---
+<section style="max-width:1180px;margin:0 auto;padding:0 24px 72px">
+  <h2 style={`font-size:22px;font-weight:800;letter-spacing:-0.01em;margin-bottom:24px${dark ? ';color:#fff' : ''}`}>More sessions</h2>
+  <div class="more-sessions-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px">
+    {sessions.map((session) => {
+      const tag = categories[session.data.category][theme];
+      return (
+        <a href={sessionHref(session, theme)} style={cardStyle}>
+          <span style={tagStyle(tag.color, tag.more)}>{session.data.category}</span>
+          <h3 style={h3Style}>{session.data.title}</h3>
+          <p style={metaStyle}>{session.data.cardDate}</p>
+        </a>
+      );
+    })}
+    <a href={LUMA_URL} target="_blank" rel="noopener" style={cardStyle}>
+      <span style={dark ? tagStyle('#f0d382', '#3d3320') : tagStyle('#8a6300', '#fdf3d9')}>Coming soon</span>
+      <h3 style={h3Style}>More sessions on the way</h3>
+      <p style={metaStyle}>Register on Luma to get notified</p>
+      <span style={`font-weight:700;font-size:13px;color:#fff;background:#3f56a1;padding:8px 16px;border-radius:${dark ? '6px' : '999px'};width:fit-content;margin-top:8px`}>Register on Luma</span>
+    </a>
+  </div>
+</section>

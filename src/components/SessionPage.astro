@@ -1,0 +1,82 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import MoreSessions from './MoreSessions.astro';
+import JoinCta from './JoinCta.astro';
+import Footer from './Footer.astro';
+import { getSessions, type Session } from '../data/sessions';
+import { SITE_URL, navLinks, type Theme } from '../data/site';
+
+interface Props {
+  session: Session;
+  theme?: Theme;
+}
+
+const { session, theme = 'light' } = Astro.props;
+const s = session.data;
+const dark = theme === 'dark';
+const { Content } = await render(session);
+
+// «More sessions»: todas las demás sesiones, en el mismo orden que en el seminario.
+const more = (await getSessions()).filter((item) => item.id !== session.id);
+
+const lightUrl = `${SITE_URL}/session-${session.id}.html`;
+const title = `${s.title} – W4AIS Seminar${dark ? ' (dark)' : ''}`;
+
+const css = `@media (max-width: 800px) {
+      .session-grid{grid-template-columns:1fr !important}
+    }
+    .session-text{display:contents}
+    .session-text p{font-size:16px;line-height:1.75;color:${dark ? '#b6b4c2' : 'oklch(0.3 0.01 260)'};margin:${s.paragraphGap}px 0 0}
+    .session-text p:first-child{margin-top:28px}`;
+
+const links = navLinks(theme);
+const toggle = dark ? `session-${session.id}.html` : `session-${session.id}-dark.html`;
+const accent = dark ? '#8fa7fa' : '#3f56a1';
+---
+<Base
+  title={title}
+  canonical={lightUrl}
+  theme={theme}
+  seo={dark ? undefined : { description: `${s.metaSummary} — W4AIS AI Safety Seminar.`, ogDescription: `${s.metaSummary}.`, url: lightUrl }}
+  css={css}
+  mobileCss=".more-sessions-grid{grid-template-columns:1fr !important}"
+>
+<Nav theme={theme} links={links} toggle={toggle} />
+
+<section class="session-grid" style="max-width:1180px;margin:0 auto;padding:56px 24px 72px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
+  <div style="min-width:0">
+    <span style={`font-size:13px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:${accent}`}>{s.category}</span>
+    <h1 style={`font-size:44px;line-height:1.1;font-weight:${dark ? '700' : '800'};letter-spacing:-0.01em;margin:14px 0 0${dark ? ';color:#efe9e2' : ''}`}>{s.title}</h1>
+    <p style={`font-size:18px;font-weight:${dark ? '500' : '600'};color:${dark ? '#b3ac9f' : 'oklch(0.4 0.01 260)'};margin:14px 0 0`}>{s.subtitle}</p>
+    <a href={s.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" style={`display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:9px;box-sizing:border-box;margin:15px -9px -9px -9px;color:${accent}`}>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"></rect><circle cx="8" cy="8.3" r="1.2" fill="currentColor"></circle><line x1="8" y1="11.5" x2="8" y2="17" stroke="currentColor" stroke-width="2"></line><path d="M12 17V12.5C12 11.4 12.9 10.5 14 10.5C15.1 10.5 16 11.4 16 12.5V17" stroke="currentColor" stroke-width="2" fill="none"></path><line x1="12" y1="11.5" x2="12" y2="17" stroke="currentColor" stroke-width="2"></line></svg>
+    </a>
+    <div class="session-text"><Content /></div>
+  </div>
+  <div>
+    <div style={`background:${dark ? '#2a3050' : '#3f56a1'};border-radius:24px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:16px`}>
+      <img src={s.photo} alt={s.speaker} style="width:160px;height:160px;border-radius:50%;object-fit:cover">
+      <div style="text-align:center">
+        <div style="font-size:18px;font-weight:800;color:#fff">{s.speaker}</div>
+        <div style={`font-size:13px;font-weight:600;color:${dark ? '#bac9fc' : 'rgba(255,255,255,0.85)'};margin-top:2px`}>{s.date}</div>
+      </div>
+    </div>
+    {s.youtube && (
+      <div style="position:relative;width:100%;padding-top:56.25%;border-radius:14px;overflow:hidden;margin-top:16px">
+        <iframe src={`https://www.youtube.com/embed/${s.youtube}`} title={`${s.title} — ${s.speaker}`} style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    )}
+    {s.slides && (
+      <a href={s.slides} target="_blank" rel="noopener" style={`text-decoration:none;display:block;text-align:center;margin-top:16px;padding:16px 20px;border-radius:14px;border:1.5px solid ${dark ? '#3a3532' : 'oklch(0.85 0.005 80)'};font-size:13px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${dark ? '#bac9fc' : '#3f56a1'}`}>Download slides (PDF)</a>
+    )}
+  </div>
+</section>
+
+<MoreSessions sessions={more} theme={theme} />
+
+<JoinCta theme={theme} />
+
+<Footer theme={theme} />
+</Base>
