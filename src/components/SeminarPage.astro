@@ -6,7 +6,7 @@ import SessionCard from './SessionCard.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
 import { getSessions } from '../data/sessions';
-import { GRADIENT, JOIN_FORM_URL, LUMA_URL, SITE_URL, type Theme } from '../data/site';
+import { GRADIENT, JOIN_FORM_URL, LUMA_URL, SITE_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -17,12 +17,7 @@ const dark = theme === 'dark';
 const sessions = await getSessions();
 const url = `${SITE_URL}/seminar.html`;
 const description = 'The W4AIS AI Safety Seminar: learn directly from AI safety researchers and practitioners, twice a month, online.';
-const links = [
-  { href: 'index.html#why', label: 'Why it matters' },
-  { href: 'index.html#what', label: 'What we do' },
-  { href: dark ? 'seminar-dark.html' : 'seminar.html', label: 'Seminars' },
-  { href: 'about.html', label: 'About us' },
-];
+const links = navLinks(theme);
 const buttonRadius = dark ? '6px' : '999px';
 ---
 <Base
@@ -78,5 +73,5 @@ const buttonRadius = dark ? '6px' : '999px';
 
 <JoinCta theme={theme} />
 
-<Footer theme={theme} seminarHref={dark ? 'seminar-dark.html' : 'seminar.html'} note={!dark} />
+<Footer theme={theme} note />
 </Base>

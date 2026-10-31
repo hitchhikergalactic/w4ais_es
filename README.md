@@ -6,7 +6,7 @@ index.html — Home (src/pages/index.astro)
 about.html — About us (src/pages/about.astro)
 seminar.html — AI Safety Seminar (src/components/SeminarPage.astro)
 session-*.html — One page per seminar session (src/content/sessions/*.md)
-*-dark.html — Dark variants
+*-dark.html — Dark variants (same content, generated from the same components)
 
 Development: npm install, then npm run dev (Node 22.12+).
 Build: npm run build → dist/. Vercel builds automatically on every push to main.

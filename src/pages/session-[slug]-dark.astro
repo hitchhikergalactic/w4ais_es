@@ -2,12 +2,9 @@
 import SessionPage from '../components/SessionPage.astro';
 import { getSessions, type Session } from '../data/sessions';
 
-// Solo las sesiones con «dark: true» tienen versión oscura.
 export async function getStaticPaths() {
   const sessions = await getSessions();
-  return sessions
-    .filter((session) => session.data.dark)
-    .map((session) => ({ params: { slug: session.id }, props: { session } }));
+  return sessions.map((session) => ({ params: { slug: session.id }, props: { session } }));
 }
 
 const { session } = Astro.props as { session: Session };

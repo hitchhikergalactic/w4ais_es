@@ -12,8 +12,6 @@ date: "Wednesday, 12 August 2026"
 cardDate: "Wednesday, 12 August"
 youtube: "o8ZBJkqP2_w"
 slides: "vivi-svendsen-slides.pdf"
-moreSessions:
-  - johanna-angulo
 ---
 
 Vivi Svendsen works on AI policy because the people most affected by AI are rarely given the tools to understand or shape it. Her research at the University of Edinburgh found that current AI legislation leans heavily on the language of rights without giving people the means to exercise them. She's since coordinated an independent coalition's response to the EU AI Act's Article 6 consultation, the first step in a broader effort to make AI policy more legible.

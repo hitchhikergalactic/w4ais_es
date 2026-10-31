@@ -14,7 +14,6 @@ date: "Wednesday, 1 January 2027"
 cardDate: "Wednesday, 1 January"
 # youtube: "IDDELVIDEO"           # opcional, cuando haya grabación
 # slides: "jane-doe-slides.pdf"   # opcional: PDF en public/ o URL externa
-moreSessions: []
 ---
 
 Primer párrafo sobre la sesión.

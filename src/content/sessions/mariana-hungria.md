@@ -12,10 +12,6 @@ date: "Wednesday, 9 September 2026"
 cardDate: "Wednesday, 9 September"
 youtube: "usGjghkp4bQ"
 slides: "mariana-hungria-slides.pdf"
-moreSessions:
-  - johanna-angulo
-  - vivi-svendsen
-  - ula-ojiaku
 ---
 
 Christen Rao started the <a href="https://aigovernanceclub.com/" target="_blank" rel="noopener">AI Governance Club</a> and asked for volunteers. Mariana Hungria was in the room on the first day, messaged the organiser afterwards offering to help with anything useful, and has co-organised it ever since. The third session had twenty-two people in it; almost a year later the sessions run past a hundred people every week. Mariana came to AI safety and governance from linguistics, and she is a year into a career change that is not finished.

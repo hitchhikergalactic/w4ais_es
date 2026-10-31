@@ -8,13 +8,11 @@ metaSummary: "Johanna Angulo on contamination, memorisation, and trustworthy saf
 speaker: "Johanna Angulo"
 photo: "johanna-angulo.jpg"
 linkedin: "https://www.linkedin.com/in/johannaangulo/"
-date: "Wednesday, July 29th"
-cardDate: "Wednesday, July 29th"
+date: "Wednesday, 29 July 2026"
+cardDate: "Wednesday, 29 July"
 youtube: "UlR591ltjyM"
 slides: "https://zenodo.org/records/21750019"
 paragraphGap: 16
-dark: true
-moreSessions: []
 ---
 
 Johanna built and led the model-evaluation function at a European AI lab from zero, owning release gating and safety benchmarking across LLMs and quantum-compressed models. She now engineers AI governance into production for regulated enterprises, translating EU AI Act and ISO 42001 obligations into technical controls.

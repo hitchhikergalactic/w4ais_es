@@ -1,5 +1,5 @@
 ---
-import type { Theme } from '../data/site';
+import { pageHref, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -10,7 +10,7 @@ interface Props {
   logoAlt?: string;
 }
 
-const { theme = 'light', links, toggle, joinHref = 'index.html#join', logoAlt = 'W4AIS' } = Astro.props;
+const { theme = 'light', links, toggle, joinHref = pageHref('index', theme, '#join'), logoAlt = 'W4AIS' } = Astro.props;
 const dark = theme === 'dark';
 const linkStyle = 'text-decoration:none;font-weight:600;font-size:15px;color:inherit';
 const joinStyle = dark
@@ -19,7 +19,7 @@ const joinStyle = dark
 const toggleLabel = dark ? 'Light mode' : 'Dark mode';
 ---
 <nav style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:20px 24px;position:relative">
-  <a href="index.html" style="display:flex;margin-right:auto"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:64px;width:auto"></a>
+  <a href={pageHref('index', theme)} style="display:flex;margin-right:auto"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:64px;width:auto"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></label>
   <div class="nav-links" style="align-items:center;gap:16px">

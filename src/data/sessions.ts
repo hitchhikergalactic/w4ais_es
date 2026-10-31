@@ -8,8 +8,7 @@ export async function getSessions(): Promise<Session[]> {
   return sessions.sort((a, b) => a.data.order - b.data.order);
 }
 
-// En la versión oscura se enlaza a la página oscura de la sesión si existe; si no, a la clara.
+// Cada sesión tiene versión clara (session-x.html) y oscura (session-x-dark.html).
 export function sessionHref(session: Session, theme: Theme = 'light'): string {
-  const dark = theme === 'dark' && session.data.dark;
-  return `session-${session.id}${dark ? '-dark' : ''}.html`;
+  return `session-${session.id}${theme === 'dark' ? '-dark' : ''}.html`;
 }

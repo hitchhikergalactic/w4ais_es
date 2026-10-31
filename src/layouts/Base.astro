@@ -8,23 +8,21 @@ interface Props {
   // Metadatos SEO. Las páginas oscuras no llevan: heredan los de su versión clara (ver CONTRIBUTING.md).
   seo?: { description: string; ogDescription?: string; url: string; twitter?: boolean };
   jsonLd?: string[];
-  // index.html carga además la fuente Anton.
-  anton?: boolean;
   // CSS propio de la página antes de las reglas del menú.
   css?: string;
   // CSS propio de la página dentro del bloque móvil (max-width: 700px).
   mobileCss?: string;
 }
 
-const { title, canonical, theme = 'light', seo, jsonLd = [], anton = false, css = '', mobileCss = '' } = Astro.props;
+const { title, canonical, theme = 'light', seo, jsonLd = [], css = '', mobileCss = '' } = Astro.props;
 
 const base =
   theme === 'light'
-    ? `body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:oklch(0.98 0.005 80);color:oklch(0.22 0.01 260)}
+    ? `body{margin:0;font-family:'Overpass',system-ui,sans-serif;background:oklch(0.98 0.005 80);color:oklch(0.22 0.01 260)}
     a{color:#3f56a1}
     a:hover{color:#2c3d78}
     ::selection{background:rgba(90,126,248,0.25)}`
-    : `body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:#211f1e;color:#efe9e2}
+    : `body{margin:0;font-family:'Overpass',system-ui,sans-serif;background:#211f1e;color:#efe9e2}
     a{color:#8fa7fa}
     a:hover{color:#bac9fc}
     ::selection{background:rgba(90,126,248,0.35)}`;
@@ -51,7 +49,7 @@ const styles = `
     }
   `;
 
-const fonts = `https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800${anton ? '&family=Anton' : ''}&display=swap`;
+const fonts = 'https://fonts.googleapis.com/css2?family=Overpass:wght@400;500;600;700;800&display=swap';
 const ogDescription = seo?.ogDescription ?? seo?.description;
 ---
 <!DOCTYPE html>

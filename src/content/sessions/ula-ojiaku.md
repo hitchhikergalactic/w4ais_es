@@ -12,9 +12,6 @@ date: "Wednesday, 30 September 2026"
 cardDate: "Wednesday, 30 September"
 youtube: "Ct2LF6GRBuY"
 slides: "ula-ojiaku-slides.pdf"
-moreSessions:
-  - vivi-svendsen
-  - mariana-hungria
 ---
 
 Generative AI can now reproduce someone’s face, body or voice convincingly enough to fool the people who know them, and it can do so without that person ever finding out. The harms that follow, from deepfakes to image-based abuse, land far more often on women and girls. Ula Ojiaku has spent recent months looking at how image-based rights and digital safety are, and are not, protected today.

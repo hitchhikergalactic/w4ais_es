@@ -31,13 +31,19 @@ npm run dev
 3. Escribe el texto de la sesión debajo de la cabecera, separando los párrafos con una línea en blanco.
 4. Sube la foto (y el PDF de las diapositivas, si lo hay) a `public/`.
 
-Con eso se generan solos `session-jane-doe.html`, su tarjeta en `seminar.html` y `seminar-dark.html`, y su entrada en `sitemap.xml`. El bloque «More sessions» de cada página muestra las sesiones que se indiquen en su campo `moreSessions`, en ese orden, seguidas de la tarjeta «Coming soon».
+Con eso se generan solos `session-jane-doe.html` y su versión oscura `session-jane-doe-dark.html`, su tarjeta en `seminar.html` y `seminar-dark.html`, su entrada en `sitemap.xml` y su tarjeta en el bloque «More sessions» de las demás sesiones. Ese bloque muestra siempre todas las demás sesiones, en el orden del campo `order`, seguidas de la tarjeta «Coming soon».
+
+Las fechas se escriben con el formato `Wednesday, 12 August 2026` en `date` y `Wednesday, 12 August` en `cardDate`.
 
 ## Páginas en modo oscuro (`*-dark.html`)
 
-Las versiones oscuras son páginas aparte a las que se llega con el botón 🌙. `seminar-dark.html` y las de sesión salen de los mismos componentes que su versión clara, con `theme="dark"`; una sesión tiene versión oscura si su fichero lleva `dark: true`. `home-dark.html` es una página propia (`src/pages/home-dark.astro`) porque algunos de sus textos y secciones no coinciden con los de `index.html`.
+Cada página tiene una versión oscura a la que se llega con el botón 🌙: `home-dark.html` (portada), `about-dark.html`, `seminar-dark.html` y `session-<slug>-dark.html`. Las dos versiones salen del mismo componente (`HomePage`, `AboutPage`, `SeminarPage`, `SessionPage`) con `theme="light"` o `theme="dark"`, así que tienen siempre el mismo texto; solo cambian los colores. Dentro del modo oscuro, el menú y los enlaces llevan a las versiones oscuras de las demás páginas.
 
 Toda página oscura lleva una etiqueta `<link rel="canonical">` hacia la URL absoluta de su versión clara, y ningún metadato SEO propio (`meta description`, `og:*`, `twitter:*`, JSON-LD). `Base.astro` lo hace automáticamente cuando la página no recibe `seo`. Así Search Console consolida la página oscura bajo la clara en lugar de tratarlas como dos URL distintas con el mismo contenido.
+
+## Tipografía
+
+Todo el sitio usa Overpass (pesos 400 a 800), cargada desde Google Fonts en `src/layouts/Base.astro`.
 
 ## Dominio canónico
 

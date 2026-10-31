@@ -31,10 +31,6 @@ const sessions = defineCollection({
     slides: z.string().optional(),
     // Separación en píxeles entre párrafos del texto de la sesión.
     paragraphGap: z.number().default(20),
-    // true genera también session-<slug>-dark.html y el botón 🌙 en la página clara.
-    dark: z.boolean().default(false),
-    // Slugs de las sesiones que se muestran en «More sessions», en orden.
-    moreSessions: z.array(z.string()).default([]),
   }),
 });
 

@@ -6,7 +6,7 @@ import MoreSessions from './MoreSessions.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
 import { getSessions, type Session } from '../data/sessions';
-import { SITE_URL, type Theme } from '../data/site';
+import { SITE_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   session: Session;
@@ -18,12 +18,8 @@ const s = session.data;
 const dark = theme === 'dark';
 const { Content } = await render(session);
 
-const all = await getSessions();
-const more = s.moreSessions.map((slug) => {
-  const found = all.find((item) => item.id === slug);
-  if (!found) throw new Error(`moreSessions de «${session.id}» apunta a una sesión que no existe: «${slug}»`);
-  return found;
-});
+// «More sessions»: todas las demás sesiones, en el mismo orden que en el seminario.
+const more = (await getSessions()).filter((item) => item.id !== session.id);
 
 const lightUrl = `${SITE_URL}/session-${session.id}.html`;
 const title = `${s.title} – W4AIS Seminar${dark ? ' (dark)' : ''}`;
@@ -35,13 +31,8 @@ const css = `@media (max-width: 800px) {
     .session-text p{font-size:16px;line-height:1.75;color:${dark ? '#b6b4c2' : 'oklch(0.3 0.01 260)'};margin:${s.paragraphGap}px 0 0}
     .session-text p:first-child{margin-top:28px}`;
 
-const links = [
-  { href: 'index.html#why', label: 'Why it matters' },
-  { href: 'index.html#what', label: 'What we do' },
-  { href: dark ? 'seminar-dark.html' : 'seminar.html', label: 'Seminars' },
-  { href: 'about.html', label: 'About us' },
-];
-const toggle = s.dark ? (dark ? `session-${session.id}.html` : `session-${session.id}-dark.html`) : undefined;
+const links = navLinks(theme);
+const toggle = dark ? `session-${session.id}.html` : `session-${session.id}-dark.html`;
 const accent = dark ? '#8fa7fa' : '#3f56a1';
 ---
 <Base
@@ -87,5 +78,5 @@ const accent = dark ? '#8fa7fa' : '#3f56a1';
 
 <JoinCta theme={theme} />
 
-<Footer theme={theme} seminarHref={dark ? 'seminar-dark.html' : 'seminar.html'} />
+<Footer theme={theme} />
 </Base>
