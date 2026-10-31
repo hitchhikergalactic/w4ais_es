@@ -1,0 +1,90 @@
+---
+import { OG_IMAGE, type Theme } from '../data/site';
+
+interface Props {
+  title: string;
+  canonical: string;
+  theme?: Theme;
+  // Metadatos SEO. Las páginas oscuras no llevan: heredan los de su versión clara (ver CONTRIBUTING.md).
+  seo?: { description: string; ogDescription?: string; url: string; twitter?: boolean };
+  jsonLd?: string[];
+  // index.html carga además la fuente Anton.
+  anton?: boolean;
+  // CSS propio de la página antes de las reglas del menú.
+  css?: string;
+  // CSS propio de la página dentro del bloque móvil (max-width: 700px).
+  mobileCss?: string;
+}
+
+const { title, canonical, theme = 'light', seo, jsonLd = [], anton = false, css = '', mobileCss = '' } = Astro.props;
+
+const base =
+  theme === 'light'
+    ? `body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:oklch(0.98 0.005 80);color:oklch(0.22 0.01 260)}
+    a{color:#3f56a1}
+    a:hover{color:#2c3d78}
+    ::selection{background:rgba(90,126,248,0.25)}`
+    : `body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:#211f1e;color:#efe9e2}
+    a{color:#8fa7fa}
+    a:hover{color:#bac9fc}
+    ::selection{background:rgba(90,126,248,0.35)}`;
+
+const menuPanel =
+  theme === 'light'
+    ? 'background:oklch(0.98 0.005 80);padding:12px 24px 20px;border-top:1px solid oklch(0.88 0.005 80);box-shadow:0 16px 32px -16px rgba(30,20,10,0.18)'
+    : 'background:#211f1e;padding:12px 24px 20px;border-top:1px solid #3a3532;box-shadow:0 16px 32px -16px rgba(0,0,0,0.5)';
+
+const styles = `
+    ${base}
+    ${css}
+    .nav-toggle{position:absolute;opacity:0;pointer-events:none}
+    .nav-burger{display:none}
+    .nav-links{display:flex}
+    @media (max-width: 700px) {
+      nav img{height:48px}
+      .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;cursor:pointer}
+      .nav-burger span{display:block;width:22px;height:2.5px;background:currentColor;border-radius:2px}
+      .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;position:absolute;top:100%;left:0;${menuPanel};z-index:30}
+      .nav-toggle:checked ~ .nav-links{display:flex}
+      .nav-links a{width:100%;padding:14px 4px}
+      ${mobileCss}
+    }
+  `;
+
+const fonts = `https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800${anton ? '&family=Anton' : ''}&display=swap`;
+const ogDescription = seo?.ogDescription ?? seo?.description;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{jsonLd.map((data) => <script type="application/ld+json" is:inline set:html={data} />)}
+{seo && <meta name="description" content={seo.description}>}
+<link rel="canonical" href={canonical}>
+{seo && (
+  <>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={ogDescription}>
+    <meta property="og:url" content={seo.url}>
+    <meta property="og:image" content={OG_IMAGE}>
+  </>
+)}
+{seo?.twitter && (
+  <>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={seo.description}>
+    <meta name="twitter:image" content={OG_IMAGE}>
+  </>
+)}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href={fonts} rel="stylesheet">
+<style is:inline set:html={styles}></style>
+</head>
+<body>
+<slot />
+</body>
+</html>

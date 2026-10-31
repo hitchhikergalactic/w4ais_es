@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Sponsor from './Sponsor.astro';
+import SessionCard from './SessionCard.astro';
+import JoinCta from './JoinCta.astro';
+import Footer from './Footer.astro';
+import { getSessions } from '../data/sessions';
+import { GRADIENT, JOIN_FORM_URL, LUMA_URL, SITE_URL, type Theme } from '../data/site';
+
+interface Props {
+  theme?: Theme;
+}
+
+const { theme = 'light' } = Astro.props;
+const dark = theme === 'dark';
+const sessions = await getSessions();
+const url = `${SITE_URL}/seminar.html`;
+const description = 'The W4AIS AI Safety Seminar: learn directly from AI safety researchers and practitioners, twice a month, online.';
+const links = [
+  { href: 'index.html#why', label: 'Why it matters' },
+  { href: 'index.html#what', label: 'What we do' },
+  { href: dark ? 'seminar-dark.html' : 'seminar.html', label: 'Seminars' },
+  { href: 'about.html', label: 'About us' },
+];
+const buttonRadius = dark ? '6px' : '999px';
+---
+<Base
+  title={`AI Safety Seminar – W4AIS${dark ? ' (dark)' : ''}`}
+  canonical={url}
+  theme={theme}
+  seo={dark ? undefined : { description, url, twitter: true }}
+  mobileCss=".sessions-grid{grid-template-columns:1fr !important}"
+>
+<Nav theme={theme} links={links} toggle={dark ? 'seminar.html' : 'seminar-dark.html'} />
+
+{dark ? (
+  <header style="border-bottom:1px solid #3a3532">
+    <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px">
+      <span style="display:inline-flex;width:fit-content;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#bac9fc;background:#2a3050;padding:6px 14px;border-radius:999px">Every other Wednesday</span>
+      <h1 style="font-size:52px;line-height:1.1;font-weight:700;letter-spacing:-0.01em;max-width:18ch;margin:0;color:#efe9e2">AI Safety Seminar</h1>
+      <p style="font-size:19px;font-weight:500;max-width:46ch;margin:0;color:#b3ac9f">Learn directly from AI safety researchers and people working in the field, and find the guidance your career needs to make a real impact.</p>
+      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
+        <a href={LUMA_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:6px">Register for the seminar</a>
+        <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#efe9e2;padding:13px 24px;border-radius:6px;border:1px solid #3a3532">Submit a proposal</a>
+      </div>
+    </div>
+  </header>
+) : (
+  <header id="seminar" style={`position:relative;overflow:hidden;background:${GRADIENT}`}>
+    <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px;position:relative">
+      <span style="display:inline-flex;width:fit-content;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:999px">Every other Wednesday</span>
+      <h1 style="font-size:52px;line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:#fff">AI Safety Seminar</h1>
+      <p style="font-size:19px;font-weight:600;max-width:46ch;margin:0;color:rgba(255,255,255,0.92)">Learn directly from AI safety researchers and people working in the field, and find the guidance your career needs to make a real impact.</p>
+      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
+        <a href={LUMA_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Register for the seminar</a>
+        <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">Submit a proposal</a>
+      </div>
+    </div>
+  </header>
+)}
+
+<Sponsor theme={theme} />
+
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 80px">
+  <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin-bottom:32px${dark ? ';color:#fff' : ''}`}>Sessions &amp; speakers</h2>
+  <div class="sessions-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+    {sessions.map((session) => <SessionCard session={session} theme={theme} />)}
+    <a href={LUMA_URL} target="_blank" rel="noopener" style={`text-decoration:none;color:inherit;border:1px solid ${dark ? '#3a3532' : 'oklch(0.88 0.005 80)'};border-radius:20px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px`}>
+      <span style={`font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:12px 24px;border-radius:${buttonRadius}`}>Subscribe to calendar</span>
+    </a>
+  </div>
+  <div style={`background:${dark ? '#4a3226' : '#fbeee2'};border-radius:20px;padding:28px;margin-top:28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start`}>
+    <p style={`font-size:16px;line-height:1.6;color:${dark ? '#f6b98a' : '#8a5a3f'};margin:0`}>Sessions and speakers are announced here as they're confirmed.</p>
+    <a href={LUMA_URL} target="_blank" rel="noopener" style={`text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:12px 24px;border-radius:${buttonRadius}`}>Register to be notified</a>
+  </div>
+</section>
+
+<JoinCta theme={theme} />
+
+<Footer theme={theme} seminarHref={dark ? 'seminar-dark.html' : 'seminar.html'} note={!dark} />
+</Base>

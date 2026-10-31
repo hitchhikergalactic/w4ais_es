@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_URL } from '../data/site';
+
+const url = `${SITE_URL}/about.html`;
+const description = 'W4AIS is building the career network women need to get into AI safety and move up in it.';
+const logoAlt = 'W4AIS – Women For AI Safety logo';
+const links = [
+  { href: '#who', label: 'Who we are' },
+  { href: 'seminar.html', label: 'Seminar' },
+];
+---
+<Base
+  title="About – W4AIS"
+  canonical={url}
+  seo={{ description, url, twitter: true }}
+  mobileCss=".core-beliefs-grid{grid-template-columns:1fr !important}"
+>
+<Nav links={links} logoAlt={logoAlt} />
+
+<div style="max-width:1180px;margin:0 auto;padding:8px 24px 0;font-size:13px;color:oklch(0.5 0.01 260)">
+  <a href="index.html" style="color:inherit;text-decoration:none">Home</a> &gt; About us
+</div>
+
+<header style="max-width:1180px;margin:0 auto;padding:24px 24px 56px">
+  <span style="display:inline-flex;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#3f56a1;background:#eef2fe;padding:6px 14px;border-radius:999px;margin-bottom:16px">About us</span>
+  <h1 style="font-size:48px;line-height:1.1;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0">Building the career network AI safety needs</h1>
+</header>
+
+<section id="who" style="max-width:760px;margin:0 auto;padding:0 24px 72px">
+  <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.01em;margin-bottom:16px">Who we are</h2>
+  <p style="font-size:17px;line-height:1.7;color:oklch(0.3 0.01 260)">W4AIS started because too many capable women in AI safety were working in isolation, with no network to find each other.</p>
+  <p style="font-size:17px;line-height:1.7;color:oklch(0.3 0.01 260)">We're building the network that fixes that: a place to find roles, get visibility, find a mentor and meet the people who open doors, whether you're already established in alignment, governance or policy, or still finding your way in.</p>
+  <p style="font-size:17px;line-height:1.7;color:oklch(0.3 0.01 260)">The field is young, and the people who join now will shape what it becomes.</p>
+</section>
+
+<section style="max-width:1180px;margin:0 auto;padding:0 24px 80px">
+  <h2 style="font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:32px">Core beliefs</h2>
+  <div class="core-beliefs-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+    <div>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">The field needs every capable person</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">AI safety is short of people in operations, governance, policy and leadership, and leaving capable people out is a cost it can't afford.</p>
+    </div>
+    <div>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">Entry routes matter</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Many people who could do this work never find a way in. A network, a mentor and a concrete first step change that.</p>
+    </div>
+    <div>
+      <h3 style="font-size:19px;font-weight:700;margin:0 0 8px;color:#3f56a1">The field is still being shaped</h3>
+      <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0">Now is a good moment to get in and move up, while the field is still young.</p>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1180px;margin:0 auto;padding:0 24px 80px">
+  <h2 style="font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">Team</h2>
+  <p style="font-size:16px;color:oklch(0.4 0.01 260);max-width:52ch;margin:0 0 32px">Different backgrounds. One goal: AI that works for the whole world.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;max-width:600px">
+    <div>
+      <img src="osmani-redondo.jpg" alt="Osmani Redondo" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:16px">
+      <h3 style="font-size:16px;font-weight:800;margin:0 0 2px">Osmani Redondo</h3>
+      <div style="font-size:13px;color:#3f56a1;font-weight:700;margin-bottom:10px">Director of Women4AISafety</div>
+      <p style="font-size:16px;font-style:italic;color:oklch(0.4 0.01 260);line-height:1.6;margin:0">"AI safety needs diverse perspectives. If AI systems are going to work for society as a whole, the people making them safe need to represent it too."</p>
+    </div>
+  </div>
+</section>
+
+<Footer seminarLabel="Seminar" note logoAlt={logoAlt} />
+</Base>

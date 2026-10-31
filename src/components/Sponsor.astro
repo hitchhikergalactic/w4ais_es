@@ -1,0 +1,18 @@
+---
+import type { Theme } from '../data/site';
+
+interface Props {
+  theme?: Theme;
+}
+
+const { theme = 'light' } = Astro.props;
+const dark = theme === 'dark';
+---
+<section style={dark ? 'background:#292522;border-top:1px solid #3a3532;border-bottom:1px solid #3a3532' : 'background:#f2f5fe;border-top:1px solid #dbe3fd;border-bottom:1px solid #dbe3fd'}>
+  <a href="https://bluedot.org" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block">
+    <div style="max-width:1180px;margin:0 auto;padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center">
+      <div style={`font-weight:800;font-size:14px;letter-spacing:0.12em;color:${dark ? '#b3ac9f' : 'oklch(0.45 0.02 260)'}`}>SPONSORED BY</div>
+      <img src={dark ? 'bluedot-logo-white.svg' : 'bluedot-logo-blue.svg'} alt="BlueDot Impact" style="height:36px;width:auto">
+    </div>
+  </a>
+</section>

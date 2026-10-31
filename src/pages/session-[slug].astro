@@ -1,0 +1,12 @@
+---
+import SessionPage from '../components/SessionPage.astro';
+import { getSessions, type Session } from '../data/sessions';
+
+export async function getStaticPaths() {
+  const sessions = await getSessions();
+  return sessions.map((session) => ({ params: { slug: session.id }, props: { session } }));
+}
+
+const { session } = Astro.props as { session: Session };
+---
+<SessionPage session={session} />

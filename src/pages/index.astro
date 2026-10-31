@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Sponsor from '../components/Sponsor.astro';
+import JoinCta from '../components/JoinCta.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { GRADIENT, LUMA_URL, SITE_URL } from '../data/site';
+
+const description = 'Women4AISafety (W4AIS) is the career network for women working in or entering AI safety, alignment, governance and policy.';
+const jsonLd = [
+  '{"@context":"https://schema.org","@type":"Organization","name":"Women4AISafety","alternateName":"W4AIS","url":"https://www.women4aisafety.com/","logo":"https://www.women4aisafety.com/logo_color_cropped.png","sameAs":["https://www.instagram.com/womenaisafety/","https://www.linkedin.com/company/women4aisafety/","https://osmaniredondo.substack.com/"]}',
+  '{"@context":"https://schema.org","@type":"EventSeries","name":"W4AIS AI Safety Seminar","description":"Twice-monthly online seminar series where women in AI safety, alignment, governance and policy learn directly from researchers and practitioners in the field.","url":"https://www.women4aisafety.com/seminar.html","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://luma.com/gkxzc0ap"},"organizer":{"@type":"Organization","name":"Women4AISafety","url":"https://www.women4aisafety.com/"}}',
+];
+const logoAlt = 'W4AIS – Women For AI Safety logo';
+const links = [
+  { href: '#why', label: 'Why it matters' },
+  { href: '#what', label: 'What we do' },
+  { href: 'seminar.html', label: 'Seminars' },
+  { href: 'about.html', label: 'About us' },
+];
+---
+<Base
+  title="W4AIS – Women For AI Safety"
+  canonical={`${SITE_URL}/`}
+  seo={{ description, url: `${SITE_URL}/`, twitter: true }}
+  jsonLd={jsonLd}
+  anton
+  mobileCss="#network{text-align:center}"
+>
+<Nav links={links} toggle="home-dark.html" joinHref="#join" logoAlt={logoAlt} />
+
+<header style={`position:relative;overflow:hidden;background:${GRADIENT}`}>
+  <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px;position:relative">
+    <h1 style="font-size:clamp(34px,8vw,56px);line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:#fff;text-wrap:balance">AI safety needs every capable person it can get.</h1>
+    <p style="font-size:clamp(17px,4.2vw,20px);line-height:1.5;font-weight:600;max-width:42ch;margin:0;color:rgba(255,255,255,0.92);text-wrap:pretty">W4AIS is the career network that helps women get into the field and move up in it.</p>
+    <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
+      <a href="#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Join the network</a>
+      <a href="#what" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">See what we do</a>
+    </div>
+  </div>
+</header>
+
+<Sponsor />
+
+<section id="why" style="max-width:960px;margin:0 auto;padding:72px 24px">
+  <h2 style="font-size:clamp(26px,6.5vw,32px);line-height:1.2;font-weight:800;letter-spacing:-0.01em;max-width:16ch">Why this matters</h2>
+  <p style="font-size:17px;line-height:1.65;color:oklch(0.32 0.01 260);max-width:68ch;text-wrap:pretty">The field working to make AI go well is still small, and the decisions it makes now will shape how this technology develops. It's short of people in operations, governance, policy and leadership, and many capable women never find a way in: no network, no one to ask, no clear route from where they are to where the work is.</p>
+  <p style="font-size:17px;line-height:1.65;color:oklch(0.32 0.01 260);max-width:68ch;text-wrap:pretty">W4AIS is that route. We connect you with women already doing the work, through talks, networking sessions and mentoring, so you can see what the jobs actually look like and take a concrete next step.</p>
+  <p style="font-size:17px;line-height:1.65;color:oklch(0.32 0.01 260);max-width:68ch;text-wrap:pretty">Whether you already work in AI safety, alignment, governance or policy, or you're coming from another field and wondering where you'd fit, this is where you find opportunities, get visibility and meet the people who can open doors.</p>
+</section>
+
+<section id="what" style="max-width:960px;margin:0 auto;padding:24px 24px 72px">
+  <h2 style="font-size:32px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">What we're building</h2>
+  <p style="font-size:16px;line-height:1.6;color:oklch(0.4 0.01 260);margin:0 0 8px;max-width:56ch">Right now, that means one thing: <strong style="color:#3f56a1">the network</strong>.<br>Here's what it will open up.</p>
+  <div style="border-top:1px solid oklch(0.88 0.005 80)">
+    <div style="display:flex;gap:32px;padding:32px 0;border-bottom:1px solid oklch(0.88 0.005 80);align-items:baseline">
+      <span style="font-size:14px;font-weight:800;color:#3f56a1;width:24px;flex-shrink:0">01</span>
+      <div>
+        <h3 style="font-size:20px;font-weight:700;margin:0 0 6px">Find your next role</h3>
+        <p style="font-size:16px;color:oklch(0.4 0.01 260);margin:0;line-height:1.6;max-width:52ch">Roles, fellowships and introductions surfaced from inside the field.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:32px;padding:32px 0;border-bottom:1px solid oklch(0.88 0.005 80);align-items:baseline">
+      <span style="font-size:14px;font-weight:800;color:#3f56a1;width:24px;flex-shrink:0">02</span>
+      <div>
+        <h3 style="font-size:20px;font-weight:700;margin:0 0 6px">Be seen for your work</h3>
+        <p style="font-size:16px;color:oklch(0.4 0.01 260);margin:0;line-height:1.6;max-width:52ch">Speaking slots, features and referrals that put you in front of the right people.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:32px;padding:32px 0;border-bottom:1px solid oklch(0.88 0.005 80);align-items:baseline">
+      <span style="font-size:14px;font-weight:800;color:#3f56a1;width:24px;flex-shrink:0">03</span>
+      <div>
+        <h3 style="font-size:20px;font-weight:700;margin:0 0 6px">Meet people who open doors</h3>
+        <p style="font-size:16px;color:oklch(0.4 0.01 260);margin:0;line-height:1.6;max-width:52ch">A working network across alignment, governance and policy — not a mailing list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gather" style="max-width:1180px;margin:0 auto;padding:24px 24px 80px;display:flex;gap:48px;flex-wrap:wrap;align-items:center">
+  <div style="flex:1 1 280px;min-width:0">
+    <h2 style="font-size:32px;font-weight:800;letter-spacing:-0.01em;margin-bottom:12px">How we gather</h2>
+    <p style="font-size:18px;line-height:1.6;max-width:46ch;color:oklch(0.3 0.01 260)">We gather regularly: real conversations, real connections, real career support.</p>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+      <a href={LUMA_URL} target="_blank" rel="noopener" style="text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;background:#f2f5fe;color:#3f56a1">Twice a month, on Wednesdays, online</a>
+    </div>
+  </div>
+  <div style="flex:1 1 280px;min-width:0;max-width:380px">
+    <a href={LUMA_URL} target="_blank" rel="noopener" style="display:block">
+      <img src="gather-invite.jpg" alt="Invitation to the W4AIS AI Safety Seminar, held twice a month online — register on Luma" style="width:100%;height:auto;border-radius:28px;display:block;box-shadow:0 12px 32px -12px rgba(60,40,80,0.28)">
+    </a>
+  </div>
+</section>
+
+<section id="network" style="max-width:1180px;margin:0 auto;padding:24px 24px 80px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center">
+  <div style="flex:1 1 260px;min-width:0">
+    <h2 style="font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">Part of the global AI safety network</h2>
+    <p style="font-size:18px;line-height:1.6;color:oklch(0.4 0.01 260);max-width:44ch;margin:0">We're part of the global AI safety ecosystem, collaborating closely with BlueDot Impact and the international network of local hubs.</p>
+  </div>
+  <div style="flex:1 1 260px;min-width:0;max-width:380px;display:flex;justify-content:center">
+    <a href="https://aisafety.es/" target="_blank" rel="noopener"><img src="ias-logo.png" alt="iaS — AI Safety hub in Spain, W4AIS network partner" style="height:99px;width:193px;flex-shrink:0"></a>
+  </div>
+</section>
+
+<JoinCta />
+
+<footer style="max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px">
+  <a href="index.html" style="display:flex;flex-shrink:0"><img src="logo_color_cropped.png" alt={logoAlt} style="height:88px;width:auto"></a>
+  <div style="display:flex;gap:24px;flex-wrap:wrap">
+    <a href="#why" style="text-decoration:none;font-size:14px;font-weight:700;color:inherit">Why it matters</a>
+    <a href="#what" style="text-decoration:none;font-size:14px;font-weight:700;color:inherit">What we do</a>
+    <a href="#join" style="text-decoration:none;font-size:14px;font-weight:700;color:inherit">Join</a>
+  </div>
+  <SocialLinks color="#3f56a1" />
+  <span style="font-size:12px;font-weight:700;color:oklch(0.55 0.01 260)">© 2026 Women4AISafety</span>
+</div>
+</footer>
+</Base>

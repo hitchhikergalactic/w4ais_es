@@ -1,0 +1,23 @@
+---
+import { categories } from '../data/categories';
+import { sessionHref, type Session } from '../data/sessions';
+import type { Theme } from '../data/site';
+
+// Tarjeta grande del listado de seminar.html.
+interface Props {
+  session: Session;
+  theme?: Theme;
+}
+
+const { session, theme = 'light' } = Astro.props;
+const { title, category, speaker, summary, cardDate } = session.data;
+const dark = theme === 'dark';
+const tag = categories[category][theme];
+---
+<a href={sessionHref(session, theme)} style={`text-decoration:none;color:inherit;border:1px solid ${dark ? '#3a3532' : 'oklch(0.88 0.005 80)'};border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px`}>
+  <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${tag.color};background:${tag.card};padding:5px 12px;border-radius:999px;width:fit-content`}>{category}</span>
+  <h3 style={`font-size:19px;font-weight:700;margin:4px 0 0${dark ? ';color:#efe9e2' : ''}`}>{title}</h3>
+  <p style={`font-size:14px;font-weight:600;color:${dark ? '#c9c2b5' : 'oklch(0.35 0.01 260)'};margin:0`}>{speaker}</p>
+  <p style={`font-size:16px;line-height:1.6;color:${dark ? '#b3ac9f' : 'oklch(0.4 0.01 260)'};margin:0`}>{summary}</p>
+  <span style={`font-size:13px;font-weight:700;color:${dark ? '#948c7d' : 'oklch(0.5 0.01 260)'};margin-top:8px`}>{cardDate}</span>
+</a>

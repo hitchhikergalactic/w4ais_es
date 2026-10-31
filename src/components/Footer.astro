@@ -1,0 +1,32 @@
+---
+import type { Theme } from '../data/site';
+
+// Pie sencillo de las páginas interiores (seminario, sesiones, about).
+interface Props {
+  theme?: Theme;
+  seminarHref?: string;
+  seminarLabel?: string;
+  // Línea «Part of the global AI safety ecosystem.»
+  note?: boolean;
+  logoAlt?: string;
+}
+
+const { theme = 'light', seminarHref = 'seminar.html', seminarLabel = 'Seminars', note = false, logoAlt = 'W4AIS' } = Astro.props;
+const dark = theme === 'dark';
+const linkStyle = dark
+  ? 'text-decoration:none;font-size:14px;font-weight:700;color:#c9c2b5'
+  : 'text-decoration:none;font-size:14px;color:inherit';
+const smallStyle = dark ? 'font-size:12px;font-weight:700;color:#948c7d' : 'font-size:12px;color:oklch(0.55 0.01 260)';
+---
+<footer style="max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px">
+  <a href="index.html" style="display:flex;flex-shrink:0"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:auto;width:110px"></a>
+  <div style="display:flex;gap:24px;flex-wrap:wrap">
+    <a href="index.html#why" style={linkStyle}>Why it matters</a>
+    <a href="index.html#what" style={linkStyle}>What we do</a>
+    <a href={seminarHref} style={linkStyle}>{seminarLabel}</a>
+  </div>
+  <span style={smallStyle}>© 2026 Women4AISafety</span>
+</div>
+{note && <span style="font-size:12px;color:oklch(0.55 0.01 260)">Part of the global AI safety ecosystem.</span>}
+</footer>

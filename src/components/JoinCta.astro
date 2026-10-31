@@ -1,0 +1,22 @@
+---
+import { GRADIENT, JOIN_FORM_URL, type Theme } from '../data/site';
+
+interface Props {
+  theme?: Theme;
+}
+
+const { theme = 'light' } = Astro.props;
+---
+{theme === 'light' ? (
+  <section id="join" style={`position:relative;overflow:hidden;padding:72px 24px;text-align:center;background:${GRADIENT}`}>
+    <h2 style="color:#fff;font-size:34px;font-weight:800;margin:0 0 12px">Shape safe AI</h2>
+    <p style="color:rgba(255,255,255,0.92);font-size:17px;max-width:40ch;margin:0 auto 28px">This field is still being shaped. Help shape it.</p>
+    <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:16px 32px;border-radius:999px">Join the network</a>
+  </section>
+) : (
+  <section id="join" style="padding:72px 24px;text-align:center;border-top:1px solid #3a3532">
+    <h2 style="color:#efe9e2;font-size:32px;font-weight:700;margin:0 0 12px">Shape safe AI</h2>
+    <p style="color:#b3ac9f;font-size:17px;max-width:40ch;margin:0 auto 28px">This field is still being shaped. Help shape it.</p>
+    <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:15px 30px;border-radius:6px">Join the network</a>
+  </section>
+)}
