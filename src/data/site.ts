@@ -1,10 +1,10 @@
 export const SITE_URL = 'https://www.women4aisafety.com';
 export const OG_IMAGE = `${SITE_URL}/logo_color_cropped.png`;
 export const LUMA_URL = 'https://luma.com/Women4AISafety';
-// Página de Luma del PRÓXIMO seminario: los botones «Register» llevan directo a ella
-// para ahorrar el paso por el calendario. Actualízala tras cada sesión.
-// Si aún no hay evento publicado, pon LUMA_URL.
-export const NEXT_SEMINAR_URL = 'https://luma.com/cfu8qr4k';
+// Los botones «Register» llevan directo al próximo seminario en Luma, sin pasar por el calendario.
+// /next-seminar es una función de Vercel (api/next-seminar.js) que busca el evento sola:
+// no hay que actualizar nada tras cada sesión. Solo funciona en Vercel, no con «astro dev».
+export const NEXT_SEMINAR_URL = '/next-seminar';
 export const JOIN_FORM_URL = 'https://airtable.com/app9fza9uUIvEEUrC/shrP2p2RewK8Y0kim';
 export const GRADIENT =
   'radial-gradient(circle at 15% 85%, #f2a259 0%, transparent 45%), radial-gradient(circle at 85% 15%, #ae9ad5 0%, transparent 50%), linear-gradient(135deg, #d6897f 0%, #d6b39f 35%, #b380b8 100%)';

@@ -45,6 +45,9 @@
       ]
     }
   ],
+  "rewrites": [
+    { "source": "/next-seminar", "destination": "/api/next-seminar" }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
