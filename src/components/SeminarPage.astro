@@ -6,7 +6,7 @@ import SessionCard from './SessionCard.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
 import { getSessions } from '../data/sessions';
-import { GRADIENT, JOIN_FORM_URL, LUMA_URL, SITE_URL, navLinks, type Theme } from '../data/site';
+import { GRADIENT, JOIN_FORM_URL, LUMA_URL, NEXT_SEMINAR_URL, SITE_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -36,7 +36,7 @@ const buttonRadius = dark ? '6px' : '999px';
       <h1 style="font-size:52px;line-height:1.1;font-weight:700;letter-spacing:-0.01em;max-width:18ch;margin:0;color:#efe9e2">AI Safety Seminar</h1>
       <p style="font-size:19px;font-weight:500;max-width:46ch;margin:0;color:#b3ac9f">Learn directly from AI safety researchers and people working in the field, and find the guidance your career needs to make a real impact.</p>
       <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-        <a href={LUMA_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:6px">Register for the seminar</a>
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:6px">Register for the seminar</a>
         <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#efe9e2;padding:13px 24px;border-radius:6px;border:1px solid #3a3532">Submit a proposal</a>
       </div>
     </div>
@@ -48,7 +48,7 @@ const buttonRadius = dark ? '6px' : '999px';
       <h1 style="font-size:52px;line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:#fff">AI Safety Seminar</h1>
       <p style="font-size:19px;font-weight:600;max-width:46ch;margin:0;color:rgba(255,255,255,0.92)">Learn directly from AI safety researchers and people working in the field, and find the guidance your career needs to make a real impact.</p>
       <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-        <a href={LUMA_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Register for the seminar</a>
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Register for the seminar</a>
         <a href={JOIN_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">Submit a proposal</a>
       </div>
     </div>

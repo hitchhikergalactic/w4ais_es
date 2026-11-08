@@ -6,7 +6,7 @@ import Nav from './Nav.astro';
 import Sponsor from './Sponsor.astro';
 import JoinCta from './JoinCta.astro';
 import SocialLinks from './SocialLinks.astro';
-import { GRADIENT, LUMA_URL, SITE_URL, navLinks, type Theme } from '../data/site';
+import { GRADIENT, NEXT_SEMINAR_URL, SITE_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -18,7 +18,7 @@ const dark = theme === 'dark';
 const description = 'Women4AISafety (W4AIS) is the career network for women working in or entering AI safety, alignment, governance and policy.';
 const jsonLd = [
   '{"@context":"https://schema.org","@type":"Organization","name":"Women4AISafety","alternateName":"W4AIS","url":"https://www.women4aisafety.com/","logo":"https://www.women4aisafety.com/logo_color_cropped.png","sameAs":["https://www.instagram.com/womenaisafety/","https://www.linkedin.com/company/women4aisafety/","https://osmaniredondo.substack.com/"]}',
-  '{"@context":"https://schema.org","@type":"EventSeries","name":"W4AIS AI Safety Seminar","description":"Twice-monthly online seminar series where women in AI safety, alignment, governance and policy learn directly from researchers and practitioners in the field.","url":"https://www.women4aisafety.com/seminar.html","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://luma.com/gkxzc0ap"},"organizer":{"@type":"Organization","name":"Women4AISafety","url":"https://www.women4aisafety.com/"}}',
+  '{"@context":"https://schema.org","@type":"EventSeries","name":"W4AIS AI Safety Seminar","description":"Twice-monthly online seminar series where women in AI safety, alignment, governance and policy learn directly from researchers and practitioners in the field.","url":"https://www.women4aisafety.com/seminar.html","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://luma.com/Women4AISafety"},"organizer":{"@type":"Organization","name":"Women4AISafety","url":"https://www.women4aisafety.com/"}}',
 ];
 const logoAlt = 'W4AIS – Women For AI Safety logo';
 
@@ -51,7 +51,7 @@ const items = [
       <p style="font-size:clamp(17px,4.2vw,19px);line-height:1.5;font-weight:500;max-width:42ch;margin:0;color:#b3ac9f;text-wrap:pretty">W4AIS is the career network that helps women get into the field and move up in it.</p>
       <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
         <a href="#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:6px">Join the network</a>
-        <a href="#what" style="text-decoration:none;font-weight:700;font-size:15px;color:#efe9e2;padding:13px 24px;border-radius:6px;border:1px solid #3a3532">See what we do</a>
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#efe9e2;padding:13px 24px;border-radius:6px;border:1px solid #3a3532">Register for the next seminar</a>
       </div>
     </div>
   </header>
@@ -62,7 +62,7 @@ const items = [
       <p style="font-size:clamp(17px,4.2vw,20px);line-height:1.5;font-weight:600;max-width:42ch;margin:0;color:rgba(255,255,255,0.92);text-wrap:pretty">W4AIS is the career network that helps women get into the field and move up in it.</p>
       <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
         <a href="#join" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Join the network</a>
-        <a href="#what" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">See what we do</a>
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">Register for the next seminar</a>
       </div>
     </div>
   </header>
@@ -98,11 +98,11 @@ const items = [
     <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin-bottom:12px;color:${c.heading}`}>How we gather</h2>
     <p style={`font-size:18px;line-height:1.6;max-width:46ch;color:${dark ? c.soft : 'oklch(0.3 0.01 260)'}`}>We gather regularly: real conversations, real connections, real career support.</p>
     <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-      <a href={LUMA_URL} target="_blank" rel="noopener" style={`text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;background:${c.pillBg};color:${c.pillText}`}>Twice a month, on Wednesdays, online</a>
+      <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style={`text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;background:${c.pillBg};color:${c.pillText}`}>Twice a month, on Wednesdays, online</a>
     </div>
   </div>
   <div style="flex:1 1 280px;min-width:0;max-width:380px">
-    <a href={LUMA_URL} target="_blank" rel="noopener" style="display:block">
+    <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="display:block">
       <img src="gather-invite.jpg" alt="Invitation to the W4AIS AI Safety Seminar, held twice a month online — register on Luma" style={`width:100%;height:auto;border-radius:28px;display:block;box-shadow:0 12px 32px -12px ${dark ? 'rgba(0,0,0,0.5)' : 'rgba(60,40,80,0.28)'}`}>
     </a>
   </div>
