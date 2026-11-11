@@ -1,0 +1,24 @@
+[
+  {
+    "id": "evt-PFc1JZKIs2aWOMo",
+    "name": "Women4AISafety",
+    "url": "https://luma.com/cfu8qr4k",
+    "start": "2026-11-11T18:00:00.000Z",
+    "end": "2026-11-11T19:00:00.000Z",
+    "timezone": "Europe/Madrid",
+    "inPerson": false,
+    "city": null,
+    "venue": null
+  },
+  {
+    "id": "evt-BcpEAcooXiDOpWJ",
+    "name": "Women4AISafety - First Event",
+    "url": "https://luma.com/w4ais-spain",
+    "start": "2026-11-24T18:00:00.000Z",
+    "end": "2026-11-24T20:30:00.000Z",
+    "timezone": "Europe/Madrid",
+    "inPerson": true,
+    "city": "Madrid",
+    "venue": "Celonis SL"
+  }
+]

@@ -1,0 +1,113 @@
+---
+import eventsJson from '../data/events.json';
+import { getSessions } from '../data/sessions';
+import { getChapters } from '../data/chapters';
+import { LUMA_URL, type Theme } from '../data/site';
+
+// Próximos eventos del calendario de Luma, leídos de src/data/events.json
+// (lo actualiza cada día scripts/update-events.mjs desde .github/workflows/update-events.yml).
+// Cada tarjeta entera lleva a la inscripción en Luma.
+// En el HTML las horas salen en hora de Madrid; al cargar, las de los eventos online pasan a la hora de quien visita
+// y los eventos que ya han terminado desaparecen, aunque el JSON aún no se haya actualizado.
+
+interface Props {
+  theme?: Theme;
+  limit?: number;
+}
+
+type LumaEvent = {
+  id: string; name: string; url: string; start: string; end: string | null;
+  timezone: string; inPerson: boolean; city: string | null; venue: string | null;
+};
+
+const { theme = 'light', limit = 3 } = Astro.props;
+const dark = theme === 'dark';
+
+// Día del evento en su zona horaria, para cruzarlo con las sesiones y los capítulos de la web.
+const dayOf = (iso: string, tz: string) => new Date(iso).toLocaleDateString('sv-SE', { timeZone: tz });
+const sessionDay = (date: string) => {
+  const d = new Date(`${date.replace(/^\w+,\s*/, '')} 12:00 UTC`);
+  return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+};
+
+const sessions = await getSessions();
+const chapters = await getChapters();
+
+// En Luma el seminario se llama solo «Women4AISafety»: se muestra el título de la charla y la ponente.
+const cards = (eventsJson as LumaEvent[]).slice(0, limit).map((e) => {
+  const day = dayOf(e.start, e.timezone);
+  const session = !e.inPerson ? sessions.find((s) => sessionDay(s.data.date) === day) : undefined;
+  const chapter = e.inPerson ? chapters.find((ch) => ch.data.events.some((ev) => ev.isoDate === day)) : undefined;
+  const chapterEvent = chapter?.data.events.find((ev) => ev.isoDate === day);
+  const fmt = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('en-GB', { timeZone: e.timezone, ...o }).format(new Date(e.start));
+  return {
+    ...e,
+    title: session ? session.data.title : chapterEvent ? chapterEvent.title : e.name.replace(/\s*[-–|]\s*$/, ''),
+    by: session ? `AI Safety Seminar with ${session.data.speaker}` : chapter ? `W4AIS ${chapter.data.city}, in person` : e.inPerson ? 'In person' : 'Online',
+    place: e.inPerson ? (e.city ?? 'In person') : 'Online',
+    dayNum: fmt({ day: 'numeric' }),
+    month: fmt({ month: 'short' }).toUpperCase(),
+    weekday: fmt({ weekday: 'long' }),
+    time: fmt({ hour: '2-digit', minute: '2-digit', hour12: false }),
+    zoneLabel: `${(e.inPerson && e.city) || e.timezone.split('/').pop()?.replace(/_/g, ' ')} time`,
+  };
+});
+
+const css = dark
+  ? { heading: '#fff', card: '#292522', border: '#3a3532', tile: '#2a3050', tileText: '#bac9fc', title: '#efe9e2', meta: '#b3ac9f', by: '#8fa7fa', btn: '#8fa7fa', btnText: '#211f1e', radius: '6px', link: '#8fa7fa' }
+  : { heading: 'oklch(0.22 0.01 260)', card: '#fff', border: 'oklch(0.88 0.005 80)', tile: '#f2f5fe', tileText: '#3f56a1', title: 'oklch(0.22 0.01 260)', meta: 'oklch(0.45 0.01 260)', by: '#3f56a1', btn: '#3f56a1', btnText: '#fff', radius: '999px', link: '#3f56a1' };
+---
+{cards.length > 0 && (
+  <section id="upcoming" class="upcoming" style="max-width:1180px;margin:0 auto;padding:56px 24px 8px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+      <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin:0;color:${css.heading}`}>Upcoming events</h2>
+      <a href={LUMA_URL} target="_blank" rel="noopener" style={`font-weight:700;font-size:16px;color:${css.link};text-underline-offset:4px`}>See all on Luma →</a>
+    </div>
+    <div class="up-list" style="display:flex;flex-direction:column;gap:16px">
+      {cards.map((e) => (
+        <a class="up-card" href={`${e.url}?utm_source=women4aisafety.com&utm_medium=web&utm_campaign=upcoming`} target="_blank" rel="noopener"
+          data-start={e.start} data-end={e.end ?? e.start} data-online={e.inPerson ? undefined : ''}
+          style={`background:${css.card};border:1px solid ${css.border}`}>
+          <div class="tile" style={`background:${css.tile};color:${css.tileText}`}><b>{e.dayNum}</b><span>{e.month}</span></div>
+          <div style="min-width:0">
+            <div style={`font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:${css.by};margin-bottom:4px`}>{e.by}</div>
+            <div style={`font-size:19px;font-weight:700;line-height:1.3;color:${css.title}`}>{e.title}</div>
+            <div style={`font-size:15px;font-weight:500;margin-top:6px;color:${css.meta}`}>
+              {e.place}<span class="dot"></span><span class="up-when">{e.weekday}, {e.time}</span> <span class="up-zone" style="opacity:.8">({e.zoneLabel})</span>
+            </div>
+          </div>
+          <span class="btn" style={`background:${css.btn};color:${css.btnText};border-radius:${css.radius}`}>Register ↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+<script is:inline>
+  (function () {
+    var now = Date.now();
+    var tz;
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+    document.querySelectorAll('.up-card').forEach(function (card) {
+      if (new Date(card.dataset.end).getTime() < now) { card.remove(); return; }
+      if (tz && card.hasAttribute('data-online')) {
+        var d = new Date(card.dataset.start);
+        var day = new Intl.DateTimeFormat('en-GB', { timeZone: tz, weekday: 'long' }).format(d);
+        var time = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
+        card.querySelector('.up-when').textContent = day + ', ' + time;
+        card.querySelector('.up-zone').textContent = '(your time)';
+      }
+    });
+    var section = document.getElementById('upcoming');
+    if (section && !section.querySelector('.up-card')) section.remove();
+  })();
+</script>
+<style is:global>
+      .up-card{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;text-decoration:none;color:inherit;border-radius:20px;padding:20px 24px;transition:transform .15s ease, box-shadow .15s ease}
+      .up-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px -14px rgba(60,40,100,.35)}
+      .up-card .tile{width:76px;height:76px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800}
+      .up-card .tile b{font-size:30px;line-height:1}
+      .up-card .tile span{font-size:13px;letter-spacing:.1em;margin-top:4px}
+      .up-card .btn{font-weight:700;font-size:15px;padding:12px 22px;white-space:nowrap}
+      @media (max-width:700px){.up-card{grid-template-columns:auto 1fr;gap:16px}.up-card .btn{grid-column:1 / -1;text-align:center}}
+  .up-card .dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;margin:0 8px;vertical-align:middle;opacity:.7}
+</style>
