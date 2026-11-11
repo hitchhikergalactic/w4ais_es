@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Sponsor from './Sponsor.astro';
+import UpcomingEvents from './UpcomingEvents.astro';
 import JoinCta from './JoinCta.astro';
 import SocialLinks from './SocialLinks.astro';
 import { GRADIENT, NEXT_SEMINAR_URL, SITE_URL, navLinks, type Theme } from '../data/site';
@@ -69,6 +70,8 @@ const items = [
 )}
 
 <Sponsor theme={theme} />
+
+<UpcomingEvents theme={theme} />
 
 <section id="why" style="max-width:960px;margin:0 auto;padding:72px 24px">
   <h2 style={`font-size:clamp(26px,6.5vw,32px);line-height:1.2;font-weight:800;letter-spacing:-0.01em;max-width:16ch;color:${c.heading}`}>Why this matters</h2>
