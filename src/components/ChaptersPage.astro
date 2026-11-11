@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Sponsor from './Sponsor.astro';
+import EventCard from './EventCard.astro';
+import JoinCta from './JoinCta.astro';
+import Footer from './Footer.astro';
+import { chapterHref, getChapters, splitEvents } from '../data/chapters';
+import { eventCardCss } from '../data/eventCardCss';
+import { GRADIENT, SITE_URL, navLinks, type Theme } from '../data/site';
+
+interface Props {
+  theme?: Theme;
+}
+
+const { theme = 'light' } = Astro.props;
+const dark = theme === 'dark';
+const chapters = await getChapters();
+const url = `${SITE_URL}/chapters.html`;
+const description = 'W4AIS chapters: local, in-person meetups for women working in or moving into AI safety, governance and policy.';
+const links = navLinks(theme);
+
+// Próximo evento de todos los capítulos, para destacarlo arriba.
+const upcoming = chapters
+  .flatMap((chapter) => splitEvents(chapter.data.events).upcoming.map((event) => ({ chapter, event })))
+  .sort((a, b) => a.event.isoDate.localeCompare(b.event.isoDate));
+const next = upcoming[0];
+
+const c = dark
+  ? { heading: '#fff', text: '#b3ac9f', border: '#3a3532', tag: '#bac9fc', tagBg: '#2a3050', card: 'transparent' }
+  : { heading: 'oklch(0.22 0.01 260)', text: 'oklch(0.4 0.01 260)', border: 'oklch(0.88 0.005 80)', tag: '#3f56a1', tagBg: '#f2f5fe', card: 'transparent' };
+---
+<Base
+  title={`Chapters – W4AIS${dark ? ' (dark)' : ''}`}
+  canonical={url}
+  theme={theme}
+  seo={dark ? undefined : { description, url, twitter: true }}
+  css={eventCardCss}
+  mobileCss=".chapters-grid{grid-template-columns:1fr !important}"
+>
+<Nav theme={theme} links={links} toggle={dark ? 'chapters.html' : 'chapters-dark.html'} />
+
+<header style={dark ? 'border-bottom:1px solid #3a3532' : `position:relative;overflow:hidden;background:${GRADIENT}`}>
+  <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px">
+    <span style={`display:inline-flex;width:fit-content;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 14px;border-radius:999px;${dark ? 'color:#bac9fc;background:#2a3050' : 'color:#fff;background:rgba(255,255,255,0.2)'}`}>In person</span>
+    <h1 style={`font-size:52px;line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:${dark ? '#efe9e2' : '#fff'}`}>Chapters</h1>
+    <p style={`font-size:19px;font-weight:600;max-width:50ch;margin:0;color:${dark ? '#b3ac9f' : 'rgba(255,255,255,0.92)'}`}>Local W4AIS groups that meet in person, in their own language, to connect women with the people already doing the work in AI safety.</p>
+  </div>
+</header>
+
+<Sponsor theme={theme} />
+
+{next && (
+  <section style="max-width:1180px;margin:0 auto;padding:64px 24px 0">
+    <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin:0 0 28px;color:${c.heading}`}>Next meetup</h2>
+    <EventCard event={next.event} theme={theme} chapterLabel={`W4AIS ${next.chapter.data.city}, ${next.chapter.data.country}`} />
+  </section>
+)}
+
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 80px">
+  <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin:0 0 28px;color:${c.heading}`}>All chapters</h2>
+  <div class="chapters-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
+    {chapters.map((chapter) => {
+      const { upcoming: up } = splitEvents(chapter.data.events);
+      return (
+        <a href={chapterHref(chapter, theme)} style={`text-decoration:none;color:inherit;border:1px solid ${c.border};border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px`}>
+          <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${c.tag};background:${c.tagBg};padding:5px 12px;border-radius:999px;width:fit-content`}>{chapter.data.country}<span class="sep"></span>{chapter.data.language}</span>
+          <h3 style={`font-size:24px;font-weight:800;margin:4px 0 0;color:${c.heading}`}>W4AIS {chapter.data.city}</h3>
+          <p style={`font-size:16px;line-height:1.6;color:${c.text};margin:0`}>{chapter.data.summary}</p>
+          {up[0] && <span style={`font-size:13px;font-weight:700;color:${c.text};margin-top:8px`}>Next: {up[0].date}</span>}
+        </a>
+      );
+    })}
+  </div>
+</section>
+
+<JoinCta theme={theme} />
+
+<Footer theme={theme} />
+</Base>

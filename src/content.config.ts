@@ -41,4 +41,41 @@ const sessions = defineCollection({
   }),
 });
 
-export const collections = { sessions };
+// Un capítulo local = un fichero Markdown en src/content/chapters/.
+// El nombre del fichero es el slug: madrid.md → chapter-madrid.html.
+// El texto del fichero es la presentación del capítulo; los eventos van en el frontmatter.
+const chapters = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/chapters' }),
+  schema: z.object({
+    order: z.number().int(),
+    city: z.string(),
+    country: z.string(),
+    // Idioma en el que se hacen los encuentros.
+    language: z.string(),
+    // Frase de la tarjeta en chapters.html y bajo el título del capítulo.
+    summary: z.string(),
+    events: z.array(
+      z.object({
+        title: z.string(),
+        // Traducción del título si el evento no es en inglés.
+        titleEn: z.string().optional(),
+        // Fecha ISO (AAAA-MM-DD): sirve para ordenar y para separar próximos de pasados.
+        isoDate: z.string(),
+        date: z.string(),
+        time: z.string(),
+        doors: z.string().optional(),
+        venue: z.string(),
+        address: z.string(),
+        format: z.string(),
+        luma: z.string().url(),
+        hosts: z.array(z.string()).default([]),
+        support: z.array(z.string()).default([]),
+        agenda: z.array(z.object({ time: z.string(), item: z.string() })).default([]),
+        // Párrafos de la descripción.
+        about: z.array(z.string()).default([]),
+      }),
+    ),
+  }),
+});
+
+export const collections = { sessions, chapters };
