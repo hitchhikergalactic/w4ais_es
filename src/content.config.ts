@@ -18,9 +18,16 @@ const sessions = defineCollection({
     // «Nombre on tema», sin punto final: genera la meta description y og:description.
     metaSummary: z.string(),
     speaker: z.string(),
-    // Nombre del fichero de la foto en public/.
-    photo: z.string(),
-    linkedin: z.string().url(),
+    // Línea bajo el nombre en la tarjeta de la ponente (cargo, organización). Opcional.
+    speakerRole: z.string().optional(),
+    // Nombre del fichero de la foto en public/. Si falta, la tarjeta muestra las iniciales.
+    photo: z.string().optional(),
+    // Si falta, no se muestra el icono de LinkedIn.
+    linkedin: z.string().url().optional(),
+    // Web personal de la ponente. Opcional: se muestra como «Follow her work and get in touch».
+    website: z.string().url().optional(),
+    // Nota sobre grabación/diapositivas cuando no hay vídeo o PDF (cada ponente decide qué se comparte).
+    sharingNote: z.string().optional(),
     // Fecha tal como se muestra en la página de la sesión.
     date: z.string(),
     // Fecha tal como se muestra en las tarjetas.
