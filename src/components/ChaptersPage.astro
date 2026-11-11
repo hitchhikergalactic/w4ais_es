@@ -26,15 +26,22 @@ const upcoming = chapters
   .sort((a, b) => a.event.isoDate.localeCompare(b.event.isoDate));
 const next = upcoming[0];
 
-// Franja de trayectoria. W4AIS se reúne online dos veces al mes (seminarios y networking) desde julio de 2026.
-// Se cuentan 2 encuentros por cada mes ya terminado: el 1 de diciembre pasa solo de 8 a 10.
-const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-const monthsDone = Math.max(0, (now.getFullYear() - 2026) * 12 + now.getMonth() - 6);
-const stats = [
-  { value: String(monthsDone * 2), label: 'online meetups since July 2026: seminars and networking' },
-  { value: '2×', label: 'a month, online' },
-  { value: '1st', label: `in-person chapter: ${chapters[0]?.data.city ?? ''}` },
-];
+// Correo para proponer un capítulo: asunto y cuerpo ya rellenos, solo hay que completar los corchetes.
+const chapterMail = `mailto:w4ais@women4aisafety.com?subject=${encodeURIComponent('Opening a W4AIS chapter in [city]')}&body=${encodeURIComponent(
+  [
+    'Hi W4AIS team,',
+    '',
+    "I'd like to open a W4AIS chapter in [city, country].",
+    '',
+    'About me: [your name, what you do and your link to AI safety]',
+    'Why this city: [the people and organisations you could bring together]',
+    'How I could help: [venue ideas, partners, time I can give each month]',
+    '',
+    'Best,',
+    '[your name]',
+  ].join('\n'),
+)}`;
+
 
 const c = dark
   ? { heading: '#fff', text: '#b3ac9f', border: '#3a3532', tag: '#bac9fc', tagBg: '#2a3050', card: 'transparent' }
@@ -46,7 +53,7 @@ const c = dark
   theme={theme}
   seo={dark ? undefined : { description, url, twitter: true }}
   css={eventCardCss}
-  mobileCss=".chapters-grid,.stats-row{grid-template-columns:1fr !important}"
+  mobileCss=".chapters-grid{grid-template-columns:1fr !important}"
 >
 <Nav theme={theme} links={links} toggle={dark ? 'chapters.html' : 'chapters-dark.html'} />
 
@@ -54,20 +61,9 @@ const c = dark
   <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px">
     <span style={`display:inline-flex;width:fit-content;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 14px;border-radius:999px;${dark ? 'color:#bac9fc;background:#2a3050' : 'color:#fff;background:rgba(255,255,255,0.2)'}`}>In person</span>
     <h1 style={`font-size:52px;line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:${dark ? '#efe9e2' : '#fff'}`}>Chapters</h1>
-    <p style={`font-size:19px;font-weight:600;max-width:50ch;margin:0;color:${dark ? '#b3ac9f' : 'rgba(255,255,255,0.92)'}`}>Local W4AIS groups that meet in person, in their own language, to connect women with the people already doing the work in AI safety.</p>
+    <p style={`font-size:19px;font-weight:600;max-width:50ch;margin:0;color:${dark ? '#b3ac9f' : 'rgba(255,255,255,0.92)'}`}>Local W4AIS groups that meet in person to connect women with the people already doing the work in AI safety.</p>
   </div>
 </header>
-
-<section style={`border-bottom:1px solid ${c.border}`}>
-  <div class="stats-row" style="max-width:1180px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
-    {stats.map((st) => (
-      <div style="display:flex;align-items:baseline;gap:14px">
-        <span style={`font-size:44px;line-height:1;font-weight:800;letter-spacing:-0.02em;color:${dark ? '#8fa7fa' : '#3f56a1'}`}>{st.value}</span>
-        <span style={`font-size:15px;line-height:1.35;font-weight:600;color:${c.text}`}>{st.label}</span>
-      </div>
-    ))}
-  </div>
-</section>
 
 <Sponsor theme={theme} />
 
@@ -92,6 +88,13 @@ const c = dark
         </a>
       );
     })}
+  </div>
+  <div style={`margin-top:28px;border-radius:20px;padding:28px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;background:${dark ? '#2a3050' : '#f2f5fe'}`}>
+    <div style="max-width:60ch">
+      <h3 style={`font-size:20px;font-weight:800;margin:0 0 6px;color:${c.heading}`}>Want to open a chapter in your city?</h3>
+      <p style={`font-size:16px;line-height:1.6;margin:0;color:${c.text}`}>Write to us and tell us where you are and who you could bring together. We'll help you get the first meetup going.</p>
+    </div>
+    <a href={chapterMail} style={`text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:${dark ? '6px' : '999px'};white-space:nowrap`}>Write to us</a>
   </div>
 </section>
 
