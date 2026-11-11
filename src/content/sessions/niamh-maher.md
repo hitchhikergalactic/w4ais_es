@@ -8,6 +8,7 @@ metaSummary: "Niamh Maher on her year moving from particle physics and slot game
 speaker: "Niamh Maher"
 speakerRole: "Organiser, AI Safety Barcelona"
 photo: "niamh-maher.jpg"
+linkedin: "https://www.linkedin.com/in/niamhmaher75/"
 date: "Wednesday, 11 November 2026"
 cardDate: "Wednesday, 11 November"
 sharingNote: "This session is not recorded. The slides will be shared here after the talk."

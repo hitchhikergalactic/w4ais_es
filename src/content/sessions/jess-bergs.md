@@ -7,6 +7,8 @@ summary: "How people get into technical AI safety, which roles exist, and what h
 metaSummary: "Jess Bergs on pathways into technical AI safety"
 speaker: "Jess Bergs"
 speakerRole: "Engineering lead, UK AI Security Institute"
+photo: "jess-bergs.jpg"
+linkedin: "https://www.linkedin.com/in/jbergs/"
 date: "Wednesday, 28 October 2026"
 cardDate: "Wednesday, 28 October"
 website: "https://www.jbergs.eu/"
