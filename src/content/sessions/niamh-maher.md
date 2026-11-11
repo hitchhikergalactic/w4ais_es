@@ -11,7 +11,8 @@ photo: "niamh-maher.jpg"
 linkedin: "https://www.linkedin.com/in/niamhmaher75/"
 date: "Wednesday, 11 November 2026"
 cardDate: "Wednesday, 11 November"
-sharingNote: "This session is not recorded. The slides will be shared here after the talk."
+slides: "niamh-maher-slides.pdf"
+sharingNote: "This session was not recorded, but the slides are shared."
 ---
 
 From theoretical particle physics to slot game mathematics, and from there to technical AI safety: Niamh Maher joins W4AIS to look back on the year she changed careers and share what she has learned along the way.
