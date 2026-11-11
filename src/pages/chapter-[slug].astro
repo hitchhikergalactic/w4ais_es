@@ -1,0 +1,12 @@
+---
+import ChapterPage from '../components/ChapterPage.astro';
+import { getChapters, type Chapter } from '../data/chapters';
+
+export async function getStaticPaths() {
+  const chapters = await getChapters();
+  return chapters.map((chapter) => ({ params: { slug: chapter.id }, props: { chapter } }));
+}
+
+const { chapter } = Astro.props as { chapter: Chapter };
+---
+<ChapterPage chapter={chapter} />

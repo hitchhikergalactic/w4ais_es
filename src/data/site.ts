@@ -13,7 +13,7 @@ export type Theme = 'light' | 'dark';
 
 // Enlace interno que mantiene el modo: en oscuro lleva a la versión oscura de la página.
 // La portada oscura conserva su URL histórica, home-dark.html.
-export function pageHref(page: 'index' | 'about' | 'seminar', theme: Theme = 'light', hash = ''): string {
+export function pageHref(page: 'index' | 'about' | 'seminar' | 'chapters', theme: Theme = 'light', hash = ''): string {
   const file = theme === 'dark' ? (page === 'index' ? 'home-dark' : `${page}-dark`) : page;
   return `${file}.html${hash}`;
 }
@@ -25,6 +25,7 @@ export function navLinks(theme: Theme = 'light', onHome = false) {
     { href: `${home}#why`, label: 'Why it matters' },
     { href: `${home}#what`, label: 'What we do' },
     { href: pageHref('seminar', theme), label: 'Seminars' },
+    { href: pageHref('chapters', theme), label: 'Chapters' },
     { href: pageHref('about', theme), label: 'About us' },
   ];
 }

@@ -1,0 +1,69 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Sponsor from './Sponsor.astro';
+import EventCard from './EventCard.astro';
+import JoinCta from './JoinCta.astro';
+import Footer from './Footer.astro';
+import { splitEvents, type Chapter } from '../data/chapters';
+import { eventCardCss } from '../data/eventCardCss';
+import { GRADIENT, SITE_URL, navLinks, pageHref, type Theme } from '../data/site';
+
+interface Props {
+  chapter: Chapter;
+  theme?: Theme;
+}
+
+const { chapter, theme = 'light' } = Astro.props;
+const dark = theme === 'dark';
+const ch = chapter.data;
+const { Content } = await render(chapter);
+const { upcoming, past } = splitEvents(ch.events);
+const url = `${SITE_URL}/chapter-${chapter.id}.html`;
+const description = `W4AIS ${ch.city}: ${ch.summary}`;
+const links = navLinks(theme);
+const heading = dark ? '#fff' : 'oklch(0.22 0.01 260)';
+const css = `${eventCardCss}
+.chapter-intro p{font-size:18px;line-height:1.65;max-width:62ch;margin:0;color:${dark ? '#b3ac9f' : 'rgba(255,255,255,0.92)'};font-weight:600}`;
+---
+<Base
+  title={`W4AIS ${ch.city} – Chapters${dark ? ' (dark)' : ''}`}
+  canonical={url}
+  theme={theme}
+  seo={dark ? undefined : { description, url, twitter: true }}
+  css={css}
+>
+<Nav theme={theme} links={links} toggle={dark ? `chapter-${chapter.id}.html` : `chapter-${chapter.id}-dark.html`} />
+
+<header style={dark ? 'border-bottom:1px solid #3a3532' : `position:relative;overflow:hidden;background:${GRADIENT}`}>
+  <div style="max-width:1180px;margin:0 auto;padding:64px 24px 60px;display:flex;flex-direction:column;gap:18px">
+    <a href={pageHref('chapters', theme)} style={`text-decoration:none;font-size:14px;font-weight:700;color:${dark ? '#8fa7fa' : '#fff'}`}>← All chapters</a>
+    <span style={`display:inline-flex;width:fit-content;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 14px;border-radius:999px;${dark ? 'color:#bac9fc;background:#2a3050' : 'color:#fff;background:rgba(255,255,255,0.2)'}`}>Chapter<span class="sep"></span>{ch.country}<span class="sep"></span>In {ch.language}</span>
+    <h1 style={`font-size:52px;line-height:1.08;font-weight:800;letter-spacing:-0.02em;margin:0;color:${dark ? '#efe9e2' : '#fff'}`}>W4AIS {ch.city}</h1>
+    <div class="chapter-intro"><Content /></div>
+  </div>
+</header>
+
+<Sponsor theme={theme} />
+
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 24px">
+  <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin:0 0 28px;color:${heading}`}>Upcoming events</h2>
+  {upcoming.length > 0
+    ? <div style="display:flex;flex-direction:column;gap:28px">{upcoming.map((event) => <EventCard event={event} theme={theme} />)}</div>
+    : <p style={`font-size:16px;color:${dark ? '#b3ac9f' : 'oklch(0.4 0.01 260)'}`}>The next meetup will be announced here.</p>}
+</section>
+
+{past.length > 0 && (
+  <section style="max-width:1180px;margin:0 auto;padding:40px 24px 24px">
+    <h2 style={`font-size:24px;font-weight:800;letter-spacing:-0.01em;margin:0 0 24px;color:${heading}`}>Past events</h2>
+    <div style="display:flex;flex-direction:column;gap:28px">{past.map((event) => <EventCard event={event} theme={theme} past />)}</div>
+  </section>
+)}
+
+<div style="height:56px"></div>
+
+<JoinCta theme={theme} />
+
+<Footer theme={theme} />
+</Base>

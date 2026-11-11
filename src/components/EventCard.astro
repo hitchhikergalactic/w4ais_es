@@ -1,0 +1,49 @@
+---
+import type { ChapterEvent } from '../data/chapters';
+import type { Theme } from '../data/site';
+
+// Tarjeta de un evento presencial de un capítulo. Necesita el CSS de eventCardCss (lo añade la página).
+interface Props {
+  event: ChapterEvent;
+  theme?: Theme;
+  past?: boolean;
+  // En chapters.html se muestra el nombre del capítulo encima del título.
+  chapterLabel?: string;
+}
+
+const { event: e, theme = 'light', past = false, chapterLabel } = Astro.props;
+const dark = theme === 'dark';
+const day = e.isoDate.split('-')[2];
+const monthLabel = new Date(`${e.isoDate}T12:00:00Z`).toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase();
+const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${e.venue}, ${e.address}`)}`;
+---
+<article class={`event-card${dark ? ' dark' : ''}${past ? ' past' : ''}`}>
+  <div class="event-top">
+    <div class="event-date" aria-hidden="true"><span>{monthLabel}</span><strong>{Number(day)}</strong></div>
+    <div style="min-width:0">
+      {chapterLabel && <div class="event-kicker">{chapterLabel}</div>}
+      <h3 class="event-title">{e.title}</h3>
+      {e.titleEn && <p class="event-title-en">{e.titleEn}</p>}
+    </div>
+  </div>
+  <div class="event-body">
+    <div>
+      <dl class="event-facts">
+        <dt>When</dt><dd>{e.date}<br>{e.time}{e.doors && <><br><span class="muted">{e.doors}</span></>}</dd>
+        <dt>Where</dt><dd><a href={maps} target="_blank" rel="noopener">{e.venue}</a><br><span class="muted">{e.address}</span></dd>
+        <dt>Format</dt><dd>{e.format}</dd>
+        {e.hosts.length > 0 && <><dt>Hosted by</dt><dd>{e.hosts.join(', ')}</dd></>}
+        <dt>Support</dt><dd>Sponsored by BlueDot Impact{e.support.length > 0 && `, with ${e.support.join(' and ')}`}</dd>
+      </dl>
+      {past
+        ? <span class="event-btn ghost">Past event</span>
+        : <a class="event-btn" href={e.luma} target="_blank" rel="noopener">Register on Luma</a>}
+    </div>
+    {e.agenda.length > 0 && (
+      <ol class="event-agenda">
+        {e.agenda.map((a) => <li><span>{a.time}</span>{a.item}</li>)}
+      </ol>
+    )}
+  </div>
+  {e.about.length > 0 && <div class="event-about">{e.about.map((p) => <p>{p}</p>)}</div>}
+</article>
