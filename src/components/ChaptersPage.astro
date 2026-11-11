@@ -26,6 +26,16 @@ const upcoming = chapters
   .sort((a, b) => a.event.isoDate.localeCompare(b.event.isoDate));
 const next = upcoming[0];
 
+// Franja de trayectoria. W4AIS se reúne online dos veces al mes (seminarios y networking) desde julio de 2026.
+// Se cuentan 2 encuentros por cada mes ya terminado: el 1 de diciembre pasa solo de 8 a 10.
+const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+const monthsDone = Math.max(0, (now.getFullYear() - 2026) * 12 + now.getMonth() - 6);
+const stats = [
+  { value: String(monthsDone * 2), label: 'online meetups since July 2026: seminars and networking' },
+  { value: '2×', label: 'a month, online' },
+  { value: '1st', label: `in-person chapter: ${chapters[0]?.data.city ?? ''}` },
+];
+
 const c = dark
   ? { heading: '#fff', text: '#b3ac9f', border: '#3a3532', tag: '#bac9fc', tagBg: '#2a3050', card: 'transparent' }
   : { heading: 'oklch(0.22 0.01 260)', text: 'oklch(0.4 0.01 260)', border: 'oklch(0.88 0.005 80)', tag: '#3f56a1', tagBg: '#f2f5fe', card: 'transparent' };
@@ -36,7 +46,7 @@ const c = dark
   theme={theme}
   seo={dark ? undefined : { description, url, twitter: true }}
   css={eventCardCss}
-  mobileCss=".chapters-grid{grid-template-columns:1fr !important}"
+  mobileCss=".chapters-grid,.stats-row{grid-template-columns:1fr !important}"
 >
 <Nav theme={theme} links={links} toggle={dark ? 'chapters.html' : 'chapters-dark.html'} />
 
@@ -47,6 +57,17 @@ const c = dark
     <p style={`font-size:19px;font-weight:600;max-width:50ch;margin:0;color:${dark ? '#b3ac9f' : 'rgba(255,255,255,0.92)'}`}>Local W4AIS groups that meet in person, in their own language, to connect women with the people already doing the work in AI safety.</p>
   </div>
 </header>
+
+<section style={`border-bottom:1px solid ${c.border}`}>
+  <div class="stats-row" style="max-width:1180px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    {stats.map((st) => (
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style={`font-size:44px;line-height:1;font-weight:800;letter-spacing:-0.02em;color:${dark ? '#8fa7fa' : '#3f56a1'}`}>{st.value}</span>
+        <span style={`font-size:15px;line-height:1.35;font-weight:600;color:${c.text}`}>{st.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
 
 <Sponsor theme={theme} />
 
