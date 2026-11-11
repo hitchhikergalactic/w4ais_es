@@ -1,7 +1,7 @@
 ---
 order: 6
 title: "Reflections on 2026: My AI Safety Year"
-category: "Career"
+category: "Career transition"
 subtitle: "From theoretical particle physics to slot game mathematics, and from there to technical AI safety"
 summary: "One career change, one year: funding, evaluation awareness and the community that made the switch possible."
 metaSummary: "Niamh Maher on her year moving from particle physics and slot game mathematics into technical AI safety"

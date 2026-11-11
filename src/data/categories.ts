@@ -13,6 +13,10 @@ export const categories = {
     light: { color: '#6a4c9c', card: '#f1ecf9', more: '#f1ecf9' },
     dark: { color: '#d3c2f0', card: '#352c48', more: '#352c48' },
   },
+  'Career transition': {
+    light: { color: '#9c3d6a', card: '#fbe9f1', more: '#fbe9f1' },
+    dark: { color: '#f3b3cf', card: '#4a2a3a', more: '#4a2a3a' },
+  },
 } as const;
 
 export type Category = keyof typeof categories;

@@ -3,7 +3,7 @@
 # Cada campo está explicado en src/content.config.ts.
 order: 5
 title: "Título de la charla"
-category: "Technical research" # Technical research | Governance & policy | Career
+category: "Technical research" # Technical research | Governance & policy | Career | Career transition
 subtitle: "Frase bajo el título en la página de la sesión"
 summary: "Texto de la tarjeta en seminar.html."
 metaSummary: "Nombre de la ponente on tema de la charla"
