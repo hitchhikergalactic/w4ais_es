@@ -5,8 +5,8 @@ import Nav from './Nav.astro';
 import MoreSessions from './MoreSessions.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
-import { getSessions, type Session } from '../data/sessions';
-import { SITE_URL, navLinks, type Theme } from '../data/site';
+import { getSessions, sessionHref, type Session } from '../data/sessions';
+import { SITE_URL, navLinks, pageHref, type Theme } from '../data/site';
 
 interface Props {
   session: Session;
@@ -19,7 +19,13 @@ const dark = theme === 'dark';
 const { Content } = await render(session);
 
 // «More sessions»: todas las demás sesiones, en el mismo orden que en el seminario.
-const more = (await getSessions()).filter((item) => item.id !== session.id);
+const all = await getSessions();
+const more = all.filter((item) => item.id !== session.id);
+
+// Flechas «Previous / Next»: la sesión anterior y la siguiente en ese mismo orden.
+const index = all.findIndex((item) => item.id === session.id);
+const prev = index > 0 ? all[index - 1] : undefined;
+const next = index < all.length - 1 ? all[index + 1] : undefined;
 
 const lightUrl = `${SITE_URL}/session-${session.id}.html`;
 const title = `${s.title} – W4AIS Seminar${dark ? ' (dark)' : ''}`;
@@ -28,6 +34,13 @@ const css = `@media (max-width: 800px) {
       .session-grid{grid-template-columns:1fr !important}
     }
     .session-text{display:contents}
+    .session-back{display:flex;width:fit-content;align-items:center;gap:6px;text-decoration:none;font-size:14px;font-weight:700;padding:10px 0;margin:-10px 0 18px}
+    .session-back:hover,.session-pager a:hover{text-decoration:underline}
+    .session-pager{max-width:1180px;margin:0 auto;padding:0 24px 56px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .session-pager a{text-decoration:none;display:flex;flex-direction:column;gap:6px;padding:20px 24px;border-radius:16px}
+    .session-pager .next{grid-column:2;text-align:right}
+    .session-pager .label{font-size:12px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase}
+    .session-pager .ptitle{font-size:16px;font-weight:700;line-height:1.35}
     .session-text p{font-size:16px;line-height:1.75;color:${dark ? '#b6b4c2' : 'oklch(0.3 0.01 260)'};margin:${s.paragraphGap}px 0 0}
     .session-text p:first-child{margin-top:28px}
     .speaker-art{position:relative;overflow:hidden;isolation:isolate;border-radius:24px;padding:28px 28px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;color:#fff;
@@ -45,6 +58,8 @@ const css = `@media (max-width: 800px) {
 const links = navLinks(theme);
 const toggle = dark ? `session-${session.id}.html` : `session-${session.id}-dark.html`;
 const accent = dark ? '#8fa7fa' : '#3f56a1';
+const pagerBorder = dark ? '#3a3532' : 'oklch(0.88 0.005 80)';
+const pagerTitle = dark ? '#efe9e2' : 'oklch(0.25 0.01 260)';
 const initials = s.speaker.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
 ---
 <Base
@@ -53,12 +68,13 @@ const initials = s.speaker.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').to
   theme={theme}
   seo={dark ? undefined : { description: `${s.metaSummary} — W4AIS AI Safety Seminar.`, ogDescription: `${s.metaSummary}.`, url: lightUrl }}
   css={css}
-  mobileCss=".more-sessions-grid{grid-template-columns:1fr !important}"
+  mobileCss=".more-sessions-grid{grid-template-columns:1fr !important}.session-pager{grid-template-columns:1fr !important}.session-pager .next{grid-column:1 !important}"
 >
 <Nav theme={theme} links={links} toggle={toggle} />
 
 <section class="session-grid" style="max-width:1180px;margin:0 auto;padding:56px 24px 72px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
   <div style="min-width:0">
+    <a class="session-back" href={pageHref('seminar', theme)} style={`color:${accent}`}>← All seminars</a>
     <span style={`font-size:13px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:${accent}`}>{s.category}</span>
     <h1 style={`font-size:44px;line-height:1.1;font-weight:${dark ? '700' : '800'};letter-spacing:-0.01em;margin:14px 0 0${dark ? ';color:#efe9e2' : ''}`}>{s.title}</h1>
     <p style={`font-size:18px;font-weight:${dark ? '500' : '600'};color:${dark ? '#b3ac9f' : 'oklch(0.4 0.01 260)'};margin:14px 0 0`}>{s.subtitle}</p>
@@ -100,6 +116,21 @@ const initials = s.speaker.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').to
     )}
   </div>
 </section>
+
+<nav class="session-pager" aria-label="Seminar sessions">
+  {prev && (
+    <a class="prev" href={sessionHref(prev, theme)} style={`border:1px solid ${pagerBorder}`}>
+      <span class="label" style={`color:${accent}`}>← Previous</span>
+      <span class="ptitle" style={`color:${pagerTitle}`}>{prev.data.title}</span>
+    </a>
+  )}
+  {next && (
+    <a class="next" href={sessionHref(next, theme)} style={`border:1px solid ${pagerBorder}`}>
+      <span class="label" style={`color:${accent}`}>Next →</span>
+      <span class="ptitle" style={`color:${pagerTitle}`}>{next.data.title}</span>
+    </a>
+  )}
+</nav>
 
 <MoreSessions sessions={more} theme={theme} />
 
