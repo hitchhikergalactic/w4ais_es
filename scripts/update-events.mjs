@@ -1,5 +1,7 @@
 // Guarda los próximos eventos del calendario de Luma de W4AIS en src/data/events.json.
-// Lo ejecuta cada día .github/workflows/update-events.yml; si Luma falla, el archivo se queda como estaba.
+// Se ejecuta antes de cada build («npm run build»), así que cada despliegue de Vercel trae los eventos del momento.
+// Vercel redespliega cada día solo (api/redeploy.js, programado en «crons» de vercel.json).
+// Si Luma falla, el archivo se queda como estaba y el build sigue: la web nunca se cae por esto.
 // Basado en scripts/actualizar-eventos.mjs de aisafety.es.
 //
 // Se lee la página pública del calendario (no hace falta la API de pago de Luma).
@@ -10,6 +12,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const CALENDAR = 'cal-XhJ7azfTJM4lIWV';
 const PAGE = 'https://luma.com/Women4AISafety';
 const TARGET = new URL('../src/data/events.json', import.meta.url);
+
+try {
 
 const response = await fetch(PAGE, { headers: { 'User-Agent': 'Mozilla/5.0 (women4aisafety.com)' } });
 if (!response.ok) throw new Error(`Luma respondió ${response.status}`);
@@ -60,4 +64,8 @@ if (next === current) {
   writeFileSync(TARGET, next);
   console.log(`Próximos eventos: ${events.length}`);
   events.forEach((e) => console.log(`- ${e.start} ${e.name}`));
+}
+
+} catch (error) {
+  console.warn(`update-events: no se han podido actualizar los eventos (${error.message}); se usan los guardados.`);
 }
