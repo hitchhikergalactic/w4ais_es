@@ -6,6 +6,8 @@ export const LUMA_URL = 'https://luma.com/Women4AISafety';
 // no hay que actualizar nada tras cada sesión. Solo funciona en Vercel, no con «astro dev».
 export const NEXT_SEMINAR_URL = '/next-seminar';
 export const JOIN_FORM_URL = 'https://airtable.com/app9fza9uUIvEEUrC/shrP2p2RewK8Y0kim';
+// Formulario «Submit a proposal» para quien quiera dar una charla en el seminario.
+export const TALK_FORM_URL = 'https://airtable.com/appHb3Icyxx3MH0Dg/pag1gLxv6XXrMVTHx/form';
 export const GRADIENT =
   'radial-gradient(circle at 15% 85%, #f2a259 0%, transparent 45%), radial-gradient(circle at 85% 15%, #ae9ad5 0%, transparent 50%), linear-gradient(135deg, #d6897f 0%, #d6b39f 35%, #b380b8 100%)';
 
