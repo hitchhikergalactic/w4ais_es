@@ -7,12 +7,10 @@ interface Props {
   // Botón 🌙 / ☀️ que lleva a la otra versión de la página.
   toggle?: string;
   joinHref?: string;
-  // En la portada el hero ya tiene «Join the network»: ahí se oculta «Join us» para no repetirlo.
-  showJoin?: boolean;
   logoAlt?: string;
 }
 
-const { theme = 'light', links, toggle, joinHref = pageHref('index', theme, '#join'), showJoin = true, logoAlt = 'W4AIS' } = Astro.props;
+const { theme = 'light', links, toggle, joinHref = pageHref('index', theme, '#join'), logoAlt = 'W4AIS' } = Astro.props;
 const dark = theme === 'dark';
 const linkStyle = 'text-decoration:none;font-weight:600;font-size:15px;color:inherit';
 const joinStyle = dark
@@ -29,6 +27,6 @@ const toggleLabel = dark ? 'Light mode' : 'Dark mode';
     {toggle && (
       <a href={toggle} aria-label={toggleLabel} style={`${linkStyle};display:flex;align-items:center`} title={toggleLabel}>{dark ? '☀️' : '🌙'}</a>
     )}
-    {showJoin && <a href={joinHref} style={joinStyle}>Join us</a>}
+    <a href={joinHref} style={joinStyle}>Join us</a>
   </div>
 </nav>
