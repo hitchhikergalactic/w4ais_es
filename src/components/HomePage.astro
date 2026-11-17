@@ -42,7 +42,7 @@ const items = [
   jsonLd={dark ? [] : jsonLd}
   mobileCss="#network{text-align:center}"
 >
-<Nav theme={theme} links={navLinks(theme, true)} toggle={dark ? 'index.html' : 'home-dark.html'} joinHref="#join" logoAlt={logoAlt} />
+<Nav theme={theme} links={navLinks(theme, true)} toggle={dark ? 'index.html' : 'home-dark.html'} showJoin={false} logoAlt={logoAlt} />
 
 {dark ? (
   <header style="border-bottom:1px solid #3a3532">
