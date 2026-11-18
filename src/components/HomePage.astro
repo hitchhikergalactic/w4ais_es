@@ -42,7 +42,10 @@ const stats = [
 
 // Ponentes: salen solas de src/content/sessions/. El cargo es speakerRole; si falta, no se muestra.
 const sessions = await getSessions();
-const speakers = sessions.filter((s) => s.data.photo || s.data.speakerRole).map((s) => s.data);
+// Solo las que ya han hablado: la web se compila cada día, así que una sesión futura entra en la cinta al día siguiente de darse.
+const today = new Date().toISOString().slice(0, 10);
+const sessionIso = (date: string) => { const d = new Date(`${date.replace(/^\w+,\s*/, '')} 12:00 UTC`); return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10); };
+const speakers = sessions.filter((s) => (s.data.photo || s.data.speakerRole) && sessionIso(s.data.date) < today).map((s) => s.data);
 const speakerLinks = new Map(sessions.map((s) => [s.data.speaker, sessionHref(s, theme)]));
 
 const steps = [

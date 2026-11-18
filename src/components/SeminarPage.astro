@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Sponsor from './Sponsor.astro';
+import UpcomingEvents from './UpcomingEvents.astro';
 import SessionCard from './SessionCard.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
@@ -14,7 +15,8 @@ interface Props {
 
 const { theme = 'light' } = Astro.props;
 const dark = theme === 'dark';
-const sessions = await getSessions();
+// Más recientes primero: lo último que ha pasado es lo más relevante.
+const sessions = (await getSessions()).slice().reverse();
 const url = `${SITE_URL}/seminar.html`;
 const description = 'The W4AIS AI Safety Seminar: learn directly from AI safety researchers and practitioners, twice a month, online.';
 const links = navLinks(theme);
@@ -54,6 +56,10 @@ const buttonRadius = dark ? '6px' : '999px';
     </div>
   </header>
 )}
+
+<div style="padding-bottom:56px">
+  <UpcomingEvents theme={theme} limit={2} onlineOnly heading="Next sessions" />
+</div>
 
 <Sponsor theme={theme} />
 

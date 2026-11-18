@@ -13,6 +13,9 @@ import { LUMA_URL, type Theme } from '../data/site';
 interface Props {
   theme?: Theme;
   limit?: number;
+  // Solo eventos online (el seminario), para la página Seminar.
+  onlineOnly?: boolean;
+  heading?: string;
 }
 
 type LumaEvent = {
@@ -23,7 +26,7 @@ type LumaEvent = {
 // Imagen de la tarjeta: la foto de la ponente si el evento es una sesión de la web; si no, la portada del evento en Luma (reducida por su CDN).
 const lumaThumb = (url: string) => url.replace('https://images.lumacdn.com/', 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=80,width=400,height=400/');
 
-const { theme = 'light', limit = 3 } = Astro.props;
+const { theme = 'light', limit = 3, onlineOnly = false, heading = 'Upcoming events' } = Astro.props;
 const dark = theme === 'dark';
 
 // Día del evento en su zona horaria, para cruzarlo con las sesiones y los capítulos de la web.
@@ -37,7 +40,7 @@ const sessions = await getSessions();
 const chapters = await getChapters();
 
 // En Luma el seminario se llama solo «Women4AISafety»: se muestra el título de la charla y la ponente.
-const cards = (eventsJson as LumaEvent[]).slice(0, limit).map((e) => {
+const cards = (eventsJson as LumaEvent[]).filter((e) => !onlineOnly || !e.inPerson).slice(0, limit).map((e) => {
   const day = dayOf(e.start, e.timezone);
   const session = !e.inPerson ? sessions.find((s) => sessionDay(s.data.date) === day) : undefined;
   const chapter = e.inPerson ? chapters.find((ch) => ch.data.events.some((ev) => ev.isoDate === day)) : undefined;
@@ -64,7 +67,7 @@ const css = dark
 {cards.length > 0 && (
   <section id="upcoming" class="upcoming" style="max-width:1180px;margin:0 auto;padding:56px 24px 8px">
     <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap">
-      <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin:0;color:${css.heading}`}>Upcoming events</h2>
+      <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin:0;color:${css.heading}`}>{heading}</h2>
       <a href={LUMA_URL} target="_blank" rel="noopener" style={`font-weight:700;font-size:16px;color:${css.link};text-underline-offset:4px`}>See all on Luma →</a>
     </div>
     <div class="up-list" style="display:flex;flex-direction:column;gap:16px">
