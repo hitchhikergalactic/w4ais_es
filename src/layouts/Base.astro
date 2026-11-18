@@ -50,6 +50,9 @@ const styles = `
       .nav-links{display:none;flex-direction:column !important;align-items:flex-start !important;gap:4px !important;width:100%;position:absolute;top:100%;left:0;${menuPanel};z-index:30}
       .nav-toggle:checked ~ .nav-links{display:flex}
       .nav-links a{width:100%;padding:14px 4px}
+      .footer-links{display:grid !important;grid-template-columns:1fr 1fr;gap:0 24px !important;width:100%;max-width:360px}
+      .footer-links a{padding:10px 0}
+      .footer-links.center{justify-items:center;margin:0 auto}
       ${mobileCss}
     }
   `;

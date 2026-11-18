@@ -56,7 +56,7 @@ const cards = (eventsJson as LumaEvent[]).filter((e) => !onlineOnly || !e.inPers
     weekday: fmt({ weekday: 'long' }),
     time: fmt({ hour: '2-digit', minute: '2-digit', hour12: false }),
     zoneLabel: `${(e.inPerson && e.city) || e.timezone.split('/').pop()?.replace(/_/g, ' ')} time`,
-    image: session?.data.photo ?? (e.cover ? lumaThumb(e.cover) : null),
+    image: session?.data.photo ?? chapterEvent?.image ?? (e.cover ? lumaThumb(e.cover) : null),
   };
 });
 

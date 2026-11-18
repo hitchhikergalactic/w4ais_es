@@ -210,7 +210,7 @@ const mobileCss = `.stats{grid-template-columns:1fr 1fr}.paths{grid-template-col
 <footer style={`max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:flex;flex-direction:column;gap:24px;border-top:1px solid ${c.line}`}>
 <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px">
   <a href={dark ? 'home-dark.html' : 'index.html'} style="display:flex;flex-shrink:0"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:88px;width:auto"></a>
-  <div class="footer-links" style="display:flex;gap:24px;flex-wrap:wrap">
+  <div class="footer-links center" style="display:flex;gap:24px;flex-wrap:wrap">
     {navLinks(theme, true).map((l) => <a href={l.href} style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>{l.label}</a>)}
   </div>
   <SocialLinks color={c.accent} />

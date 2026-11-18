@@ -8,6 +8,7 @@ events:
   - title: "Reducir el p(doom) está en nuestras manos (también)"
     titleEn: "Lowering p(doom) is on us, too: the first Women4AISafety meetup in Madrid"
     headlineEn: "Lowering p(doom) is on us, too"
+    image: "chapter-madrid.jpg"
     isoDate: "2026-11-24"
     date: "Tuesday, 24 November 2026"
     time: "19:00–21:30 CET"
