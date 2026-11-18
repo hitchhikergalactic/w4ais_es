@@ -13,9 +13,14 @@ const { session, theme = 'light' } = Astro.props;
 const { title, category, speaker, summary, cardDate } = session.data;
 const dark = theme === 'dark';
 const tag = categories[category][theme];
+const iso = (() => { const d = new Date(`${session.data.date.replace(/^\w+,\s*/, '')} 12:00 UTC`); return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10); })();
+const upcoming = iso >= new Date().toISOString().slice(0, 10);
 ---
 <a href={sessionHref(session, theme)} style={`text-decoration:none;color:inherit;border:1px solid ${dark ? '#3a3532' : 'oklch(0.88 0.005 80)'};border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px`}>
-  <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${tag.color};background:${tag.card};padding:5px 12px;border-radius:999px;width:fit-content`}>{category}</span>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    {upcoming && <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${dark ? '#9fe0cf' : '#1f6b5c'};background:${dark ? '#1f3a34' : '#e3f4ef'};padding:5px 12px;border-radius:999px`}>Upcoming</span>}
+    <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${tag.color};background:${tag.card};padding:5px 12px;border-radius:999px;width:fit-content`}>{category}</span>
+  </div>
   <h3 style={`font-size:19px;font-weight:700;margin:4px 0 0${dark ? ';color:#efe9e2' : ''}`}>{title}</h3>
   <p style={`font-size:14px;font-weight:600;color:${dark ? '#c9c2b5' : 'oklch(0.35 0.01 260)'};margin:0`}>{speaker}</p>
   <p style={`font-size:16px;line-height:1.6;color:${dark ? '#b3ac9f' : 'oklch(0.4 0.01 260)'};margin:0`}>{summary}</p>
