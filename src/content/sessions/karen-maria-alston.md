@@ -8,6 +8,7 @@ metaSummary: "Karen Maria Alston on compute, concentration of power and AI safet
 speaker: "Karen Maria Alston"
 speakerRole: "Strategic narrative executive, Alston Marketing Group"
 photo: "karen-maria-alston.jpg"
+linkedin: "https://www.linkedin.com/in/karenmariaalston/"
 date: "Wednesday, 25 November 2026"
 cardDate: "Wednesday, 25 November"
 ---
