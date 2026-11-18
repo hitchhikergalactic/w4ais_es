@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import { SITE_URL, navLinks, pageHref, type Theme } from '../data/site';
+import { MENTOR_FORM_URL, SITE_URL, navLinks, pageHref, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -17,6 +17,14 @@ const logoAlt = 'W4AIS – Women For AI Safety logo';
 const c = dark
   ? { heading: '#fff', text: '#b6b4c2', muted: '#b3ac9f', accent: '#8fa7fa', crumb: '#948c7d', tag: '#bac9fc', tagBg: '#2a3050' }
   : { heading: 'inherit', text: 'oklch(0.3 0.01 260)', muted: 'oklch(0.4 0.01 260)', accent: '#3f56a1', crumb: 'oklch(0.5 0.01 260)', tag: '#3f56a1', tagBg: '#eef2fe' };
+
+// Versión pública y corta de la teoría del cambio: solo lo que existe hoy, y lo que se está montando marcado como tal.
+const change: { step: string; title: string; text: string; status: string; live: boolean; link?: [string, string] }[] = [
+  { step: '1', title: 'Seminar', text: 'Twice a month, online, women in AI safety explain what their job involves and how they got there. More than 300 women have attended since July 2026.', status: 'Running', live: true },
+  { step: '2', title: 'Network', text: 'Attendees join a private members’ space to find each other and ask questions.', status: 'Running', live: true },
+  { step: '3', title: 'Mentor and opportunity', text: 'Members will be matched with a woman already working in the field and a concrete next step: an introduction, a project or a role to apply to.', status: 'Recruiting mentors', live: false, link: [MENTOR_FORM_URL, 'Become a mentor →'] },
+  { step: '4', title: 'A role in AI safety', text: 'The goal: more women working in the roles the field finds hardest to fill, in operations, governance and policy, fieldbuilding and leadership.', status: 'The goal', live: false },
+];
 
 const beliefs = [
   ['The field needs every capable person', "AI safety is short of people in operations, governance, policy and leadership, and leaving capable people out is a cost it can't afford."],
@@ -63,7 +71,7 @@ const initials = (name: string) => name.split(' ').map((w) => w[0]).slice(0, 2).
   canonical={url}
   theme={theme}
   seo={dark ? undefined : { description, url, twitter: true }}
-  mobileCss=".core-beliefs-grid{grid-template-columns:1fr !important}"
+  mobileCss=".core-beliefs-grid,.change-grid{grid-template-columns:1fr !important}"
 >
 <Nav theme={theme} links={navLinks(theme)} toggle={dark ? 'about.html' : 'about-dark.html'} logoAlt={logoAlt} />
 
@@ -81,6 +89,22 @@ const initials = (name: string) => name.split(' ').map((w) => w[0]).slice(0, 2).
   <p style={`font-size:17px;line-height:1.7;color:${c.text}`}>W4AIS started because too many capable women in AI safety were working in isolation, with no network to find each other.</p>
   <p style={`font-size:17px;line-height:1.7;color:${c.text}`}>We're building the network that fixes that: a place to meet the people already doing the work, get visibility and, soon, find a mentor, whether you're already established in alignment, governance or policy, or still finding your way in.</p>
   <p style={`font-size:17px;line-height:1.7;color:${c.text}`}>The field is young, and the people who join now will shape what it becomes.</p>
+</section>
+
+<section style="max-width:1180px;margin:0 auto;padding:0 24px 80px">
+  <h2 style={`font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;color:${c.heading}`}>How we get women into AI safety</h2>
+  <p style={`font-size:16px;color:${c.muted};max-width:60ch;margin:0 0 32px`}>The seminar is the way in, not the end goal. Each step builds on the one before.</p>
+  <ol class="change-grid" style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px">
+    {change.map((s) => (
+      <li style={`border:1px solid ${dark ? '#3a3532' : 'oklch(0.88 0.005 80)'};border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;background:${dark ? '#292522' : '#fff'}`}>
+        <span style={`font-size:13px;font-weight:800;color:${c.accent}`}>{s.step}</span>
+        <h3 style={`font-size:19px;font-weight:700;margin:0;color:${c.heading}`}>{s.title}</h3>
+        <p style={`font-size:15px;line-height:1.6;color:${c.muted};margin:0`}>{s.text}</p>
+        <span style={`margin-top:auto;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;width:fit-content;padding:5px 12px;border-radius:999px;${s.live ? (dark ? 'color:#9fe0cf;background:#1f3a34' : 'color:#1f6b5c;background:#e3f4ef') : `color:${c.tag};background:${c.tagBg}`}`}>{s.status}</span>
+        {s.link && <a href={s.link[0]} target="_blank" rel="noopener" style={`font-size:15px;font-weight:700;color:${c.accent}`}>{s.link[1]}</a>}
+      </li>
+    ))}
+  </ol>
 </section>
 
 <section style="max-width:1180px;margin:0 auto;padding:0 24px 80px">
