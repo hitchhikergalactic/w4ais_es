@@ -17,8 +17,11 @@ interface Props {
 
 type LumaEvent = {
   id: string; name: string; url: string; start: string; end: string | null;
-  timezone: string; inPerson: boolean; city: string | null; venue: string | null;
+  timezone: string; inPerson: boolean; city: string | null; venue: string | null; cover?: string | null;
 };
+
+// Imagen de la tarjeta: la foto de la ponente si el evento es una sesión de la web; si no, la portada del evento en Luma (reducida por su CDN).
+const lumaThumb = (url: string) => url.replace('https://images.lumacdn.com/', 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=80,width=400,height=400/');
 
 const { theme = 'light', limit = 3 } = Astro.props;
 const dark = theme === 'dark';
@@ -42,7 +45,7 @@ const cards = (eventsJson as LumaEvent[]).slice(0, limit).map((e) => {
   const fmt = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('en-GB', { timeZone: e.timezone, ...o }).format(new Date(e.start));
   return {
     ...e,
-    title: session ? session.data.title : chapterEvent ? chapterEvent.title : e.name.replace(/\s*[-–|]\s*$/, ''),
+    title: session ? session.data.title : chapterEvent ? chapterEvent.title : (!e.inPerson && /^women4aisafety$/i.test(e.name.trim())) ? 'AI Safety Seminar' : e.name.replace(/\s*[-–|]\s*$/, ''),
     by: session ? `AI Safety Seminar with ${session.data.speaker}` : chapter ? `W4AIS ${chapter.data.city}, in person` : e.inPerson ? 'In person' : 'Online',
     place: e.inPerson ? (e.city ?? 'In person') : 'Online',
     dayNum: fmt({ day: 'numeric' }),
@@ -50,6 +53,7 @@ const cards = (eventsJson as LumaEvent[]).slice(0, limit).map((e) => {
     weekday: fmt({ weekday: 'long' }),
     time: fmt({ hour: '2-digit', minute: '2-digit', hour12: false }),
     zoneLabel: `${(e.inPerson && e.city) || e.timezone.split('/').pop()?.replace(/_/g, ' ')} time`,
+    image: session?.data.photo ?? (e.cover ? lumaThumb(e.cover) : null),
   };
 });
 
@@ -69,6 +73,7 @@ const css = dark
           data-start={e.start} data-end={e.end ?? e.start} data-online={e.inPerson ? undefined : ''}
           style={`background:${css.card};border:1px solid ${css.border}`}>
           <div class="tile" style={`background:${css.tile};color:${css.tileText}`}><b>{e.dayNum}</b><span>{e.month}</span></div>
+          {e.image ? <img class="pic" src={e.image} alt="" loading="lazy" width="90" height="90"> : <span class="pic" style={`background:${css.tile}`}></span>}
           <div style="min-width:0">
             <div style={`font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:${css.by};margin-bottom:4px`}>{e.by}</div>
             <div style={`font-size:19px;font-weight:700;line-height:1.3;color:${css.title}`}>{e.title}</div>
@@ -102,12 +107,13 @@ const css = dark
   })();
 </script>
 <style is:global>
-      .up-card{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;text-decoration:none;color:inherit;border-radius:20px;padding:20px 24px;transition:transform .15s ease, box-shadow .15s ease}
+      .up-card{display:grid;grid-template-columns:auto auto 1fr auto;gap:24px;align-items:center;text-decoration:none;color:inherit;border-radius:20px;padding:20px 24px;transition:transform .15s ease, box-shadow .15s ease}
       .up-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px -14px rgba(60,40,100,.35)}
       .up-card .tile{width:76px;height:76px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800}
       .up-card .tile b{font-size:30px;line-height:1}
       .up-card .tile span{font-size:13px;letter-spacing:.1em;margin-top:4px}
       .up-card .btn{font-weight:700;font-size:15px;padding:12px 22px;white-space:nowrap}
-      @media (max-width:700px){.up-card{grid-template-columns:auto 1fr;gap:16px}.up-card .btn{grid-column:1 / -1;text-align:center}}
+      .up-card .pic{width:90px;height:90px;border-radius:14px;object-fit:cover;display:block}
+      @media (max-width:700px){.up-card{grid-template-columns:auto 1fr;gap:16px}.up-card .pic{grid-column:1 / -1;order:-1;width:100%;height:150px}.up-card .btn{grid-column:1 / -1;text-align:center}}
   .up-card .dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;margin:0 8px;vertical-align:middle;opacity:.7}
 </style>

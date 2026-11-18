@@ -51,6 +51,7 @@ const events = [...seen.values()]
       inPerson,
       city: inPerson ? (place.city ?? null) : null,
       venue: inPerson ? (place.address ?? null) : null,
+      cover: ev.cover_url ?? null,
     };
   })
   .sort((a, b) => a.start.localeCompare(b.start));
