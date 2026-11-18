@@ -33,12 +33,12 @@ const c = dark
   : { heading: 'oklch(0.22 0.01 260)', text: 'oklch(0.32 0.01 260)', muted: 'oklch(0.4 0.01 260)', accent: '#3f56a1', line: 'oklch(0.88 0.005 80)', card: '#fff', pillBg: '#f2f5fe', pillText: '#3f56a1', small: 'oklch(0.5 0.01 260)', footerLink: 'inherit', btn: '#3f56a1', btnText: '#fff', radius: '999px', face: '#f2f5fe' };
 
 // Cifras del seminario online. Actualizar a mano junto con STATS_PERIOD.
-const STATS_PERIOD = 'Online seminar, July to November 2026';
+const STATS_PERIOD = 'Online seminar, July to November 2026. Rating from 104 reviews';
 const stats = [
   ['328', 'women have attended'],
-  ['37.5%', 'came back for another session'],
-  ['4.6/5', 'average rating, from 104 ratings'],
-  ['8', 'sessions so far'],
+  ['1,098', 'sign-ups'],
+  ['123', 'came back for more sessions'],
+  ['4.6/5', 'average rating'],
 ];
 
 // Ponentes: salen solas de src/content/sessions/. El cargo es speakerRole; si falta, no se muestra.
@@ -59,8 +59,14 @@ const btnSecondary = `display:inline-block;text-decoration:none;font-weight:700;
 
 const css = `
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .speakers{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:28px 20px}
-  .speaker{text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .stats-band{position:relative;isolation:isolate;background:${dark ? '#292522' : GRADIENT}}
+  .stats-band::before{content:"";position:absolute;inset:0;z-index:-1;opacity:${dark ? '0' : '.35'};mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .marquee-track{display:flex;gap:20px;width:max-content;animation:marquee 45s linear infinite}
+  .marquee:hover .marquee-track,.marquee:focus-within .marquee-track{animation-play-state:paused}
+  @keyframes marquee{to{transform:translateX(calc(-50% - 10px))}}
+  @media (prefers-reduced-motion: reduce){.marquee-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.marquee-track [aria-hidden]{display:none}.marquee{-webkit-mask-image:none;mask-image:none}}
+  .speaker{width:190px;flex-shrink:0;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
   .speaker img,.speaker .ini{width:112px;height:112px;border-radius:50%;object-fit:cover;border:4px solid ${dark ? '#2a3050' : '#3f83ef'};box-sizing:border-box}
   .speaker:hover b{text-decoration:underline;text-underline-offset:3px}
   .paths{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -107,34 +113,40 @@ const mobileCss = `.stats{grid-template-columns:1fr 1fr}.paths{grid-template-col
 
 <UpcomingEvents theme={theme} />
 
-<section id="numbers" style="max-width:1180px;margin:0 auto;padding:64px 24px 24px">
-  <h2 style={h2}>Women keep coming back</h2>
-  <div class="stats" style="margin-top:24px">
-    {stats.map(([n, label]) => (
-      <div style={`background:${c.card};border:1px solid ${c.line};border-radius:20px;padding:24px`}>
-        <div style={`font-size:clamp(30px,6vw,40px);font-weight:800;letter-spacing:-0.02em;color:${c.accent};line-height:1`}>{n}</div>
-        <div style={`font-size:15px;font-weight:600;line-height:1.4;color:${c.text};margin-top:10px`}>{label}</div>
-      </div>
-    ))}
+<section id="numbers" class="stats-band" style="margin-top:56px">
+  <div style="max-width:1180px;margin:0 auto;padding:56px 24px 48px">
+    <h2 style={`${h2};color:${dark ? c.heading : '#fff'}`}>Women keep coming back</h2>
+    <div class="stats" style="margin-top:24px">
+      {stats.map(([n, label]) => (
+        <div style={`background:${dark ? '#211f1e' : 'rgba(255,255,255,0.94)'};border:1px solid ${dark ? c.line : 'transparent'};border-radius:20px;padding:24px`}>
+          <div style={`font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:-0.02em;color:${c.accent};line-height:1`}>{n}</div>
+          <div style={`font-size:15px;font-weight:600;line-height:1.4;color:${c.text};margin-top:10px`}>{label}</div>
+        </div>
+      ))}
+    </div>
+    <p style={`font-size:13px;font-weight:600;color:${dark ? c.small : 'rgba(255,255,255,0.92)'};margin:14px 0 0`}>{STATS_PERIOD}.</p>
   </div>
-  <p style={`font-size:13px;color:${c.small};margin:12px 0 0`}>{STATS_PERIOD}.</p>
 </section>
 
 {speakers.length > 0 && (
-  <section id="speakers" style="max-width:1180px;margin:0 auto;padding:56px 24px 24px">
+  <section id="speakers" style="padding:64px 0 24px">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px">
     <h2 style={h2}>Women who have spoken</h2>
     <p style={lead}>Each one told us what her work involves and how she got there.</p>
-    <div class="speakers" style="margin-top:32px">
-      {speakers.map((s) => (
-        <a class="speaker" href={speakerLinks.get(s.speaker)}>
+  </div>
+  <div class="marquee" style="margin-top:32px">
+    <div class="marquee-track">
+      {[0, 1].map((copy) => speakers.map((s) => (
+        <a class="speaker" href={speakerLinks.get(s.speaker)} aria-hidden={copy ? 'true' : undefined} tabindex={copy ? -1 : undefined}>
           {s.photo
             ? <img src={s.photo} alt={s.speaker} loading="lazy" width="112" height="112">
             : <span class="ini" style={`display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;background:${c.face};color:${c.accent}`}>{s.speaker.split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>}
           <b style={`font-size:16px;font-weight:700;color:${c.heading}`}>{s.speaker}</b>
           {s.speakerRole && <span style={`font-size:13px;line-height:1.4;color:${c.muted};margin-top:-4px`}>{s.speakerRole}</span>}
         </a>
-      ))}
+      )))}
     </div>
+  </div>
   </section>
 )}
 
