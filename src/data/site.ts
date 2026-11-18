@@ -1,5 +1,5 @@
 export const SITE_URL = 'https://www.women4aisafety.com';
-export const OG_IMAGE = `${SITE_URL}/logo_color_cropped.png`;
+export const OG_IMAGE = `${SITE_URL}/og.jpg`;
 export const LUMA_URL = 'https://luma.com/Women4AISafety';
 // Los botones «Register» llevan directo al próximo seminario en Luma, sin pasar por el calendario.
 // /next-seminar es una función de Vercel (api/next-seminar.js) que busca el evento sola:
