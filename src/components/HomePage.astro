@@ -8,7 +8,7 @@ import Sponsor from './Sponsor.astro';
 import UpcomingEvents from './UpcomingEvents.astro';
 import SocialLinks from './SocialLinks.astro';
 import { getSessions, sessionHref } from '../data/sessions';
-import { GRADIENT, JOIN_FORM_URL, NEXT_SEMINAR_URL, SITE_URL, TALK_FORM_URL, navLinks, type Theme } from '../data/site';
+import { GRADIENT, JOIN_FORM_URL, NEXT_SEMINAR_URL, SITE_URL, MENTOR_FORM_URL, TALK_FORM_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -24,7 +24,6 @@ const jsonLd = [
 ];
 const logoAlt = 'W4AIS – Women For AI Safety logo';
 const CONTACT_EMAIL = 'w4ais@women4aisafety.com';
-const MENTOR_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('I want to be a W4AIS mentor')}`;
 const ACCESS_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Access to the W4AIS members’ space')}`;
 
 // Colores por tema.
@@ -184,7 +183,7 @@ const mobileCss = `.stats{grid-template-columns:1fr 1fr}.paths{grid-template-col
       <h3 style={`font-size:22px;font-weight:800;margin:0;color:${c.heading}`}>Be a mentor or a speaker</h3>
       <p style={`font-size:16px;line-height:1.6;color:${c.text};margin:0`}>Mentor a woman entering the field, or give a 50-minute talk on what your job involves and how you got there.</p>
       <div style="margin-top:auto;padding-top:8px;display:flex;gap:12px;flex-wrap:wrap">
-        <a href={MENTOR_MAILTO} style={btnPrimary}>Become a mentor</a>
+        <a href={MENTOR_FORM_URL} target="_blank" rel="noopener" style={btnPrimary}>Become a mentor</a>
         <a href={TALK_FORM_URL} target="_blank" rel="noopener" style={btnSecondary}>Become a speaker</a>
       </div>
     </div>
