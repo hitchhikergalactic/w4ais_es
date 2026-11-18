@@ -63,7 +63,8 @@ const css = `
   .stats-band::before{content:"";position:absolute;inset:0;z-index:-1;opacity:${dark ? '0' : '.35'};mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
   .marquee-track{display:flex;gap:20px;width:max-content;animation:marquee 45s linear infinite}
-  .marquee:hover .marquee-track,.marquee:focus-within .marquee-track{animation-play-state:paused}
+  @media (hover:hover){.marquee:hover .marquee-track{animation-play-state:paused}}
+  .marquee:has(:focus-visible) .marquee-track{animation-play-state:paused}
   @keyframes marquee{to{transform:translateX(calc(-50% - 10px))}}
   @media (prefers-reduced-motion: reduce){.marquee-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.marquee-track [aria-hidden]{display:none}.marquee{-webkit-mask-image:none;mask-image:none}}
   .speaker{width:190px;flex-shrink:0;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
