@@ -211,9 +211,7 @@ const mobileCss = `.stats{grid-template-columns:1fr 1fr}.paths{grid-template-col
 <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px">
   <a href={dark ? 'home-dark.html' : 'index.html'} style="display:flex;flex-shrink:0"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:88px;width:auto"></a>
   <div class="footer-links" style="display:flex;gap:24px;flex-wrap:wrap">
-    <a href="#how" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>How it works</a>
-    <a href="#speakers" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Speakers</a>
-    <a href="#join" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Get involved</a>
+    {navLinks(theme, true).map((l) => <a href={l.href} style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>{l.label}</a>)}
   </div>
   <SocialLinks color={c.accent} />
   <span style={`font-size:12px;font-weight:700;color:${c.small}`}>© 2026 Women4AISafety</span>

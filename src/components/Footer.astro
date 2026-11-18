@@ -1,5 +1,6 @@
 ---
-import { pageHref, type Theme } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
+import { navLinks, pageHref, type Theme } from '../data/site';
 
 // Pie sencillo de las páginas interiores (seminario, sesiones, about).
 interface Props {
@@ -20,11 +21,9 @@ const smallStyle = dark ? 'font-size:12px;font-weight:700;color:#948c7d' : 'font
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px">
   <a href={pageHref('index', theme)} style="display:flex;flex-shrink:0"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:auto;width:110px"></a>
   <div class="footer-links" style="display:flex;gap:24px;flex-wrap:wrap">
-    <a href={pageHref('index', theme, '#how')} style={linkStyle}>How it works</a>
-    <a href={pageHref('index', theme, '#speakers')} style={linkStyle}>Speakers</a>
-    <a href={pageHref('seminar', theme)} style={linkStyle}>Seminars</a>
-    <a href={pageHref('chapters', theme)} style={linkStyle}>Chapters</a>
+    {navLinks(theme).map((l) => <a href={l.href} style={linkStyle}>{l.label}</a>)}
   </div>
+  <SocialLinks color={dark ? '#8fa7fa' : '#3f56a1'} />
   <span style={smallStyle}>© 2026 Women4AISafety</span>
 </div>
 {note && <span style={`font-size:12px;color:${dark ? '#948c7d' : 'oklch(0.55 0.01 260)'}`}>Part of the global AI safety ecosystem.</span>}
