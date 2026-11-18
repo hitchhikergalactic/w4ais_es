@@ -16,6 +16,7 @@ const h3Style = `font-size:16px;font-weight:700;margin:2px 0 0${dark ? ';color:#
 const metaStyle = `font-size:13px;color:${dark ? '#948c7d' : 'oklch(0.5 0.01 260)'};margin:0`;
 const tagStyle = (color: string, background: string) =>
   `font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${color};background:${background};padding:5px 12px;border-radius:999px;width:fit-content`;
+const isUpcoming = (date: string) => { const d = new Date(`${date.replace(/^\w+,\s*/, '')} 12:00 UTC`); return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) >= new Date().toISOString().slice(0, 10); };
 ---
 <section style="max-width:1180px;margin:0 auto;padding:0 24px 72px">
   <h2 style={`font-size:22px;font-weight:800;letter-spacing:-0.01em;margin-bottom:24px${dark ? ';color:#fff' : ''}`}>More sessions</h2>
@@ -24,7 +25,10 @@ const tagStyle = (color: string, background: string) =>
       const tag = categories[session.data.category][theme];
       return (
         <a href={sessionHref(session, theme)} style={cardStyle}>
-          <span style={tagStyle(tag.color, tag.more)}>{session.data.category}</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            {isUpcoming(session.data.date) && <span style={dark ? tagStyle('#9fe0cf', '#1f3a34') : tagStyle('#1f6b5c', '#e3f4ef')}>Upcoming</span>}
+            <span style={tagStyle(tag.color, tag.more)}>{session.data.category}</span>
+          </div>
           <h3 style={h3Style}>{session.data.title}</h3>
           <p style={metaStyle}>{session.data.cardDate}</p>
         </a>

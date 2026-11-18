@@ -61,6 +61,8 @@ const chapters = defineCollection({
         titleEn: z.string().optional(),
         // Título corto en inglés para la tarjeta de la portada (no una traducción literal).
         headlineEn: z.string().optional(),
+        // Imagen cuadrada de la tarjeta de la portada (en public/). Si falta, se usa la portada de Luma.
+        image: z.string().optional(),
         // Fecha ISO (AAAA-MM-DD): sirve para ordenar y para separar próximos de pasados.
         isoDate: z.string(),
         date: z.string(),
