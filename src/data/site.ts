@@ -24,8 +24,8 @@ export function pageHref(page: 'index' | 'about' | 'seminar' | 'chapters', theme
 export function navLinks(theme: Theme = 'light', onHome = false) {
   const home = onHome ? '' : pageHref('index', theme);
   return [
-    { href: `${home}#why`, label: 'Why it matters' },
-    { href: `${home}#what`, label: 'What we do' },
+    { href: `${home}#how`, label: 'How it works' },
+    { href: `${home}#speakers`, label: 'Speakers' },
     { href: pageHref('seminar', theme), label: 'Seminars' },
     { href: pageHref('chapters', theme), label: 'Chapters' },
     { href: pageHref('about', theme), label: 'About us' },

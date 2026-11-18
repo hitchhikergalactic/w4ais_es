@@ -1,13 +1,14 @@
 ---
 // Portada. index.html (claro) y home-dark.html (oscuro) comparten el mismo contenido;
 // solo cambian los colores y la cabecera.
+// Orden: qué es → próximos eventos → cifras → ponentes → cómo funciona → dos caminos → red.
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Sponsor from './Sponsor.astro';
 import UpcomingEvents from './UpcomingEvents.astro';
-import JoinCta from './JoinCta.astro';
 import SocialLinks from './SocialLinks.astro';
-import { GRADIENT, NEXT_SEMINAR_URL, SITE_URL, TALK_FORM_URL, navLinks, type Theme } from '../data/site';
+import { getSessions, sessionHref } from '../data/sessions';
+import { GRADIENT, JOIN_FORM_URL, NEXT_SEMINAR_URL, SITE_URL, TALK_FORM_URL, navLinks, type Theme } from '../data/site';
 
 interface Props {
   theme?: Theme;
@@ -16,23 +17,55 @@ interface Props {
 const { theme = 'light' } = Astro.props;
 const dark = theme === 'dark';
 
-const description = 'Women4AISafety (W4AIS) is the career network for women working in or entering AI safety, alignment, governance and policy.';
+const description = 'Women4AISafety (W4AIS) is the career network for women moving into AI safety roles in operations, governance and policy, fieldbuilding and leadership.';
 const jsonLd = [
   '{"@context":"https://schema.org","@type":"Organization","name":"Women4AISafety","alternateName":"W4AIS","url":"https://www.women4aisafety.com/","logo":"https://www.women4aisafety.com/logo_color_cropped.png","sameAs":["https://www.instagram.com/womenaisafety/","https://www.linkedin.com/company/women4aisafety/","https://osmaniredondo.substack.com/"]}',
-  '{"@context":"https://schema.org","@type":"EventSeries","name":"W4AIS AI Safety Seminar","description":"Twice-monthly online seminar series where women in AI safety, alignment, governance and policy learn directly from researchers and practitioners in the field.","url":"https://www.women4aisafety.com/seminar.html","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://luma.com/Women4AISafety"},"organizer":{"@type":"Organization","name":"Women4AISafety","url":"https://www.women4aisafety.com/"}}',
+  '{"@context":"https://schema.org","@type":"EventSeries","name":"W4AIS AI Safety Seminar","description":"Online seminar on the 2nd and 4th Wednesday of every month where women working in AI safety explain what their job involves and how they got there.","url":"https://www.women4aisafety.com/seminar.html","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://luma.com/Women4AISafety"},"organizer":{"@type":"Organization","name":"Women4AISafety","url":"https://www.women4aisafety.com/"}}',
 ];
 const logoAlt = 'W4AIS – Women For AI Safety logo';
+const CONTACT_EMAIL = 'w4ais@women4aisafety.com';
+const MENTOR_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('I want to be a W4AIS mentor')}`;
+const ACCESS_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Access to the W4AIS members’ space')}`;
 
 // Colores por tema.
 const c = dark
-  ? { heading: '#fff', text: '#b6b4c2', muted: '#b3ac9f', soft: '#c9c2b5', accent: '#8fa7fa', line: '#3a3532', pillBg: '#2a3050', pillText: '#bac9fc', small: '#948c7d', footerLink: '#c9c2b5' }
-  : { heading: 'inherit', text: 'oklch(0.32 0.01 260)', muted: 'oklch(0.4 0.01 260)', soft: 'oklch(0.3 0.01 260)', accent: '#3f56a1', line: 'oklch(0.88 0.005 80)', pillBg: '#f2f5fe', pillText: '#3f56a1', small: 'oklch(0.55 0.01 260)', footerLink: 'inherit' };
+  ? { heading: '#efe9e2', text: '#b6b4c2', muted: '#b3ac9f', accent: '#8fa7fa', line: '#3a3532', card: '#292522', pillBg: '#2a3050', pillText: '#bac9fc', small: '#948c7d', footerLink: '#c9c2b5', btn: '#8fa7fa', btnText: '#211f1e', radius: '6px', face: '#2a3050' }
+  : { heading: 'oklch(0.22 0.01 260)', text: 'oklch(0.32 0.01 260)', muted: 'oklch(0.4 0.01 260)', accent: '#3f56a1', line: 'oklch(0.88 0.005 80)', card: '#fff', pillBg: '#f2f5fe', pillText: '#3f56a1', small: 'oklch(0.5 0.01 260)', footerLink: 'inherit', btn: '#3f56a1', btnText: '#fff', radius: '999px', face: '#f2f5fe' };
 
-const items = [
-  ['01', 'Find your next role', 'Roles, fellowships and introductions surfaced from inside the field.'],
-  ['02', 'Be seen for your work', 'Speaking slots, features and referrals that put you in front of the right people.'],
-  ['03', 'Meet people who open doors', 'A working network across alignment, governance and policy — not a mailing list.'],
+// Cifras del seminario online. Actualizar a mano junto con STATS_PERIOD.
+const STATS_PERIOD = 'Online seminar, July to November 2026';
+const stats = [
+  ['328', 'women have attended'],
+  ['37.5%', 'came back for another session'],
+  ['4.6/5', 'average rating, from 104 ratings'],
+  ['8', 'sessions so far'],
 ];
+
+// Ponentes: salen solas de src/content/sessions/. El cargo es speakerRole; si falta, no se muestra.
+const sessions = await getSessions();
+const speakers = sessions.filter((s) => s.data.photo || s.data.speakerRole).map((s) => s.data);
+const speakerLinks = new Map(sessions.map((s) => [s.data.speaker, sessionHref(s, theme)]));
+
+const steps = [
+  ['01', 'Hear how she got there', 'Every session is a 50-minute online call. A woman who works in AI safety explains what her job involves and how she got it, then there is Q&A and networking.'],
+  ['02', 'Take a concrete next step', 'Each session points you to something you can do next: a BlueDot course or programmes such as Talos and SteadRise.'],
+  ['03', 'Get matched with a mentor', 'Sign up for member matching and we will pair you with a woman already working in the field. We are recruiting mentors now.'],
+];
+
+const h2 = `font-size:clamp(26px,6.5vw,32px);line-height:1.2;font-weight:800;letter-spacing:-0.01em;margin:0 0 12px;color:${c.heading}`;
+const lead = `font-size:17px;line-height:1.6;color:${c.muted};margin:0;max-width:60ch;text-wrap:pretty`;
+const btnPrimary = `display:inline-block;text-decoration:none;font-weight:700;font-size:15px;color:${c.btnText};background:${c.btn};padding:14px 26px;border-radius:${c.radius}`;
+const btnSecondary = `display:inline-block;text-decoration:none;font-weight:700;font-size:15px;color:${c.accent};padding:13px 24px;border-radius:${c.radius};border:1.5px solid ${c.accent}`;
+
+const css = `
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .speakers{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:28px 20px}
+  .speaker{text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .speaker img,.speaker .ini{width:112px;height:112px;border-radius:50%;object-fit:cover;border:4px solid ${dark ? '#2a3050' : '#3f83ef'};box-sizing:border-box}
+  .speaker:hover b{text-decoration:underline;text-underline-offset:3px}
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+`;
+const mobileCss = `.stats{grid-template-columns:1fr 1fr}.paths{grid-template-columns:1fr}#network{text-align:center}`;
 ---
 <Base
   title={`W4AIS – Women For AI Safety${dark ? ' (dark)' : ''}`}
@@ -40,7 +73,8 @@ const items = [
   theme={theme}
   seo={dark ? undefined : { description, url: `${SITE_URL}/`, twitter: true }}
   jsonLd={dark ? [] : jsonLd}
-  mobileCss="#network{text-align:center}"
+  css={css}
+  mobileCss={mobileCss}
 >
 <Nav theme={theme} links={navLinks(theme, true)} toggle={dark ? 'index.html' : 'home-dark.html'} joinHref="#join" logoAlt={logoAlt} />
 
@@ -48,73 +82,108 @@ const items = [
   <header style="border-bottom:1px solid #3a3532">
     <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px">
       <span style="display:inline-block;width:40px;height:3px;background:#5a7ef8"></span>
-      <h1 style="font-size:clamp(32px,7.6vw,52px);line-height:1.1;font-weight:700;letter-spacing:-0.01em;max-width:18ch;margin:0;color:#efe9e2;text-wrap:balance">AI safety needs every capable person it can get.</h1>
-      <p style="font-size:clamp(17px,4.2vw,19px);line-height:1.5;font-weight:500;max-width:42ch;margin:0;color:#b3ac9f;text-wrap:pretty">W4AIS is the career network that helps women get into the field and move up in it.</p>
-      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-        <a href={TALK_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:6px">Become a speaker</a>
-        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#efe9e2;padding:13px 24px;border-radius:6px;border:1px solid #3a3532">Register for the next seminar</a>
+      <h1 style="font-size:clamp(32px,7.6vw,52px);line-height:1.1;font-weight:700;letter-spacing:-0.01em;max-width:18ch;margin:0;color:#efe9e2;text-wrap:balance">From interested to working in AI safety.</h1>
+      <p style="font-size:clamp(17px,4.2vw,19px);line-height:1.5;font-weight:500;max-width:48ch;margin:0;color:#b3ac9f;text-wrap:pretty">W4AIS is the career network for women moving into the roles the field finds hardest to fill: operations, governance and policy, fieldbuilding and leadership.</p>
+      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;align-items:center">
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#211f1e;background:#8fa7fa;padding:13px 24px;border-radius:6px">Register for the next seminar</a>
+        <a href="#join" style="font-weight:700;font-size:15px;color:#bac9fc;text-underline-offset:4px;padding:13px 4px">Already in the field? Become a mentor</a>
       </div>
+      <span style="font-size:14px;font-weight:600;color:#948c7d">Online, on the 2nd and 4th Wednesday of every month.</span>
     </div>
   </header>
 ) : (
   <header style={`position:relative;overflow:hidden;background:${GRADIENT}`}>
     <div style="max-width:1180px;margin:0 auto;padding:72px 24px 64px;display:flex;flex-direction:column;gap:20px;position:relative">
-      <h1 style="font-size:clamp(34px,8vw,56px);line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:#fff;text-wrap:balance">AI safety needs every capable person it can get.</h1>
-      <p style="font-size:clamp(17px,4.2vw,20px);line-height:1.5;font-weight:600;max-width:42ch;margin:0;color:rgba(255,255,255,0.92);text-wrap:pretty">W4AIS is the career network that helps women get into the field and move up in it.</p>
-      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-        <a href={TALK_FORM_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Become a speaker</a>
-        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#fff;padding:14px 26px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.6)">Register for the next seminar</a>
+      <h1 style="font-size:clamp(34px,8vw,56px);line-height:1.08;font-weight:800;letter-spacing:-0.02em;max-width:18ch;margin:0;color:#fff;text-wrap:balance">From interested to working in AI safety.</h1>
+      <p style="font-size:clamp(17px,4.2vw,20px);line-height:1.5;font-weight:600;max-width:48ch;margin:0;color:rgba(255,255,255,0.92);text-wrap:pretty">W4AIS is the career network for women moving into the roles the field finds hardest to fill: operations, governance and policy, fieldbuilding and leadership.</p>
+      <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;align-items:center">
+        <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;font-size:15px;color:#3f56a1;background:#fff;padding:14px 26px;border-radius:999px">Register for the next seminar</a>
+        <a href="#join" style="font-weight:700;font-size:15px;color:#fff;text-underline-offset:4px;padding:14px 4px">Already in the field? Become a mentor</a>
       </div>
+      <span style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.9)">Online, on the 2nd and 4th Wednesday of every month.</span>
     </div>
   </header>
 )}
 
-<Sponsor theme={theme} />
-
 <UpcomingEvents theme={theme} />
 
-<section id="why" style="max-width:960px;margin:0 auto;padding:72px 24px">
-  <h2 style={`font-size:clamp(26px,6.5vw,32px);line-height:1.2;font-weight:800;letter-spacing:-0.01em;max-width:16ch;color:${c.heading}`}>Why this matters</h2>
-  <p style={`font-size:17px;line-height:1.65;color:${c.text};max-width:68ch;text-wrap:pretty`}>The field working to make AI go well is still small, and the decisions it makes now will shape how this technology develops. It's short of people in operations, governance, policy and leadership, and many capable women never find a way in: no network, no one to ask, no clear route from where they are to where the work is.</p>
-  <p style={`font-size:17px;line-height:1.65;color:${c.text};max-width:68ch;text-wrap:pretty`}>W4AIS is that route. We connect you with women already doing the work, through talks, networking sessions and mentoring, so you can see what the jobs actually look like and take a concrete next step.</p>
-  <p style={`font-size:17px;line-height:1.65;color:${c.text};max-width:68ch;text-wrap:pretty`}>Whether you already work in AI safety, alignment, governance or policy, or you're coming from another field and wondering where you'd fit, this is where you find opportunities, get visibility and meet the people who can open doors.</p>
+<section id="numbers" style="max-width:1180px;margin:0 auto;padding:64px 24px 24px">
+  <h2 style={h2}>Women keep coming back</h2>
+  <div class="stats" style="margin-top:24px">
+    {stats.map(([n, label]) => (
+      <div style={`background:${c.card};border:1px solid ${c.line};border-radius:20px;padding:24px`}>
+        <div style={`font-size:clamp(30px,6vw,40px);font-weight:800;letter-spacing:-0.02em;color:${c.accent};line-height:1`}>{n}</div>
+        <div style={`font-size:15px;font-weight:600;line-height:1.4;color:${c.text};margin-top:10px`}>{label}</div>
+      </div>
+    ))}
+  </div>
+  <p style={`font-size:13px;color:${c.small};margin:12px 0 0`}>{STATS_PERIOD}.</p>
 </section>
 
-<section id="what" style="max-width:960px;margin:0 auto;padding:24px 24px 72px">
-  <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;color:${c.heading}`}>What we're building</h2>
-  <p style={`font-size:16px;line-height:1.6;color:${c.muted};margin:0 0 8px;max-width:56ch`}>Right now, that means one thing: <strong style={`color:${c.accent}`}>the network</strong>.<br>Here's what it will open up.</p>
-  <div style={`border-top:1px solid ${c.line}`}>
-    {items.map(([n, title, text]) => (
-      <div style={`display:flex;gap:32px;padding:32px 0;border-bottom:1px solid ${c.line};align-items:baseline`}>
+{speakers.length > 0 && (
+  <section id="speakers" style="max-width:1180px;margin:0 auto;padding:56px 24px 24px">
+    <h2 style={h2}>Women who have spoken</h2>
+    <p style={lead}>Each one told us what her work involves and how she got there.</p>
+    <div class="speakers" style="margin-top:32px">
+      {speakers.map((s) => (
+        <a class="speaker" href={speakerLinks.get(s.speaker)}>
+          {s.photo
+            ? <img src={s.photo} alt={s.speaker} loading="lazy" width="112" height="112">
+            : <span class="ini" style={`display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;background:${c.face};color:${c.accent}`}>{s.speaker.split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>}
+          <b style={`font-size:16px;font-weight:700;color:${c.heading}`}>{s.speaker}</b>
+          {s.speakerRole && <span style={`font-size:13px;line-height:1.4;color:${c.muted};margin-top:-4px`}>{s.speakerRole}</span>}
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<section id="how" style="max-width:960px;margin:0 auto;padding:72px 24px">
+  <h2 style={h2}>How it works</h2>
+  <p style={lead}>Most of the women who join us are already interested. What's missing is a way from interest to a track record employers can see.</p>
+  <div style={`border-top:1px solid ${c.line};margin-top:24px`}>
+    {steps.map(([n, title, text], i) => (
+      <div style={`display:flex;gap:32px;padding:28px 0;border-bottom:1px solid ${c.line};align-items:baseline`}>
         <span style={`font-size:14px;font-weight:800;color:${c.accent};width:24px;flex-shrink:0`}>{n}</span>
         <div>
-          <h3 style={`font-size:20px;font-weight:700;margin:0 0 6px;color:${c.heading}`}>{title}</h3>
-          <p style={`font-size:16px;color:${c.muted};margin:0;line-height:1.6;max-width:52ch`}>{text}</p>
+          <h3 style={`font-size:20px;font-weight:700;margin:0 0 6px;color:${c.heading}`}>
+            {title}
+            {i === 2 && <span style={`font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle;margin-left:10px;padding:4px 10px;border-radius:999px;background:${c.pillBg};color:${c.pillText}`}>New</span>}
+          </h3>
+          <p style={`font-size:16px;color:${c.muted};margin:0;line-height:1.6;max-width:56ch`}>{text}</p>
         </div>
       </div>
     ))}
   </div>
 </section>
 
-<section id="gather" style="max-width:1180px;margin:0 auto;padding:24px 24px 80px;display:flex;gap:48px;flex-wrap:wrap;align-items:center">
-  <div style="flex:1 1 280px;min-width:0">
-    <h2 style={`font-size:32px;font-weight:800;letter-spacing:-0.01em;margin-bottom:12px;color:${c.heading}`}>How we gather</h2>
-    <p style={`font-size:18px;line-height:1.6;max-width:46ch;color:${dark ? c.soft : 'oklch(0.3 0.01 260)'}`}>We gather regularly: real conversations, real connections, real career support.</p>
-    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-      <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style={`text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;background:${c.pillBg};color:${c.pillText}`}>Twice a month, on Wednesdays, online</a>
+<section id="join" style="max-width:1180px;margin:0 auto;padding:24px 24px 80px">
+  <h2 style={h2}>Get involved</h2>
+  <div class="paths" style="margin-top:24px">
+    <div style={`background:${c.card};border:1px solid ${c.line};border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:14px`}>
+      <span style={`font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:${c.accent}`}>I want to get into the field</span>
+      <h3 style={`font-size:22px;font-weight:800;margin:0;color:${c.heading}`}>Get matched with a mentor</h3>
+      <p style={`font-size:16px;line-height:1.6;color:${c.text};margin:0`}>Sign up and we'll give you access to the members' space at the next seminar, or <a href={ACCESS_MAILTO}>by email</a> if you can't make it. Profiles are only visible to other members and are never published.</p>
+      <div style="margin-top:auto;padding-top:8px"><a href={JOIN_FORM_URL} target="_blank" rel="noopener" style={btnPrimary}>Join member matching</a></div>
     </div>
-  </div>
-  <div style="flex:1 1 280px;min-width:0;max-width:380px">
-    <a href={NEXT_SEMINAR_URL} target="_blank" rel="noopener" style="display:block">
-      <img src="gather-invite.jpg" alt="Invitation to the W4AIS AI Safety Seminar, held twice a month online — register on Luma" style={`width:100%;height:auto;border-radius:28px;display:block;box-shadow:0 12px 32px -12px ${dark ? 'rgba(0,0,0,0.5)' : 'rgba(60,40,80,0.28)'}`}>
-    </a>
+    <div style={`background:${c.card};border:1px solid ${c.line};border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:14px`}>
+      <span style={`font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:${c.accent}`}>I already work in AI safety</span>
+      <h3 style={`font-size:22px;font-weight:800;margin:0;color:${c.heading}`}>Be a mentor or a speaker</h3>
+      <p style={`font-size:16px;line-height:1.6;color:${c.text};margin:0`}>Mentor a woman entering the field, or give a 50-minute talk on what your job involves and how you got there.</p>
+      <div style="margin-top:auto;padding-top:8px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href={MENTOR_MAILTO} style={btnPrimary}>Become a mentor</a>
+        <a href={TALK_FORM_URL} target="_blank" rel="noopener" style={btnSecondary}>Become a speaker</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="network" style="max-width:1180px;margin:0 auto;padding:24px 24px 80px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center">
+<Sponsor theme={theme} />
+
+<section id="network" style="max-width:1180px;margin:0 auto;padding:64px 24px 72px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center">
   <div style="flex:1 1 260px;min-width:0">
     <h2 style={`font-size:26px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;color:${c.heading}`}>Part of the global AI safety network</h2>
-    <p style={`font-size:18px;line-height:1.6;color:${c.muted};max-width:44ch;margin:0`}>We're part of the global AI safety ecosystem, collaborating closely with BlueDot Impact and the international network of local hubs.</p>
+    <p style={`font-size:18px;line-height:1.6;color:${c.muted};max-width:44ch;margin:0`}>We work closely with BlueDot Impact and the international network of local AI safety hubs.</p>
   </div>
   <div style="flex:1 1 260px;min-width:0;max-width:560px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 36px">
     <a href="https://aisafety.es/" target="_blank" rel="noopener"><img src="ias-logo.png" alt="iaS — AI Safety hub in Spain, W4AIS network partner" style={dark ? 'height:80px;width:auto;background:#efe9e2;border-radius:12px;padding:8px 14px' : 'height:99px;width:193px;flex-shrink:0'}></a>
@@ -123,15 +192,13 @@ const items = [
   </div>
 </section>
 
-<JoinCta theme={theme} />
-
-<footer style="max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:flex;flex-direction:column;gap:24px">
+<footer style={`max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:flex;flex-direction:column;gap:24px;border-top:1px solid ${c.line}`}>
 <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px">
   <a href={dark ? 'home-dark.html' : 'index.html'} style="display:flex;flex-shrink:0"><img src={dark ? 'logo_blanco_cropped.png' : 'logo_color_cropped.png'} alt={logoAlt} style="height:88px;width:auto"></a>
   <div class="footer-links" style="display:flex;gap:24px;flex-wrap:wrap">
-    <a href="#why" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Why it matters</a>
-    <a href="#what" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>What we do</a>
-    <a href="#join" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Join</a>
+    <a href="#how" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>How it works</a>
+    <a href="#speakers" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Speakers</a>
+    <a href="#join" style={`text-decoration:none;font-size:14px;font-weight:700;color:${c.footerLink}`}>Get involved</a>
   </div>
   <SocialLinks color={c.accent} />
   <span style={`font-size:12px;font-weight:700;color:${c.small}`}>© 2026 Women4AISafety</span>

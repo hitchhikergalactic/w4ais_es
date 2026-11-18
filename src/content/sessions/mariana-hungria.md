@@ -6,6 +6,7 @@ subtitle: "On contributing your way into AI safety and governance, before anyone
 summary: "On contributing your way into AI safety and governance, before anyone is watching."
 metaSummary: "Mariana Hungria on contributing your way into AI safety and governance, before anyone is watching"
 speaker: "Mariana Hungria"
+speakerRole: "Head of Field Building, CEGIA"
 photo: "mariana-hungria.jpg"
 linkedin: "https://www.linkedin.com/in/mariana-hungria/"
 date: "Wednesday, 9 September 2026"

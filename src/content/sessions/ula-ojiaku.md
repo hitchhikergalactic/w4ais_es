@@ -6,6 +6,7 @@ subtitle: "Deepfakes, image-based rights and what safety by design should demand
 summary: "How deepfakes and image-based abuse expose gaps in our protections, and what safety by design should require."
 metaSummary: "Ula Ojiaku on deepfakes, image-based rights and what safety by design should demand"
 speaker: "Ula Ojiaku"
+speakerRole: "AI strategy and governance advisor, Forbes Council Member"
 photo: "ula-ojiaku.jpg"
 linkedin: "https://www.linkedin.com/in/uloakuojiaku/"
 date: "Wednesday, 30 September 2026"

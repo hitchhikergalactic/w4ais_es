@@ -6,7 +6,7 @@ subtitle: "How people get into the field, what the roles look like and what make
 summary: "How people get into technical AI safety, which roles exist, and what helps most when making the transition."
 metaSummary: "Jess Bergs on pathways into technical AI safety"
 speaker: "Jess Bergs"
-speakerRole: "Engineering lead, UK AI Security Institute"
+speakerRole: "R&D Engineering Lead, UK AI Security Institute"
 photo: "jess-bergs.jpg"
 linkedin: "https://www.linkedin.com/in/jbergs/"
 date: "Wednesday, 28 October 2026"
