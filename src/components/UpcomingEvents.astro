@@ -45,8 +45,8 @@ const cards = (eventsJson as LumaEvent[]).slice(0, limit).map((e) => {
   const fmt = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('en-GB', { timeZone: e.timezone, ...o }).format(new Date(e.start));
   return {
     ...e,
-    title: session ? session.data.title : chapterEvent ? chapterEvent.title : (!e.inPerson && /^women4aisafety$/i.test(e.name.trim())) ? 'AI Safety Seminar' : e.name.replace(/\s*[-–|]\s*$/, ''),
-    by: session ? `AI Safety Seminar with ${session.data.speaker}` : chapter ? `W4AIS ${chapter.data.city}, in person` : e.inPerson ? 'In person' : 'Online',
+    title: session ? session.data.title : chapterEvent ? (chapterEvent.headlineEn ?? chapterEvent.title) : (!e.inPerson && /^women4aisafety$/i.test(e.name.trim())) ? 'AI Safety Seminar' : e.name.replace(/\s*[-–|]\s*$/, ''),
+    by: session ? `AI Safety Seminar with ${session.data.speaker}` : chapter ? `W4AIS ${chapter.data.city}, in person${chapter.data.language !== 'English' ? `, in ${chapter.data.language}` : ''}` : e.inPerson ? 'In person' : 'Online',
     place: e.inPerson ? (e.city ?? 'In person') : 'Online',
     dayNum: fmt({ day: 'numeric' }),
     month: fmt({ month: 'short' }).toUpperCase(),

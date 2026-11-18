@@ -59,6 +59,8 @@ const chapters = defineCollection({
         title: z.string(),
         // Traducción del título si el evento no es en inglés.
         titleEn: z.string().optional(),
+        // Título corto en inglés para la tarjeta de la portada (no una traducción literal).
+        headlineEn: z.string().optional(),
         // Fecha ISO (AAAA-MM-DD): sirve para ordenar y para separar próximos de pasados.
         isoDate: z.string(),
         date: z.string(),
