@@ -11,6 +11,7 @@ photo: "karen-maria-alston.jpg"
 linkedin: "https://www.linkedin.com/in/karenmariaalston/"
 date: "Wednesday, 25 November 2026"
 cardDate: "Wednesday, 25 November"
+slides: "karen-maria-alston-slides.pdf"
 ---
 
 AI runs on compute: the specialized chips and warehouse-sized data centers that AI systems learn and run on. Think of it as the oil of the AI age. A handful of companies and governments control almost all of it, and whoever controls compute decides who gets to build advanced AI.
