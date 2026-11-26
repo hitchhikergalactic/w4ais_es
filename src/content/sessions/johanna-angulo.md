@@ -14,6 +14,7 @@ cardDate: "Wednesday, 29 July"
 youtube: "UlR591ltjyM"
 slides: "https://zenodo.org/records/21750019"
 paragraphGap: 16
+hideFromSpeakers: true
 ---
 
 Johanna built and led the model-evaluation function at a European AI lab from zero, owning release gating and safety benchmarking across LLMs and quantum-compressed models. She now engineers AI governance into production for regulated enterprises, translating EU AI Act and ISO 42001 obligations into technical controls.

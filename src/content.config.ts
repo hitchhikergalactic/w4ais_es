@@ -36,6 +36,8 @@ const sessions = defineCollection({
     youtube: z.string().optional(),
     // Fichero PDF en public/ o URL externa. Si no hay diapositivas, se omite.
     slides: z.string().optional(),
+    // true = no sale en la fila «Women who have spoken» de la portada (la página de la sesión sigue existiendo).
+    hideFromSpeakers: z.boolean().default(false),
     // Separación en píxeles entre párrafos del texto de la sesión.
     paragraphGap: z.number().default(20),
   }),
