@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Sponsor from './Sponsor.astro';
 import EventCard from './EventCard.astro';
+import EventGallery from './EventGallery.astro';
 import JoinCta from './JoinCta.astro';
 import Footer from './Footer.astro';
 import { splitEvents, type Chapter } from '../data/chapters';
@@ -20,6 +21,9 @@ const dark = theme === 'dark';
 const ch = chapter.data;
 const { Content } = await render(chapter);
 const { upcoming, past } = splitEvents(ch.events);
+// Galería: el último evento pasado que tenga fotos.
+const recapEvent = past.find((e) => e.photos.length > 0);
+const recapDate = recapEvent && new Date(`${recapEvent.isoDate}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const url = `${SITE_URL}/chapter-${chapter.id}.html`;
 const description = `W4AIS ${ch.city}: ${ch.summary}`;
 const links = navLinks(theme);
@@ -46,6 +50,15 @@ const css = `${eventCardCss}
 </header>
 
 <Sponsor theme={theme} />
+
+{recapEvent && (
+  <EventGallery
+    event={recapEvent}
+    theme={theme}
+    kicker={`${recapDate} · ${recapEvent.venue}, ${ch.city}`}
+    heading={past.length === 1 ? 'The first meetup, in pictures' : 'Our last meetup, in pictures'}
+  />
+)}
 
 <section style="max-width:1180px;margin:0 auto;padding:64px 24px 24px">
   <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin:0 0 28px;color:${heading}`}>Upcoming events</h2>

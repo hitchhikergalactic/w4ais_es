@@ -79,6 +79,18 @@ const chapters = defineCollection({
         agenda: z.array(z.object({ time: z.string(), item: z.string() })).default([]),
         // Párrafos de la descripción.
         about: z.array(z.string()).default([]),
+        // Fotos del evento ya celebrado. Cada una en public/ en dos tamaños: «x.jpg» (1600 px) y «x-sm.jpg» (800 px).
+        // size: «large» ocupa 2×2 casillas de la galería y «wide» 2×1; si se omite, 1×1.
+        // Si hay fotos, la página del capítulo muestra la galería del último evento pasado.
+        photos: z.array(z.object({
+          src: z.string(),
+          alt: z.string(),
+          size: z.enum(['large', 'wide']).optional(),
+        })).default([]),
+        // Autoría de las fotos, se muestra bajo la galería.
+        photoCredit: z.string().optional(),
+        // Resumen breve del encuentro para encabezar la galería.
+        recap: z.string().optional(),
       }),
     ),
   }),
