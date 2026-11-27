@@ -27,7 +27,7 @@ events:
       - { time: "19:40", item: "Conversation about the film" }
       - { time: "20:00", item: "Who checks that AI is safe? How the work in the field gets done, with Jess Bergs, R&D Engineering Lead in Human–AI Interaction at the Research Unit of the UK AI Security Institute (AISI) and mentor at BlueDot Impact, SPAR and Pivotal, speaking in a personal capacity" }
       - { time: "20:20", item: "What systems decide for us, with Elena Tairova, who leads strategy and partnerships at AI Safety Barcelona and runs TermsOfCreation.org" }
-      - { time: "20:40", item: "Questions and open conversation, with a raffle of a copy of the year's most debated book on AI risk, If Anyone Builds It, Everyone Dies (Yudkowsky and Soares)" }
+      - { time: "20:40", item: "Questions and open conversation, with a raffle of two copies of the year's most debated book on AI risk, If Anyone Builds It, Everyone Dies (Yudkowsky and Soares)" }
       - { time: "21:00", item: "Networking and snacks" }
     about:
       - "AI safety is still a small field whose decisions will shape where this technology goes, and it is short of people in governance, policy, operations and leadership, while many women with the right experience never get in because they have no network, no one to ask and no clear route."
@@ -37,23 +37,23 @@ events:
       - "It was open to anyone interested, with a special focus on senior profiles who want to bring their experience to this field."
       - "Organised by Women for AI Safety, the professional network that helps women get into AI safety, governance and policy and grow within them, sponsored by BlueDot Impact and in collaboration with Codemotion and Celonis, who hosted us at their offices."
       - "Hosted by Osmani Redondo, who leads Women4AISafety and founded iaS – Inteligencia Artificial Segura, the first Spanish-language community dedicated to AI safety, and coordinates BlueDot Impact's meetups in Spain from there. Osmani came to the field from dentistry, cultural management, software development and cloud architecture, writes the weekly newsletter Semana iaS, and at this session presented the problems that opened the debate and moderated the conversation."
-    recap: "It started with one person, an idea and a room lent by Celonis. On 24 November the chairs filled up: talks on how to get into AI safety, real problems put on the table, and an open conversation that turned into new contacts."
+    recap: "It started with one person and an idea. On the night, the chairs filled up: talks on how to get into AI safety, video messages from women already working in the field, real problems put on the table, and an open conversation that turned into new contacts."
     photoCredit: "MCTPHOTO"
     photos:
-      - { src: "madrid-2026-11-01", size: "large", alt: "Osmani Redondo opens the meetup in front of a full room at Celonis" }
-      - { src: "madrid-2026-11-02", alt: "Attendees laughing together during networking" }
-      - { src: "madrid-2026-11-03", alt: "Osmani Redondo listening to a question from the audience" }
-      - { src: "madrid-2026-11-04", alt: "A group of women in conversation by the wooden stands" }
+      - { src: "madrid-2026-11-01", size: "large", alt: "Group photo of the attendees waving at the camera" }
+      - { src: "madrid-2026-11-02", alt: "Osmani Redondo introduces the video message from Marina Romanisio of SteadRise" }
+      - { src: "madrid-2026-11-03", alt: "Elena Tairova and other attendees in conversation during networking" }
+      - { src: "madrid-2026-11-04", alt: "Osmani Redondo next to the video message from Ana Paula Castillo Rodríguez of Safe AI Netherlands" }
       - { src: "madrid-2026-11-05", alt: "Elena Tairova of AI Safety Barcelona presents how to get into AI safety" }
-      - { src: "madrid-2026-11-06", size: "wide", alt: "The audience fills the rows and the wooden stands" }
-      - { src: "madrid-2026-11-07", alt: "Two attendees smiling during networking" }
+      - { src: "madrid-2026-11-06", size: "wide", alt: "Attendees chatting over snacks after the talks" }
+      - { src: "madrid-2026-11-07", alt: "Osmani Redondo introduces a video message from CEGIA" }
       - { src: "madrid-2026-11-08", alt: "Jess Bergs of the UK AI Security Institute speaks to the room" }
-      - { src: "madrid-2026-11-09", size: "wide", alt: "Networking after the talks, with the whole room on its feet" }
-      - { src: "madrid-2026-11-10", alt: "Two attendees chatting at the front of the room" }
-      - { src: "madrid-2026-11-11", alt: "Attendees listening from the wooden stands" }
-      - { src: "madrid-2026-11-12", size: "wide", alt: "The audience follows the talks attentively" }
-      - { src: "madrid-2026-11-13", alt: "Welcome from Codemotion" }
-      - { src: "madrid-2026-11-14", alt: "Attendees seated on the stands during the talks" }
+      - { src: "madrid-2026-11-09", size: "wide", alt: "Attendees helping themselves at the snack table" }
+      - { src: "madrid-2026-11-10", alt: "The two winners of the book raffle with Osmani Redondo" }
+      - { src: "madrid-2026-11-11", alt: "Attendees laughing together during networking" }
+      - { src: "madrid-2026-11-12", size: "wide", alt: "Osmani Redondo opens the meetup in front of a full room at Celonis" }
+      - { src: "madrid-2026-11-13", alt: "A group of women in conversation by the wooden stands" }
+      - { src: "madrid-2026-11-14", alt: "Osmani Redondo listening to a question from the audience" }
 ---
 
 The Madrid chapter brings W4AIS offline: in-person meetups, in Spanish, for women who work in AI, cybersecurity, compliance or technical team management, and for anyone coming from another field who wants to understand what working in AI safety looks like from the inside.
