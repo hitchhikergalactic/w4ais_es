@@ -40,20 +40,20 @@ events:
     recap: "It started with one person and an idea. On the night, the chairs filled up: talks on how to get into AI safety, video messages from women already working in the field, real problems put on the table, and an open conversation that turned into new contacts."
     photoCredit: "MCTPHOTO"
     photos:
-      - { src: "madrid-2026-11-01", size: "large", alt: "Group photo of the attendees waving at the camera" }
-      - { src: "madrid-2026-11-02", alt: "Osmani Redondo introduces the video message from Marina Romanisio of SteadRise" }
-      - { src: "madrid-2026-11-03", alt: "Elena Tairova and other attendees in conversation during networking" }
-      - { src: "madrid-2026-11-04", alt: "Osmani Redondo next to the video message from Ana Paula Castillo Rodríguez of Safe AI Netherlands" }
-      - { src: "madrid-2026-11-05", alt: "Elena Tairova of AI Safety Barcelona presents how to get into AI safety" }
-      - { src: "madrid-2026-11-06", size: "wide", alt: "Attendees chatting over snacks after the talks" }
-      - { src: "madrid-2026-11-07", alt: "Osmani Redondo introduces a video message from CEGIA" }
-      - { src: "madrid-2026-11-08", alt: "Jess Bergs of the UK AI Security Institute speaks to the room" }
-      - { src: "madrid-2026-11-09", size: "wide", alt: "Attendees helping themselves at the snack table" }
-      - { src: "madrid-2026-11-10", alt: "The two winners of the book raffle with Osmani Redondo" }
-      - { src: "madrid-2026-11-11", alt: "Attendees laughing together during networking" }
-      - { src: "madrid-2026-11-12", size: "wide", alt: "Osmani Redondo opens the meetup in front of a full room at Celonis" }
-      - { src: "madrid-2026-11-13", alt: "A group of women in conversation by the wooden stands" }
-      - { src: "madrid-2026-11-14", alt: "Osmani Redondo listening to a question from the audience" }
+      - { src: "madrid-24n-057", size: "large", alt: "Group photo of the attendees waving at the camera" }
+      - { src: "madrid-24n-061", alt: "Osmani Redondo introduces the video message from Marina Romanisio of SteadRise" }
+      - { src: "madrid-24n-044", alt: "Elena Tairova and other attendees in conversation during networking" }
+      - { src: "madrid-24n-059", alt: "Osmani Redondo next to the video message from Ana Paula Castillo Rodríguez of Safe AI Netherlands" }
+      - { src: "madrid-24n-029", alt: "Elena Tairova of AI Safety Barcelona presents how to get into AI safety" }
+      - { src: "madrid-24n-067", size: "wide", alt: "Attendees chatting over snacks after the talks" }
+      - { src: "madrid-24n-060", alt: "Osmani Redondo introduces a video message from CEGIA" }
+      - { src: "madrid-24n-025", alt: "Jess Bergs of the UK AI Security Institute speaks to the room" }
+      - { src: "madrid-24n-066", size: "wide", alt: "Attendees helping themselves at the snack table" }
+      - { src: "madrid-24n-058", alt: "The two winners of the book raffle with Osmani Redondo" }
+      - { src: "madrid-24n-037", alt: "Attendees laughing together during networking" }
+      - { src: "madrid-24n-002", size: "wide", alt: "Osmani Redondo opens the meetup in front of a full room at Celonis" }
+      - { src: "madrid-24n-045", alt: "A group of women in conversation by the wooden stands" }
+      - { src: "madrid-24n-027", alt: "Osmani Redondo listening to a question from the audience" }
 ---
 
 The Madrid chapter brings W4AIS offline: in-person meetups, in Spanish, for women who work in AI, cybersecurity, compliance or technical team management, and for anyone coming from another field who wants to understand what working in AI safety looks like from the inside.
