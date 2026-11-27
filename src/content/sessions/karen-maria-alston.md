@@ -11,6 +11,7 @@ photo: "karen-maria-alston.jpg"
 linkedin: "https://www.linkedin.com/in/karenmariaalston/"
 date: "Wednesday, 25 November 2026"
 cardDate: "Wednesday, 25 November"
+youtube: "AHMKitZ_MdI"
 slides: "karen-maria-alston-slides.pdf"
 ---
 
@@ -18,7 +19,7 @@ AI runs on compute: the specialized chips and warehouse-sized data centers that 
 
 Recent allegations about the CEO of a key chip company turned that question into a headline. The allegations remain unproven, but they point to a bigger issue: when critical technology depends on so few people, who guards the guardians?
 
-In this session you will learn to explain compute in plain language, understand what happens when the most powerful technology on earth rests on weak checks and balances, and discover in-demand AI safety career paths that don't require a technical background, such as board governance, security, export controls, public engagement and fieldbuilding. The talk will be followed by a Q&A.
+In this session you will learn to explain compute in plain language, understand what happens when the most powerful technology on earth rests on weak checks and balances, and discover in-demand AI safety career paths that don't require a technical background, such as board governance, security, export controls, public engagement and fieldbuilding.
 
 Karen Maria Alston is a strategic narrative executive based in Washington, DC, with more than 20 years in strategic communications and public affairs. She leads Alston Marketing Group, founded The Spectrum Circle and convenes Last Invention DC, a discussion group on frontier AI and superintelligence. Her AI safety work focuses on power concentration and on the public's stake in frontier AI decisions.
 
