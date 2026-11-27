@@ -20,6 +20,7 @@ export const eventCardCss = `
 .event-card .muted{font-weight:500;color:oklch(0.5 0.01 260)}
 .event-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:#3f56a1;padding:13px 24px;border-radius:999px}
 .event-btn.ghost{background:none;color:oklch(0.5 0.01 260);border:1.5px solid oklch(0.85 0.005 80)}
+.event-poster{display:block;width:100%;max-width:360px;height:auto;border-radius:16px;border:1px solid oklch(0.9 0.005 80);margin:0 0 24px}
 .event-agenda{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid #d9cdf3;display:flex;flex-direction:column;gap:14px}
 .event-agenda li{position:relative;font-size:15px;font-weight:600;color:oklch(0.3 0.01 260)}
 .event-agenda li::before{content:"";position:absolute;left:-25px;top:6px;width:10px;height:10px;border-radius:50%;background:#7a6be0;box-shadow:0 0 0 3px #fff}
