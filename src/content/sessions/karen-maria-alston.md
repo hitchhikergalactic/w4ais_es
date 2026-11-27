@@ -11,6 +11,7 @@ photo: "karen-maria-alston.jpg"
 linkedin: "https://www.linkedin.com/in/karenmariaalston/"
 date: "Wednesday, 25 November 2026"
 cardDate: "Wednesday, 25 November"
+youtube: "AHMKitZ_MdI"
 slides: "karen-maria-alston-slides.pdf"
 ---
 
