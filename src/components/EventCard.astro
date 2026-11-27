@@ -39,10 +39,16 @@ const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURICompone
         ? <span class="event-btn ghost">Past event</span>
         : <a class="event-btn" href={e.luma} target="_blank" rel="noopener">Register on Luma</a>}
     </div>
-    {e.agenda.length > 0 && (
-      <ol class="event-agenda">
-        {e.agenda.map((a) => <li><span>{a.time}</span>{a.item}</li>)}
-      </ol>
+    {(e.agenda.length > 0 || (past && e.image)) && (
+      <div>
+        {/* En los eventos pasados se muestra el cartel del evento sobre el programa. */}
+        {past && e.image && <img class="event-poster" src={e.image} alt={`Event poster: ${e.headlineEn ?? e.title}`} width="1080" height="1080" loading="lazy" />}
+        {e.agenda.length > 0 && (
+          <ol class="event-agenda">
+            {e.agenda.map((a) => <li><span>{a.time}</span>{a.item}</li>)}
+          </ol>
+        )}
+      </div>
     )}
   </div>
   {e.about.length > 0 && <div class="event-about">{e.about.map((p) => <p>{p}</p>)}</div>}

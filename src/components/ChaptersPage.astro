@@ -78,13 +78,18 @@ const c = dark
   <h2 style={`font-size:30px;font-weight:800;letter-spacing:-0.01em;margin:0 0 28px;color:${c.heading}`}>All chapters</h2>
   <div class="chapters-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
     {chapters.map((chapter) => {
-      const { upcoming: up } = splitEvents(chapter.data.events);
+      const { upcoming: up, past } = splitEvents(chapter.data.events);
+      // Portada de la tarjeta: la primera foto del último evento pasado que tenga fotos.
+      const cover = past.find((e) => e.photos.length > 0)?.photos[0];
       return (
-        <a href={chapterHref(chapter, theme)} style={`text-decoration:none;color:inherit;border:1px solid ${c.border};border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px`}>
+        <a href={chapterHref(chapter, theme)} style={`text-decoration:none;color:inherit;border:1px solid ${c.border};border-radius:20px;overflow:hidden;display:flex;flex-direction:column`}>
+          {cover && <img src={`${cover.src}-sm.jpg`} alt={cover.alt} width="800" height="533" loading="lazy" style="display:block;width:100%;height:200px;object-fit:cover" />}
+          <div style="padding:28px;display:flex;flex-direction:column;gap:10px">
           <span style={`font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:${c.tag};background:${c.tagBg};padding:5px 12px;border-radius:999px;width:fit-content`}>{chapter.data.country}<span class="sep"></span>{chapter.data.language}</span>
           <h3 style={`font-size:24px;font-weight:800;margin:4px 0 0;color:${c.heading}`}>W4AIS {chapter.data.city}</h3>
           <p style={`font-size:16px;line-height:1.6;color:${c.text};margin:0`}>{chapter.data.summary}</p>
           {up[0] && <span style={`font-size:13px;font-weight:700;color:${c.text};margin-top:8px`}>Next: {up[0].date}</span>}
+          </div>
         </a>
       );
     })}
