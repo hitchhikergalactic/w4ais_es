@@ -25,7 +25,7 @@ events:
       - { time: "19:15", item: "Video messages from colleagues who couldn't join us" }
       - { time: "19:20", item: "Screening of a short fiction film that explains, in accessible terms, what today's AI is and why it matters who sits at the table where its direction is decided" }
       - { time: "19:40", item: "Conversation about the film" }
-      - { time: "20:00", item: "Who checks that AI is safe? How the work in the field gets done, with Jess Bergs, research engineering lead for human–AI interaction at the UK AI Security Institute and mentor at BlueDot Impact, SPAR and Pivotal, speaking in a personal capacity" }
+      - { time: "20:00", item: "Who checks that AI is safe? How the work in the field gets done, with Jess Bergs, R&D Engineering Lead in Human–AI Interaction at the Research Unit of the UK AI Security Institute (AISI) and mentor at BlueDot Impact, SPAR and Pivotal, speaking in a personal capacity" }
       - { time: "20:20", item: "What systems decide for us, with Elena Tairova, who leads strategy and partnerships at AI Safety Barcelona and runs TermsOfCreation.org" }
       - { time: "20:40", item: "Questions and open conversation, with a raffle of a copy of the year's most debated book on AI risk, If Anyone Builds It, Everyone Dies (Yudkowsky and Soares)" }
       - { time: "21:00", item: "Networking and snacks" }
@@ -47,7 +47,7 @@ events:
       - { src: "madrid-2026-11-05", alt: "Elena Tairova of AI Safety Barcelona presents how to get into AI safety" }
       - { src: "madrid-2026-11-06", size: "wide", alt: "The audience fills the rows and the wooden stands" }
       - { src: "madrid-2026-11-07", alt: "Two attendees smiling during networking" }
-      - { src: "madrid-2026-11-08", alt: "Jess Bergs of BlueDot Impact speaks to the room" }
+      - { src: "madrid-2026-11-08", alt: "Jess Bergs of the UK AI Security Institute speaks to the room" }
       - { src: "madrid-2026-11-09", size: "wide", alt: "Networking after the talks, with the whole room on its feet" }
       - { src: "madrid-2026-11-10", alt: "Two attendees chatting at the front of the room" }
       - { src: "madrid-2026-11-11", alt: "Attendees listening from the wooden stands" }
