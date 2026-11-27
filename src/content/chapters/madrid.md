@@ -48,7 +48,7 @@ events:
       - { src: "madrid-2026-11-06", size: "wide", alt: "Attendees chatting over snacks after the talks" }
       - { src: "madrid-2026-11-07", alt: "Osmani Redondo introduces a video message from CEGIA" }
       - { src: "madrid-2026-11-08", alt: "Jess Bergs of the UK AI Security Institute speaks to the room" }
-      - { src: "madrid-2026-11-09", size: "wide", alt: "Attendees around the snack table" }
+      - { src: "madrid-2026-11-09", size: "wide", alt: "Attendees helping themselves at the snack table" }
       - { src: "madrid-2026-11-10", alt: "The two winners of the book raffle with Osmani Redondo" }
       - { src: "madrid-2026-11-11", alt: "Attendees laughing together during networking" }
       - { src: "madrid-2026-11-12", size: "wide", alt: "Osmani Redondo opens the meetup in front of a full room at Celonis" }
